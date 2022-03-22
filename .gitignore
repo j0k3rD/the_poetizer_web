@@ -14,5 +14,4 @@ local.properties
 **/proguard/
 *.log
 *.odt
-*.txt
 >>>>>>> f686aed83dcdac89dae09919cca1c56e2f190051
