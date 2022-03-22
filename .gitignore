@@ -1,3 +1,18 @@
-
+<<<<<<< HEAD
 # LibreOffice locks
 .~lock.*#
+=======
+*.apk
+*.ap_
+*.dex
+*.class
+**/bin/
+**/gen/
+.gradle/
+build/
+local.properties
+**/proguard/
+*.log
+*.odt
+*.txt
+>>>>>>> f686aed83dcdac89dae09919cca1c56e2f190051
