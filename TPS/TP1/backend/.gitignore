@@ -1,6 +1,0 @@
-.env
-lib64
-.sh
-share/python-wheels
-lib/python3.8/site-packages
-pyvenv.cfg
