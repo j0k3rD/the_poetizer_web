@@ -14,7 +14,10 @@ def create_app():
     load_dotenv()
     api.add_resource(resource.PoemsResource, '/poems')
     api.add_resource(resource.PoemResource, '/poem/<id>')
-    api.add_resource(resource.AutorResource, '/autor/<id>')
+    api.add_resource(resource.UserResource, '/users')
+    api.add_resource(resource.UsersResource, '/user/<id>')
+    api.add_resource(resource.MarksResource, '/marks')
+    api.add_resource(resource.MarkResource, '/mark/<id>')
     #Aqui se inicializaran el resto de los m
     #retornar aplicaciion inicializada
     api.init_app(app)

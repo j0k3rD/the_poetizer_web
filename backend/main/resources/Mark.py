@@ -2,43 +2,43 @@ from flask_restful import Resource
 from flask import request
 
 #Diccionario de prueba
-POEMS = {
-    1: {'title': 'Rosas Rojas', 'autor': 'Marco21'},
-    2: {'title': 'El laberinto', 'autor': 'Santiago2121'},
+MARKS = {
+    1: {'mark': '5 estrellas'},
+    2: {'mark': '3 estrellas'},
 }
 
-#Recurso Poema
-class Poem(Resource):
+class Mark(Resource):
     #Obtener Recurso
     def get(self, id):
-        #Verificar si existe un poema con ese ID en diccionario
-        if int(id) in POEMS:
+        #Verificar si existe una calificacion con ese ID en diccionario
+        if int(id) in MARKS:
             #Devolver el poema correspondiente
-            return POEMS[int(id)]
+            return MARKS[int(id)]
         #Devolvera un mensaje de Error en el caso de no encontrarlo
         return '', 404
     
-    #Eliminar un recurso
+    #Eliminar una calificacion
     def delete(self, id):
         #Verificar si un poema existe con ese ID en diccionario
-        if int(id) in POEMS:
-            del POEMS[int(id)]
+        if int(id) in MARKS:
+            del MARKS[int(id)]
             return '', 204
         return '', 404
 
-            
-#Recurso Poemas
-class Poems(Resource):
+
+class Marks(Resource):
     #Obtener Recurso
     def get(self):
         #Verificar si existe un poema con ese ID en diccionario
-        if POEMS:
+        if MARKS:
             #Devolver el poema correspondiente
-            return POEMS
+            return MARKS
         #Devolvera un mensaje de Error en el caso de no encontrarlo
         return '', 404
+
+    #Agregar una Calificacion
     def post(self):
         Mark = request.get_json()
-        id = int(max(POEMS.keys())) + 1
-        POEMS[id] = Poems
-        return POEMS[id], 201
+        id = int(max(MARKS.keys())) + 1
+        MARKS[id] = Marks
+        return MARKS[id], 201
