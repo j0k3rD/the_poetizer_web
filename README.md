@@ -1,5 +1,5 @@
 ## Programacion-I
-Prof. Andrea Navarro - @andrea.navarro
+Prof. Andrea Navarro - @AndreaNavarroMoreno
 
   ##
 
