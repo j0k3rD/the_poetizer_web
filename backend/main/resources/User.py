@@ -11,9 +11,9 @@ USERS = {
 class User(Resource):
     #Obtener un Usuario
     def get(self, id):
-        #Verificar si existe un poema con ese ID en diccionario
+        #Verificar si existe un usuario con ese ID en diccionario
         if int(id) in USERS:
-            #Devolver el poema correspondiente
+            #Devolver el usuario correspondiente
             return USERS[int(id)]
         #Devolvera un mensaje de Error en el caso de no encontrarlo
         return '', 404
@@ -50,7 +50,7 @@ class Users(Resource):
 
     #Agregar un nuvo Usuario
     def post(self):
-        User = request.get_json()
+        user = request.get_json()
         id = int(max(USERS.keys())) + 1
-        USERS[id] = Users
+        USERS[id] = user
         return USERS[id], 201

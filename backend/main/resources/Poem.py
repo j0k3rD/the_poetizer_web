@@ -9,7 +9,7 @@ POEMS = {
 
 #Recurso Poema
 class Poem(Resource):
-    #Obtener Recurso
+    #Obtener un Poema
     def get(self, id):
         #Verificar si existe un poema con ese ID en diccionario
         if int(id) in POEMS:
@@ -18,7 +18,7 @@ class Poem(Resource):
         #Devolvera un mensaje de Error en el caso de no encontrarlo
         return '', 404
     
-    #Eliminar un recurso
+    #Eliminar un Poema
     def delete(self, id):
         #Verificar si un poema existe con ese ID en diccionario
         if int(id) in POEMS:
@@ -37,8 +37,10 @@ class Poems(Resource):
             return POEMS
         #Devolvera un mensaje de Error en el caso de no encontrarlo
         return '', 404
+    
+    #Agregara un nuevo Poema a la lista
     def post(self):
-        Mark = request.get_json()
+        poem = request.get_json()
         id = int(max(POEMS.keys())) + 1
-        POEMS[id] = Poems
+        POEMS[id] = poem
         return POEMS[id], 201

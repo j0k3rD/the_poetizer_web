@@ -7,38 +7,39 @@ MARKS = {
     2: {'mark': '3 estrellas'},
 }
 
+# Recurso Calificacion
 class Mark(Resource):
-    #Obtener Recurso
+    #Obtener una Calificacion
     def get(self, id):
         #Verificar si existe una calificacion con ese ID en diccionario
         if int(id) in MARKS:
-            #Devolver el poema correspondiente
+            #Devolver la calificacion correspondiente
             return MARKS[int(id)]
-        #Devolvera un mensaje de Error en el caso de no encontrarlo
+        #Devolvera un mensaje de Error en el caso de no encontrarla
         return '', 404
     
     #Eliminar una calificacion
     def delete(self, id):
-        #Verificar si un poema existe con ese ID en diccionario
+        #Verificar si una calificacion existe con ese ID en diccionario
         if int(id) in MARKS:
             del MARKS[int(id)]
             return '', 204
         return '', 404
 
-
+# Recurso Calificaciones
 class Marks(Resource):
-    #Obtener Recurso
+    #Obtener Lista de Calificaciones
     def get(self):
-        #Verificar si existe un poema con ese ID en diccionario
+        #Verificar si existe una calificacion con ese ID en diccionario
         if MARKS:
-            #Devolver el poema correspondiente
+            #Devolver la calificacion correspondiente
             return MARKS
-        #Devolvera un mensaje de Error en el caso de no encontrarlo
+        #Devolvera un mensaje de Error en el caso de no encontrarla
         return '', 404
 
-    #Agregar una Calificacion
+    #Agregar una Calificacion a la lista 
     def post(self):
-        Mark = request.get_json()
+        mark = request.get_json()
         id = int(max(MARKS.keys())) + 1
-        MARKS[id] = Marks
+        MARKS[id] = mark
         return MARKS[id], 201
