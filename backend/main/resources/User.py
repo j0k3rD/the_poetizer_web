@@ -48,7 +48,7 @@ class Users(Resource):
         #Devolvera un mensaje de Error en el caso de no encontrarlo
         return '', 404
 
-    #Agregar un nuvo Usuario
+    #Agregar un nuevo Usuario en la lista
     def post(self):
         user = request.get_json()
         id = int(max(USERS.keys())) + 1
