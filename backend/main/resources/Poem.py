@@ -29,7 +29,7 @@ class Poem(Resource):
             
 #Recurso Poemas
 class Poems(Resource):
-    #Obtener Recurso
+    #Obtener Lista de Poemas
     def get(self):
         #Verificar si existe un poema con ese ID en diccionario
         if POEMS:
