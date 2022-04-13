@@ -43,12 +43,10 @@ def create_app():
     api.add_resource(resource.MarksResource, '/marks')
     api.add_resource(resource.MarkResource, '/mark/<id>')
 
-    api.add_model(resource.PoemsResource, '/poems')
-    api.add_model(resource.PoemResource, '/poem/<id>')
-    api.add_resource(resource.UsersResource, '/users')
-    api.add_resource(resource.UserResource, '/user/<id>')
-    api.add_resource(resource.MarksResource, '/marks')
-    api.add_resource(resource.MarkResource, '/mark/<id>')
+    api.add_model(model.PoemModel, '/poems')
+    api.add_model(model.UserModel, '/user/<id>')
+    api.add_model(model.MarkModel, '/mark')
+
     #Aqui se inicializaran el resto de los m
     #retornar aplicaciion inicializada
     api.init_app(app)
