@@ -1,5 +1,7 @@
 from flask_restful import Resource
-from flask import request
+from flask import request, jsonify
+from .. import db
+from main.models import MarkModel
 
 #Diccionario de prueba
 MARKS = {
@@ -43,3 +45,17 @@ class Marks(Resource):
         id = int(max(MARKS.keys())) + 1
         MARKS[id] = mark
         return MARKS[id], 201
+
+"""
+    list_mark = []
+    for mark in marks:
+        list_mark.append(mark.to_json())
+    return jsonify(list_mark)
+"""
+
+#Insertar recurso
+def post(self):
+    mark = MarkModel.from_json(request.get_json())
+    db.session.add(mark)
+    db.session.commit()
+    return mark.to_json(), 201

@@ -1,6 +1,4 @@
-from email.policy import default
-from flask import Flask
-from main import db
+from .. import db
 from datetime import *
 
 
@@ -8,11 +6,11 @@ class Poem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer())
     title = db.Column(db.String(100), nullable=False)
-    body = db.Column(db.String(500, nullable=False))
-    created_at = db.Column(db.DateTime(), default=datetime.now(), nullable=False)
+    body = db.Column(db.String(500), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
 
     def __repr__(self):
-        return '<Poem: %r %r>' % (self.title, self.user_id, self.body)
+        return '<Poem: %r %r>' % (self.title, self.user_id, self.body, self.created_at)
 
     #Convertir Objeto en JSON
     def to_json(self):
@@ -39,4 +37,5 @@ class Poem(db.Model):
         title = poem_json.get('title')
         user_id = poem_json.get('user_id')
         body = poem_json.get('body')
+        date = poem_json.get('date')
         return Poem(id=id, title=title, user_id=user_id, body=body)

@@ -1,11 +1,10 @@
-from flask import Flask
-from main import db
+from .. import db
 
 class Mark(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer())
     poem_id = db.Column(db.Integer())
-    score = db.Column(db.Integer(100), nullable=False)
+    score = db.Column(db.Integer(), nullable=False)
     commentary = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
@@ -23,11 +22,11 @@ class Mark(db.Model):
         return mark_json
 
     def to_json_short(self):
-        poem_json = {
+        mark_json = {
             'id': self.id,
             'score': self.score
         }
-        return poem_json
+        return mark_json
     @staticmethod
 
     #Convertir JSON a objeto

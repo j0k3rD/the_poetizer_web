@@ -1,5 +1,8 @@
 from flask_restful import Resource
 from flask import request
+from flask import request, jsonify
+from .. import db
+from main.models import UserModel
 
 #Diccionario de prueba
 USERS = {
@@ -54,3 +57,18 @@ class Users(Resource):
         id = int(max(USERS.keys())) + 1
         USERS[id] = user
         return USERS[id], 201
+
+
+"""
+    list_user = []
+    for user in users:
+        list_user.append(user.to_json())
+    return jsonify(list_user)
+"""
+
+#Insertar recurso
+def post(self):
+    user = UserModel.from_json(request.get_json())
+    db.session.add(user)
+    db.session.commit()
+    return user.to_json(), 201

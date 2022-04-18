@@ -1,5 +1,8 @@
 from flask_restful import Resource
 from flask import request
+from flask import request, jsonify
+from .. import db
+from main.models import PoemModel
 
 #Diccionario de prueba
 POEMS = {
@@ -44,3 +47,17 @@ class Poems(Resource):
         id = int(max(POEMS.keys())) + 1
         POEMS[id] = poem
         return POEMS[id], 201
+
+"""
+    list_poem = []
+    for poem in poems:
+        list_poem.append(poem.to_json())
+    return jsonify(list_poem)
+"""
+
+#Insertar recurso
+def post(self):
+    poem= PoemModel.from_json(request.get_json())
+    db.session.add(poem)
+    db.session.commit()
+    return poem.to_json(), 201

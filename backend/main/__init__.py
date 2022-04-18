@@ -5,11 +5,6 @@ from dotenv import load_dotenv
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 
-#Importar de Modelos
-import main.models as model
-
-#Importar diccionario de Recursos
-import main.resources as resource
 
 #Inicializar API de Flask-Restful
 api = Api()
@@ -33,8 +28,11 @@ def create_app():
 
 
     #URL de configuracion de base de datos
-    app.config['SQLALCHEMY_DATABASE_URL'] = 'sqlite:////'+os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////'+os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME')
     db.init_app(app)
+
+    #Importar diccionario de Recursos
+    import main.resources as resource
 
     api.add_resource(resource.PoemsResource, '/poems')
     api.add_resource(resource.PoemResource, '/poem/<id>')
@@ -43,9 +41,9 @@ def create_app():
     api.add_resource(resource.MarksResource, '/marks')
     api.add_resource(resource.MarkResource, '/mark/<id>')
 
-    api.add_model(model.PoemModel, '/poems')
-    api.add_model(model.UserModel, '/user/<id>')
-    api.add_model(model.MarkModel, '/mark')
+    # api.add_model(model.PoemModel, '/poems')
+    # api.add_model(model.UserModel, '/user/<id>')
+    # api.add_model(model.MarkModel, '/mark')
 
     #Aqui se inicializaran el resto de los m
     #retornar aplicaciion inicializada
