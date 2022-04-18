@@ -7,7 +7,7 @@ class Poem(db.Model):
     user_id = db.Column(db.Integer())
     title = db.Column(db.String(100), nullable=False)
     body = db.Column(db.String(500), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
+    # created_at = db.Column(db.DateTime, default=datetime.now(), nullable=False)
 
     def __repr__(self):
         return '<Poem: %r %r>' % (self.title, self.user_id, self.body, self.created_at)
@@ -19,7 +19,7 @@ class Poem(db.Model):
             'title': str(self.title),
             'user_id': int(self.user_id),
             'body': str(self.body),
-            'date': datetime
+            # 'date': datetime
         }
         return poem_json
 
@@ -37,5 +37,9 @@ class Poem(db.Model):
         title = poem_json.get('title')
         user_id = poem_json.get('user_id')
         body = poem_json.get('body')
-        date = poem_json.get('date')
-        return Poem(id=id, title=title, user_id=user_id, body=body)
+        # date = poem_json.get('date')
+        return Poem(id=id,
+                    title=title,
+                    user_id=user_id,
+                    body=body,
+                    )

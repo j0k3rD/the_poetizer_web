@@ -36,4 +36,9 @@ class Mark(db.Model):
         poem_id = mark_json.get('poem_id')
         score = mark_json.get('score')
         commentary = mark_json.get('commentary')
-        return Mark(id=id, user_id=user_id, poem_id=poem_id, score=score, commentary=commentary)
+        return Mark(id=id,
+                    user_id=user_id,
+                    poem_id=poem_id,
+                    score=score,
+                    commentary=commentary
+                    )
