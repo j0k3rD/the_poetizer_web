@@ -1,14 +1,13 @@
 from flask_restful import Resource
-from flask import request
 from flask import request, jsonify
 from .. import db
 from main.models import PoemModel
 
 #Diccionario de prueba
-POEMS = {
-    1: {'title': 'Rosas Rojas', 'autor': 'Marco21'},
-    2: {'title': 'El laberinto', 'autor': 'Santiago2121'},
-}
+# POEMS = {
+#     1: {'title': 'Rosas Rojas', 'autor': 'Marco21'},
+#     2: {'title': 'El laberinto', 'autor': 'Santiago2121'},
+# }
 
 #Recurso Poema
 class Poem(Resource):
