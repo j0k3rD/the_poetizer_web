@@ -16,7 +16,7 @@ class Mark(db.Model):
             'id': self.id,
             'user_id': int(self.user_id),
             'poem_id': int(self.poem_id),
-            'score': str(self.score),
+            'score': int(self.score),
             'commentary': str(self.commentary),
         }
         return mark_json

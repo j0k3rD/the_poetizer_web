@@ -46,6 +46,12 @@ class Marks(Resource):
         # return '', 404
         marks = db.session.query(MarkModel).all()
         return jsonify([mark.to_json_short() for mark in marks])
+    #Insertar recurso
+    def post(self):
+        mark = MarkModel.from_json(request.get_json())
+        db.session.add(mark)
+        db.session.commit()
+        return mark.to_json(), 201        
 
     #Agregar una Calificacion a la lista 
     # def post(self):
@@ -61,9 +67,3 @@ class Marks(Resource):
     return jsonify(list_mark)
 """
 
-#Insertar recurso
-def post(self):
-    mark = MarkModel.from_json(request.get_json())
-    db.session.add(mark)
-    db.session.commit()
-    return mark.to_json(), 201
