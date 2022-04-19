@@ -44,14 +44,38 @@ class Marks(Resource):
         #     return MARKS
         # #Devolvera un mensaje de Error en el caso de no encontrarla
         # return '', 404
-        marks = db.session.query(MarkModel).all()
-        return jsonify([mark.to_json_short() for mark in marks])
+        # marks = db.session.query(MarkModel).all()
+        # return jsonify([mark.to_json_short() for mark in marks])
+        #Obtener valores del request
+        filters =  request.data
+        marks = db.session.query(MarkModel)
+        #Verificar si hay filtros
+        if filters:
+            #Recorrer filtros
+            for key, value in request.get_json().items():
+                if key == "marksId":
+                    marks = marks.filter(MarkModel.markId == value)
+                if key == "score":
+                    marks = marks.filter(MarkModel.score == value)
+        marks = marks.all()
+        return jsonify({ 'marks': [mark.to_json() for mark in marks] })
+    
     #Insertar recurso
     def post(self):
         mark = MarkModel.from_json(request.get_json())
-        db.session.add(mark)
-        db.session.commit()
-        return mark.to_json(), 201        
+        try:
+            db.session.add(mark)
+            db.session.commit()
+        except:
+            return 'Formato no correcto', 400
+        return mark.to_json(), 201
+
+    #Insertar recurso
+    # def post(self):
+    #     mark = MarkModel.from_json(request.get_json())
+    #     db.session.add(mark)
+    #     db.session.commit()
+    #     return mark.to_json(), 201        
 
     #Agregar una Calificacion a la lista 
     # def post(self):

@@ -9,7 +9,15 @@ class Poem(db.Model):
     user_id = db.Column(db.Integer())
     title = db.Column(db.String(100), nullable=False)
     body = db.Column(db.String(500), nullable=False)
-    created_at = db.Column(default=Timestamp.now() ,nullable=False)
+    # created_at = db.Column(default=Timestamp.now() ,nullable=False)
+    created_at = db.Column(db.DateTime(), default=datetime.now(), nullable=False)
+
+    #Campo de la ForeignKey
+    userID = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    #Relacion
+    user = db.relationship("User", back_populates="poem", uselist="False", single_parent="False")
+    marks = db.relationship("Mark", back_populates="poem", cascade="all, delete-orphan")
 
     def __repr__(self):
         return '<Poem: %r %r>' % (self.title, self.user_id, self.body, self.created_at)
@@ -22,6 +30,7 @@ class Poem(db.Model):
             'user_id': int(self.user_id),
             'body': str(self.body),
             'created_at': str(self.created_at),
+            'users': [user.to_json_short() for user in self.users]
         }
         return poem_json
 

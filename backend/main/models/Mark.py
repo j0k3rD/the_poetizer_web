@@ -1,3 +1,4 @@
+from collections import UserList
 from .. import db
 
 class Mark(db.Model):
@@ -6,6 +7,14 @@ class Mark(db.Model):
     poem_id = db.Column(db.Integer())
     score = db.Column(db.Integer(), nullable=False)
     commentary = db.Column(db.String(200), nullable=False)
+
+    #Campo de la ForeignKey
+    userID = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    poemID = db.Column(db.Integer, db.ForeignKey('poem.id'), nullable=False)
+
+    #Relacion
+    user = db.relationship("User", back_populates="mark", uselist="False", single_parent="False")
+    poem = db.relationship("Poem", back_populates="mark", uselist="False", single_parent="False")
 
     def __repr__(self):
         return '<Mark: %r %r>' % (self.user_id, self.poem_id, self.score, self.commentary)
@@ -18,6 +27,8 @@ class Mark(db.Model):
             'poem_id': int(self.poem_id),
             'score': int(self.score),
             'commentary': str(self.commentary),
+            'poems': [poem.to_json_short() for poem in self.poems],
+            'user': [user.to_json_short() for user in self.user]
         }
         return mark_json
 

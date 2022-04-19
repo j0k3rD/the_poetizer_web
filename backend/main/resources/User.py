@@ -20,7 +20,7 @@ class User(Resource):
         # #Devolvera un mensaje de Error en el caso de no encontrarlo
         # return '', 404
         user = db.session.query(UserModel).get_or_404(id)
-        return user.to_json()
+        return user.to_json_short()
     
     #Eliminar un Usuario
     def delete(self, id):
@@ -63,6 +63,7 @@ class Users(Resource):
         # return '', 404
         users = db.session.query(UserModel).all()
         return jsonify([user.to_json_short() for user in users])
+
 
         #Insertar recurso
     def post(self):
