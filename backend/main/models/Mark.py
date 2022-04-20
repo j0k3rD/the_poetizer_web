@@ -3,17 +3,18 @@ from .. import db
 
 class Mark(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer())
-    poem_id = db.Column(db.Integer())
+    # user_id = db.Column(db.Integer())
+    # poem_id = db.Column(db.Integer())
+    #Pasaron a ser foraneas..
     score = db.Column(db.Integer(), nullable=False)
     commentary = db.Column(db.String(200), nullable=False)
 
-    #Campo de la ForeignKey
-    userID = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    poemID = db.Column(db.Integer, db.ForeignKey('poem.id'), nullable=False)
-
-    #Relacion
+    #Relacion Usuario
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship("User", back_populates="marks", uselist=False, single_parent=True)
+
+    #Relacion Poema
+    poem_id = db.Column(db.Integer, db.ForeignKey('poem.id'), nullable=False)
     poem = db.relationship("Poem", back_populates="marks", uselist=False, single_parent=True)
 
     def __repr__(self):
@@ -54,7 +55,7 @@ class Mark(db.Model):
         }
         return mark_json
 
-        
+
     @staticmethod
 
     #Convertir JSON a objeto

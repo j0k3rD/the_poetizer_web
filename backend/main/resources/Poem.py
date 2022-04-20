@@ -22,28 +22,34 @@ class Poem(Resource):
 class Poems(Resource):
     #Obtener Lista de Poemas
     def get(self):
-        filters =  request.data
-        poems = db.session.query(PoemModel)
-        #Verificar si hay filtros
-        if filters:
-            #Recorrer filtros
-            for key, value in request.get_json().items():
-                if key == "poemsId":
-                    poems = poems.filter(PoemModel.poemId == value)
-                if key == "title":
-                    poems = poems.filter(PoemModel.title == value)
-        poems = poems.all()
-        return jsonify({ 'poems': [poem.to_json() for poem in poems] })
+        poems = db.session.query(PoemModel).get_or_404(id)
+        return jsonify([poem.to_json() for poem in poems])
+        # filters =  request.data
+        # poems = db.session.query(PoemModel)
+        # #Verificar si hay filtros
+        # if filters:
+        #     #Recorrer filtros
+        #     for key, value in request.get_json().items():
+        #         if key == "poemsId":
+        #             poems = poems.filter(PoemModel.poemId == value)
+        #         if key == "title":
+        #             poems = poems.filter(PoemModel.title == value)
+        # poems = poems.all()
+        # return jsonify({ 'poems': [poem.to_json() for poem in poems] })
         
 
     #Insertar recurso
     def post(self):
         poem = PoemModel.from_json(request.get_json())
-        try:
-            db.session.add(poem)
-            db.session.commit()
-        except:
-            return 'Formato no correcto', 400
+        db.session.add(poem)
+        db.session.commit()
         return poem.to_json(), 201
+        # poem = PoemModel.from_json(request.get_json())
+        # try:
+        #     db.session.add(poem)
+        #     db.session.commit()
+        # except:
+        #     return 'Formato no correcto', 400
+        # return poem.to_json(), 201
 
 

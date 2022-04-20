@@ -9,7 +9,7 @@ class User(Resource):
     #Obtener un Usuario
     def get(self, id):
         user = db.session.query(UserModel).get_or_404(id)
-        return user.to_json_short()
+        return user.to_json()
     
     #Eliminar un Usuario
     def delete(self, id):
@@ -35,11 +35,9 @@ class Users(Resource):
         users = db.session.query(UserModel).all()
         return jsonify([user.to_json_short() for user in users])
 
-
         #Insertar recurso
     def post(self):
         user = UserModel.from_json(request.get_json())
         db.session.add(user)
         db.session.commit()
         return user.to_json(), 201
-

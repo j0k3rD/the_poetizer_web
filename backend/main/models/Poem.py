@@ -6,18 +6,16 @@ from datetime import *
 
 class Poem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer())
     title = db.Column(db.String(100), nullable=False)
     body = db.Column(db.String(500), nullable=False)
-    # created_at = db.Column(default=Timestamp.now() ,nullable=False)
     created_at = db.Column(db.DateTime(), default=datetime.now(), nullable=False)
 
-    # #Campo de la ForeignKey
-    userID = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-    #Relacion
-    user = db.relationship("User", back_populates="poem", uselist=False, single_parent=True)
-    mark = db.relationship("Mark", back_populates="poem", cascade="all, delete-orphan")
+    #Relacion Usuario
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship("User", back_populates="poems", uselist=False, single_parent=True)
+    
+    #Relacion Calificacion
+    marks = db.relationship("Mark", back_populates="poem", cascade="all, delete-orphan")
 
     def __repr__(self):
         return '<Poem: %r %r>' % (self.title, self.user_id, self.body, self.created_at)
@@ -56,7 +54,7 @@ class Poem(db.Model):
         }
         return user_json
 
-        
+
     @staticmethod
 
     #Convertir JSON a objeto

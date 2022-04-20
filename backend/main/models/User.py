@@ -8,9 +8,9 @@ class User(db.Model):
     passw = db.Column(db.String(100), nullable=False)
     rol = db.Column(db.String(50), nullable=False)
 
-    #Relacion
-    poem = db.relationship("Poem", back_populates="user", cascade="all, delete-orphan")
-    mark = db.relationship("Mark", back_populates="user", cascade="all, delete-orphan")
+    #Relacion Base
+    poems = db.relationship("Poem", back_populates="user", cascade="all, delete-orphan")
+    marks = db.relationship("Mark", back_populates="user", cascade="all, delete-orphan")
     
 
     def __repr__(self):
@@ -32,6 +32,19 @@ class User(db.Model):
         user_json = {
             'id': self.id,
             'name': str(self.name),
+        }
+        return user_json
+    
+    def to_json_complete(self):
+        user_json = {
+            'id': self.id,
+            'name': str(self.name),
+            'email': str(self.email),
+            'passw': str(self.passw),
+            'rol': str(self.rol),
+            'marks': [mark.to_json() for mark in self.marks],
+            'poems': [poem.to_json() for poem in self.poems]
+        
         }
         return user_json
 
