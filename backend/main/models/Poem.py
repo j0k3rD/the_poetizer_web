@@ -12,12 +12,12 @@ class Poem(db.Model):
     # created_at = db.Column(default=Timestamp.now() ,nullable=False)
     created_at = db.Column(db.DateTime(), default=datetime.now(), nullable=False)
 
-    #Campo de la ForeignKey
+    # #Campo de la ForeignKey
     userID = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     #Relacion
-    user = db.relationship("User", back_populates="poem", uselist="False", single_parent="False")
-    marks = db.relationship("Mark", back_populates="poem", cascade="all, delete-orphan")
+    user = db.relationship("User", back_populates="poem", uselist=False, single_parent=True)
+    mark = db.relationship("Mark", back_populates="poem", cascade="all, delete-orphan")
 
     def __repr__(self):
         return '<Poem: %r %r>' % (self.title, self.user_id, self.body, self.created_at)
@@ -40,6 +40,23 @@ class Poem(db.Model):
             'title': self.title
         }
         return poem_json
+    
+
+    def to_json_complete(self):
+        poem = [poem.to_json() for poem in self.poem]
+        mark = [mark.to_json() for mark in self.mark]
+        user_json = {
+            'id': self.id,
+            'name': str(self.name),
+            'email': str(self.email),
+            'passw': str(self.passw),
+            'rol': str(self.rol),     
+            'poem':poem,
+            'mark':mark      
+        }
+        return user_json
+
+        
     @staticmethod
 
     #Convertir JSON a objeto

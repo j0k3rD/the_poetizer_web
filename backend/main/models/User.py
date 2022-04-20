@@ -9,8 +9,8 @@ class User(db.Model):
     rol = db.Column(db.String(50), nullable=False)
 
     #Relacion
-    poems = db.relationship("Poem", back_populates="user", cascade="all, delete-orphan")
-    marks = db.relationship("Mark", back_populates="user", cascade="all, delete-orphan")
+    poem = db.relationship("Poem", back_populates="user", cascade="all, delete-orphan")
+    mark = db.relationship("Mark", back_populates="user", cascade="all, delete-orphan")
     
 
     def __repr__(self):
@@ -24,8 +24,7 @@ class User(db.Model):
             'email': str(self.email),
             'passw': str(self.passw),
             'rol': str(self.rol),
-            'poems': [poem.to_json_short() for poem in self.poem],
-            'marks': [mark.to_json_short() for mark in self.mark]          
+        
         }
         return user_json
 
@@ -35,7 +34,9 @@ class User(db.Model):
             'name': str(self.name),
         }
         return user_json
+
     @staticmethod
+
     #Convertir JSON a objeto
     def from_json(user_json):
         id = user_json.get('id')
