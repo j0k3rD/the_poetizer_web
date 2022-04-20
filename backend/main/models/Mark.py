@@ -24,12 +24,10 @@ class Mark(db.Model):
     def to_json(self):
         mark_json = {
             'id': self.id,
-            'user_id': int(self.user_id),
-            'poem_id': int(self.poem_id),
             'score': int(self.score),
             'commentary': str(self.commentary),
-            'poems': [poem.to_json_short() for poem in self.poems],
-            'user': [user.to_json_short() for user in self.user]
+            'user': self.user.to_json(),
+            'poem': self.poem.to_json(),
         }
         return mark_json
 
@@ -37,21 +35,6 @@ class Mark(db.Model):
         mark_json = {
             'id': self.id,
             'score': self.score
-        }
-        return mark_json
-
-
-    def to_json_complete(self):
-        poem = [poem.to_json() for poem in self.poem]
-        user = [user.to_json() for user in self.user]
-        mark_json = {
-            'id': self.id,
-            'name': str(self.name),
-            'email': str(self.email),
-            'passw': str(self.passw),
-            'rol': str(self.rol),     
-            'poem':poem,
-            'user':user      
         }
         return mark_json
 

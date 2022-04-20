@@ -25,10 +25,10 @@ class Poem(db.Model):
         poem_json = {
             'id': self.id,
             'title': str(self.title),
-            'user_id': int(self.user_id),
             'body': str(self.body),
-            'created_at': str(self.created_at),
-            'users': [user.to_json_short() for user in self.users]
+            'created_at': str(self.created_at.strftime("%d-%m-%Y")),
+            'user': self.user.to_json(),
+
         }
         return poem_json
 
@@ -38,21 +38,6 @@ class Poem(db.Model):
             'title': self.title
         }
         return poem_json
-    
-
-    def to_json_complete(self):
-        poem = [poem.to_json() for poem in self.poem]
-        mark = [mark.to_json() for mark in self.mark]
-        user_json = {
-            'id': self.id,
-            'name': str(self.name),
-            'email': str(self.email),
-            'passw': str(self.passw),
-            'rol': str(self.rol),     
-            'poem':poem,
-            'mark':mark      
-        }
-        return user_json
 
 
     @staticmethod
