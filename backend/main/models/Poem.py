@@ -1,5 +1,6 @@
 from email.policy import default
 from sqlite3 import Timestamp
+import statistics
 from .. import db
 from datetime import *
 
@@ -20,22 +21,36 @@ class Poem(db.Model):
     def __repr__(self):
         return '<Poem: %r %r>' % (self.title, self.user_id, self.body, self.created_at)
 
+    def mean_score(self):
+        score_list = []
+        if len(self.marks) == 0:
+            avg = 0
+        else:
+            for mark in self.marks:
+                score = mark.score
+                score_list.append(score)
+            avg = statistics.mean(score_list)
+        return avg
+
     #Convertir Objeto en JSON
     def to_json(self):
+
         poem_json = {
             'id': self.id,
             'title': str(self.title),
             'body': str(self.body),
             'created_at': str(self.created_at.strftime("%d-%m-%Y")),
             'user': self.user.to_json(),
-
+            'marks': self.avg_score(),
         }
         return poem_json
 
     def to_json_short(self):
         poem_json = {
             'id': self.id,
-            'title': self.title
+            'title': self.title,
+            'created_at': str(self.created_at.strftime("%d-%m-%Y")),
+            'marks': self.avg_score(),
         }
         return poem_json
 

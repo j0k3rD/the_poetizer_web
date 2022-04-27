@@ -32,8 +32,39 @@ class User(Resource):
 class Users(Resource):
     #Obtener Lista de Usuarios
     def get(self):
-        users = db.session.query(UserModel).all()
-        return jsonify([user.to_json_short() for user in users])
+        #Página inicial por defecto
+        page = 1
+        #Cantidad de elementos por página por defecto
+        per_page = 10
+        users = db.session.query(UserModel)
+        if request.get_json():
+            filters = request.get_json().items()
+            for key, value in filters:
+                #Paginación
+                if key =="page":
+                    page = int(value)
+                if key == "per_page":
+                    per_page = int(value)
+                if key == "npoems[gt]":
+                    users=users.outerjoin(UserModel.poems).group_by(UserModel.id).having(func.count(UserModel.id) >= value)
+                if key == "name":
+                    users=users.filter(UserModel.name.like("%"+value+"%"))
+                if key == "sortby":
+                    if value == "npoems[desc]":
+                        users=users.order_by(func.count(UserModel.id).desc())
+                    if value == "npoems":
+                        print("Adentro")
+                        users=users.outerjoin(UserModel.poems).group_by(UserModel.id).order_by(func.count(UserModel.id))
+
+        #Obtener valor paginado
+        users = users.paginate(page, per_page, False, 30)
+        #Devolver además de los datos la cantidad de páginas y elementos existentes antes de paginar
+        return jsonify({ 'users': [user.to_json() for professor in users.items],
+                  'total': users.total,
+                  'pages': users.pages,
+                  'page': page
+                  })
+
 
         #Insertar recurso
     def post(self):
