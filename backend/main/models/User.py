@@ -20,7 +20,7 @@ class User(db.Model):
     def to_json(self):
         user_json = {
             'id': self.id,
-            # 'name': str(self.name),
+            'name': str(self.name),
             # 'email': str(self.email),
             # 'passw': str(self.passw),
             # 'rol': str(self.rol),

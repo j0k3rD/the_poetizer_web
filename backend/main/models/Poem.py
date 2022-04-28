@@ -21,7 +21,9 @@ class Poem(db.Model):
     def __repr__(self):
         return '<Poem: %r %r>' % (self.title, self.user_id, self.body, self.created_at)
 
-    def mean_score(self):
+    #Convertir Objeto en JSON
+    def to_json(self):
+
         score_list = []
         if len(self.marks) == 0:
             avg = 0
@@ -30,10 +32,6 @@ class Poem(db.Model):
                 score = mark.score
                 score_list.append(score)
             avg = statistics.mean(score_list)
-        return avg
-
-    #Convertir Objeto en JSON
-    def to_json(self):
 
         poem_json = {
             'id': self.id,

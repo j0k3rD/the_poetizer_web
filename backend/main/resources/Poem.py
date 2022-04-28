@@ -31,42 +31,59 @@ class Poems(Resource):
         poems = db.session.query(PoemModel)
         page = 1
         per_page = 5
+        ## Creacion de Filtros
         if request.get_json():
             filters = request.get_json().items()
             for key, value in filters:
                 if key == "page":
                     page = int(value)
-                #Cantidad de elementos que va a mostrar por pagina
+                #(Cantidad de elementos que va a mostrar por pagina)
                 if key == "per_page":
                     per_page = int(value) 
+                # Filtro Titulo del Poema
                 if key == 'title':
                     poems = poems.filter(PoemModel.title.like('%'+value+'%'))
+                # Filtro ID del Autor del Poema
                 if key == 'user_id':
                     poems = poems.filter(PoemModel.user_id == value)
-                ## GTE mayor igual a esta
-                if key == 'create_at[gte]':
+                # Filtro Valoracion del Poema
+                if key == 'score':
+                    poems = poems.filter(PoemModel.marks == value)
+                #Filtro de Rango Fecha
+                # Filtro Fecha Creacion del Poema - GTE mayor igual a esta
+                if key == 'create_at[gt]':
                     poems = poems.filter(PoemModel.created_at >= datetime.strptime(value, '%d-%m-%Y'))
-                ## LTE lesser 
-                if key == 'create_at[lte]':
+                # Filtro Fecha Creacion del Poema - LTE lesser 
+                if key == 'create_at[lt]':
                     poems = poems.filter(PoemModel.created_at <= datetime.strptime(value, '%d-%m-%Y'))
+                # Filtro Nombre Autor
                 if key == 'name':
                     poems = poems.username(PoemModel.user.has(UserModel.username.like('%'+value+'%')))
 
-                ##
-                #ORDENAR DE MANERA ASCENDENTE
+                #Ordenamiento
                 if key == "sort_by":
+                    #Ordenamiento ascendente por fechas
                     if value == "date_time":
                         poems = poems.order_by(PoemModel.date_time)
+                    #Ordenamiento descendente por fechas
                     if value == "date_time[desc]":
                         poems = poems.order_by(PoemModel.date_time.desc())
+                    #Ordenamiento por promedio de Calificaciones
                     if value == "mark":
-                        poems = poems.order_by(func.avg(MarkModel.score))
+                        poems = poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by(func.avg(PoemModel.score))
+                    #Ordenamiento por promedio Descendente de Calificaciones
                     if value == "mark[desc]":
-                    ##
+                        poems = poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by(func.avg(PoemModel.score).desc())
+                    #Ordenamiento Nombre Autor Ascendente
+                    if value == "autor_name":
+                        poems = poems.order_by(PoemModel.user)
+                    #Ordenamiento Nombre Autor Descendente 
+                    if value == "autor_name[desc]":
+                        poems = poems.order_by(PoemModel.user.desc())
 
         poems = poems.paginate(page, per_page, True, 10)       
-        return jsonify({"poems":[poem.to_json_short() for poem in poems.item()],
-        "total": poems.total, "pages": poems.pages, "page": page })
+        return jsonify({"poems":[poem.to_json_short() for poem in poems.items()],
+        "total": poems.total, "pages": poems.pages, "page": page})
 
     #Insertar recurso
     def post(self):

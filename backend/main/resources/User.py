@@ -2,7 +2,10 @@ from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
 from main.models import UserModel
-
+from sqlalchemy import func
+from main.models import PoemModel
+from main.models import UserModel
+from main.models import MarkModel
 
 #Recurso Usuario
 class User(Resource):
@@ -38,6 +41,7 @@ class Users(Resource):
         per_page = 10
         users = db.session.query(UserModel)
         if request.get_json():
+            ##Creacion de Filtros
             filters = request.get_json().items()
             for key, value in filters:
                 #Paginación
@@ -45,26 +49,44 @@ class Users(Resource):
                     page = int(value)
                 if key == "per_page":
                     per_page = int(value)
-                if key == "npoems[gt]":
-                    users=users.outerjoin(UserModel.poems).group_by(UserModel.id).having(func.count(UserModel.id) >= value)
-                if key == "name":
-                    users=users.filter(UserModel.name.like("%"+value+"%"))
-                if key == "sortby":
+                
+                #Filtro Nombre
+                if key == 'name':
+                    users = users.filter(UserModel.name.like('%'+value+'%'))
+
+                ## Ordenamientos
+                if key == "sort_by":
+                    # Ordenamiento Nombres Ascendente
+                    if key == 'name':
+                        users = users.order_by(UserModel.name.like('%'+value+'%'))
+                    # Ordenamiento Nombre Descendente
                     if value == "npoems[desc]":
                         users=users.order_by(func.count(UserModel.id).desc())
-                    if value == "npoems":
+                    # Ordenamiento Poemas Ascendente
+                    if value == "num_poems":
                         print("Adentro")
                         users=users.outerjoin(UserModel.poems).group_by(UserModel.id).order_by(func.count(UserModel.id))
+                    # Ordenamiento Calificaciones Ascendente
+                    if value == "num_marks":
+                        print("Adentro")
+                        users=users.outerjoin(UserModel.marks).group_by(UserModel.id).order_by(func.count(UserModel.id))
+                
+                    # ## Valores Devueltos
+                    # # Devuelve numero de Poemas Ascendete
+                    # if key == "num_poems[gt]":
+                    #     users=users.outerjoin(UserModel.poems).group_by(UserModel.id).having(func.count(UserModel.id) >= value)
+                    # # Devuelve numero de Calificaciones Ascendentes
+                    # if key == "num_marks[gt]":
+                    #     users=users.outerjoin(UserModel.marks).group_by(UserModel.id).having(func.count(UserModel.id) >= value)
 
         #Obtener valor paginado
-        users = users.paginate(page, per_page, False, 30)
+        poems = poems.paginate(page, per_page, True, 18)
         #Devolver además de los datos la cantidad de páginas y elementos existentes antes de paginar
-        return jsonify({ 'users': [user.to_json() for professor in users.items],
-                  'total': users.total,
-                  'pages': users.pages,
+        return jsonify({ 'poems': [poem.to_json_short() for poem in poems.items],
+                  'total': poems.total,
+                  'pages': poems.pages,
                   'page': page
                   })
-
 
         #Insertar recurso
     def post(self):
