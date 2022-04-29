@@ -26,15 +26,16 @@ class Mark(db.Model):
             'id': self.id,
             'score': int(self.score),
             'commentary': str(self.commentary),
-            'user': self.user.to_json(),
-            'poem': self.poem.to_json(),
+            'user': self.user.to_json_short(),
+            'poem': self.poem.to_json_short(),
         }
         return mark_json
 
     def to_json_short(self):
         mark_json = {
             'id': self.id,
-            'score': self.score
+            'score': self.score,
+            'user': self.user.to_json_short(),
         }
         return mark_json
 

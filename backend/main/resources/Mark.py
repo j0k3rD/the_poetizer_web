@@ -9,7 +9,7 @@ class Mark(Resource):
     #Obtener una Calificacion
     def get(self, id):
         mark = db.session.query(MarkModel).get_or_404(id)
-        return mark.to_json()    
+        return mark.to_json()   
     
     #Eliminar una calificacion
     def delete(self, id):
@@ -25,6 +25,7 @@ class Mark(Resource):
         for key, value in data:
             setattr(mark, key,value)
         db.session.add(mark)
+        db.session.commit()
         return mark.to_json(), 201
 
 # Recurso Calificaciones
@@ -38,6 +39,7 @@ class Marks(Resource):
     #Insertar recurso
     def post(self):
         mark = MarkModel.from_json(request.get_json())
+        # db.session.query(MarkModel).get_or_404(mark.poem_id)
         db.session.add(mark)
         db.session.commit()
         return mark.to_json(), 201

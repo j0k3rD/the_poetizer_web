@@ -80,17 +80,18 @@ class Users(Resource):
                     #     users=users.outerjoin(UserModel.marks).group_by(UserModel.id).having(func.count(UserModel.id) >= value)
 
         #Obtener valor paginado
-        poems = poems.paginate(page, per_page, True, 18)
+        users = users.paginate(page, per_page, True, 18)
         #Devolver además de los datos la cantidad de páginas y elementos existentes antes de paginar
-        return jsonify({ 'poems': [poem.to_json_short() for poem in poems.items],
-                  'total': poems.total,
-                  'pages': poems.pages,
+        return jsonify({ 'users': [user.to_json_short() for user in users.items],
+                  'total': users.total,
+                  'pages': users.pages,
                   'page': page
                   })
 
         #Insertar recurso
     def post(self):
         user = UserModel.from_json(request.get_json())
+        # db.session.query(UserModel).get_or_404(user.user_id)
         db.session.add(user)
         db.session.commit()
         return user.to_json(), 201
