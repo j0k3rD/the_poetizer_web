@@ -57,19 +57,19 @@ class Users(Resource):
                 ## Ordenamientos
                 if key == "sort_by":
                     # Ordenamiento Nombres Ascendente
-                    if key == 'name':
-                        users = users.order_by(UserModel.name.like('%'+value+'%'))
+                    if key == "name":
+                        users = users.order_by(UserModel.name)
                     # Ordenamiento Nombre Descendente
-                    if value == "npoems[desc]":
-                        users=users.order_by(func.count(UserModel.id).desc())
+                    if value == "num_poems[desc]":
+                        users=users.outerjoin(UserModel.poems).group_by(UserModel.id).order_by(func.count(UserModel.id).desc())
                     # Ordenamiento Poemas Ascendente
                     if value == "num_poems":
                         print("Adentro")
                         users=users.outerjoin(UserModel.poems).group_by(UserModel.id).order_by(func.count(UserModel.id))
-                    # Ordenamiento Calificaciones Ascendente
+                    # Ordenamiento Calificaciones Descendente
                     if value == "num_marks":
                         print("Adentro")
-                        users=users.outerjoin(UserModel.marks).group_by(UserModel.id).order_by(func.count(UserModel.id))
+                        users=users.outerjoin(UserModel.marks).group_by(UserModel.id).order_by(func.count(UserModel.id).desc())
                 
                     # ## Valores Devueltos
                     # # Devuelve numero de Poemas Ascendete
@@ -82,7 +82,7 @@ class Users(Resource):
         #Obtener valor paginado
         users = users.paginate(page, per_page, True, 18)
         #Devolver además de los datos la cantidad de páginas y elementos existentes antes de paginar
-        return jsonify({ 'users': [user.to_json_short() for user in users.items],
+        return jsonify({ 'users': [user.to_json_short_pAm() for user in users.items],
                   'total': users.total,
                   'pages': users.pages,
                   'page': page

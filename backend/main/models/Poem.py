@@ -41,7 +41,7 @@ class Poem(db.Model):
             'created_at': str(self.created_at.strftime("%d-%m-%Y")),
             'user': self.user.to_json(),
             'marks': [mark.to_json_short() for mark in self.marks],
-            'mark_avg': self.avg_score(),
+            'mark_avg': str(self.avg_score()),
         }
         return poem_json
 

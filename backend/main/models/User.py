@@ -37,6 +37,23 @@ class User(db.Model):
         }
         return user_json
     
+    def to_json_short_pAm(self):
+        user_json = {
+            'id': self.id,
+            'name': str(self.name),
+            'num_marks': len(self.marks),
+            'num_poems': len(self.poems),
+        }
+        return user_json
+    
+    # def to_json_short_marks(self):
+    #     user_json = {
+    #         'id': self.id,
+    #         'name': str(self.name),
+    #         'num_poems': len(self.poems),
+    #     }
+    #     return user_json
+    
     def to_json_complete(self):
         user_json = {
             'id': self.id,

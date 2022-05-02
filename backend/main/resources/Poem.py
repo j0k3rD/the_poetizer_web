@@ -3,6 +3,7 @@ from flask import request, jsonify
 from .. import db
 from main.models import PoemModel
 from main.models import UserModel
+from main.models import MarkModel
 from sqlalchemy import func
 from datetime import *
 
@@ -78,16 +79,15 @@ class Poems(Resource):
                         poems = poems.order_by(PoemModel.date_time.desc())
                     #Ordenamiento por promedio de Calificaciones
                     if value == "mark":
-                        poems = poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by(func.avg(PoemModel.score))
+                        poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by((MarkModel.score))
                     #Ordenamiento por promedio Descendente de Calificaciones
                     if value == "mark[desc]":
-                        poems = poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by(func.avg(PoemModel.score).desc())
-                    #Ordenamiento Nombre Autor Ascendente
+                                                poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by((MarkModel.score).desc())
                     if value == "autor_name":
-                        poems = poems.order_by(PoemModel.user)
+                        poems=poems.outerjoin(PoemModel.user).group_by(UserModel.id).order_by((UserModel.name))
                     #Ordenamiento Nombre Autor Descendente 
                     if value == "autor_name[desc]":
-                        poems = poems.order_by(PoemModel.user.desc())
+                        poems=poems.outerjoin(PoemModel.user).group_by(UserModel.id).order_by((UserModel.name).desc())
         poems = poems.paginate(page, per_page, True, 10)       
         return jsonify({"poems":[poem.to_json_short() for poem in poems.items],
         "total": poems.total, "pages": poems.pages, "page": page})
