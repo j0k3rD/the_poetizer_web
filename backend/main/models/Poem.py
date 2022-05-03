@@ -53,6 +53,14 @@ class Poem(db.Model):
         }
         return poem_json
 
+    def to_json_public(self):
+        poem_json = {
+            'id': self.id,
+            'title': self.title,
+            'user': self.user.to_json_short(),
+            'body': str(self.body),
+        }
+        return poem_json
 
     @staticmethod
 

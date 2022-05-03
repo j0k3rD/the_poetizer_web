@@ -1,5 +1,7 @@
+from locale import currency
 from flask_restful import Resource
 from flask import request, jsonify
+import jwt
 from .. import db
 from main.models import PoemModel
 from main.models import UserModel
@@ -13,11 +15,18 @@ from main.auth.decorators import admin_required
 #Recurso Poema
 class Poem(Resource):
     #Obtener un Poema
+    @jwt_required(optional=True)
     def get(self, id):
         poem = db.session.query(PoemModel).get_or_404(id)
-        return poem.to_json()        
+        #Verificar si se ha ingresado un token
+        current_identity = get_jwt_identity()
+        if current_identity:
+            return poem.to_json()
+        else:
+            return poem.to_json_public()        
 
     #Eliminar un Poema
+    @jwt_required()
     def delete(self, id):
         poem = db.session.query(PoemModel).get_or_404(id)
         db.session.delete(poem)
@@ -25,6 +34,7 @@ class Poem(Resource):
         return '',204
 
     #Modificar un Poema
+    @jwt_required()
     def put(self, id):
         poem = db.session.query(PoemModel).get_or_404(id)
         data = request.get_json().items()
@@ -36,11 +46,14 @@ class Poem(Resource):
 
             
 #Recurso Poemas
-@jwt_required(optional=True)
 class Poems(Resource):
     #Obtener Lista de Poemas
-    def get(self):
+    @jwt_required(optional=True)
+    def get(self,id):
+        #Obtener valores del request
+        filters = request.data
         poems = db.session.query(PoemModel)
+        poems = db.session.query(PoemModel).get_or_404(id)  ####
         page = 1
         per_page = 5
         ## Creacion de Filtros
@@ -96,12 +109,20 @@ class Poems(Resource):
         "total": poems.total, "pages": poems.pages, "page": page})
 
     #Insertar recurso
-    #
+    @jwt_required()
     def post(self):
+        #Obtener projecto de JSON
         poem = PoemModel.from_json(request.get_json())
-        db.session.query(PoemModel).get_or_404(poem.user_id)
-        db.session.add(poem)
-        db.session.commit()
+        #Obtener id del usuario autenticado
+        current_user = get_jwt_identity()
+        #Asociar proyecto a usuario
+        poem.poetId = current_user
+        try:
+            db.session.add(poem)
+            db.session.commit()
+        except Exception as error:
+            return 'Invalid Format', 400
         return poem.to_json(), 201
+
 
 
