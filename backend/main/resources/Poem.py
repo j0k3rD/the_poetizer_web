@@ -56,8 +56,8 @@ class Poems(Resource):
                 if key == 'user_id':
                     poems = poems.filter(PoemModel.user_id == value)
                 # # Filtro Valoracion del Poema
-                # if key == 'score':
-                #     poems = poems.filter(PoemModel.marks == value)
+                if key == 'rating':
+                    poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).having(func.avg(MarkModel.score) == float(value))
                 #Filtro de Rango Fecha
                 # Filtro Fecha Creacion del Poema - GTE mayor igual a esta
                 if key == 'create_at[gt]':
@@ -82,7 +82,7 @@ class Poems(Resource):
                         poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by((MarkModel.score))
                     #Ordenamiento por promedio Descendente de Calificaciones
                     if value == "mark[desc]":
-                                                poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by((MarkModel.score).desc())
+                        poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by((MarkModel.score).desc())
                     if value == "autor_name":
                         poems=poems.outerjoin(PoemModel.user).group_by(UserModel.id).order_by((UserModel.name))
                     #Ordenamiento Nombre Autor Descendente 
