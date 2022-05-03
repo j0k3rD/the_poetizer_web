@@ -4,13 +4,14 @@ from flask import Flask
 from dotenv import load_dotenv
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
-
+from flask_jwt_extended import JWTManager
 
 #Inicializar API de Flask-Restful
 api = Api()
 #Inicializar SQLAlchemy
 db = SQLAlchemy()
-
+#Inicializar JWT
+jwt = JWTManager()
 
 def create_app():
     #inicializar Flask
@@ -41,10 +42,15 @@ def create_app():
     api.add_resource(resource.MarksResource, '/marks')
     api.add_resource(resource.MarkResource, '/mark/<id>')
 
-    # api.add_model(model.PoemModel, '/poems')
-    # api.add_model(model.UserModel, '/user/<id>')
-    # api.add_model(model.MarkModel, '/mark')
+    #Cargar clave secreta
+    app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
+    #Cargar tiempo de expiracion de los tokens
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = int(os.getenv('JWT_ACCESS_TOKEN_EXPIRES'))
+    jwt.init_app(app)
 
+    from main.auth import routes
+    #Importar blueprint
+    app.register_blueprint(auth.routes.auth)
     #Aqui se inicializaran el resto de los m
     #retornar aplicaciion inicializada
     api.init_app(app)

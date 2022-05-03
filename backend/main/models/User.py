@@ -1,17 +1,33 @@
+from enum import unique
+from tokenize import generate_tokens
 from .. import db
-
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(200), nullable=False)
+    #Mail usado como nombre de usuario
+    email = db.Column(db.String(100), nullable=False, unique=True, index=True)
+    #Contraseña que será el hash de la passw en texto plano
     passw = db.Column(db.String(100), nullable=False)
+    #Rol (En el caso de que existan diferentes tipos de usuarios con diferentes permisos)
     rol = db.Column(db.String(50), nullable=False)
 
     #Relacion Base
     poems = db.relationship("Poem", back_populates="user", cascade="all, delete-orphan")
     marks = db.relationship("Mark", back_populates="user", cascade="all, delete-orphan")
     
+    @property
+    def plain_password(self):
+        #Mensaje de No Permitido
+        raise AttributeError ("Not Allowed")
+
+    @plain_password.setter
+    def plain_password(self, password):
+        self.passw = generate_password_hash(password)
+    
+    def validate_pass(self, password):
+        return check_password_hash(self.passw, password)
 
     def __repr__(self):
         return '< User: %r %r >' % (self.name, self.email, self.passw, self.rol)
@@ -79,6 +95,6 @@ class User(db.Model):
         return User(id=id,
                     name=name,
                     email=email,
-                    passw=passw,
+                    plain_password=passw,
                     rol=rol,
                     )

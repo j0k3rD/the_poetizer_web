@@ -6,15 +6,21 @@ from sqlalchemy import func
 from main.models import PoemModel
 from main.models import UserModel
 from main.models import MarkModel
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from main.auth.decorators import admin_required
+
 
 #Recurso Usuario
 class User(Resource):
     #Obtener un Usuario
+    @jwt_required
     def get(self, id):
         user = db.session.query(UserModel).get_or_404(id)
         return user.to_json()
     
     #Eliminar un Usuario
+    #@jwt_required
+    @admin_required
     def delete(self, id):
         user = db.session.query(UserModel).get_or_404(id)
         db.session.delete(user)
@@ -22,6 +28,8 @@ class User(Resource):
         return '',204
 
     #Modificar un usuario
+    # @jwt_required
+    @admin_required
     def put(self, id):
         user = db.session.query(UserModel).get_or_404(id)
         data = request.get_json().items()
@@ -34,6 +42,7 @@ class User(Resource):
 #Recurso Usuarios
 class Users(Resource):
     #Obtener Lista de Usuarios
+    @admin_required
     def get(self):
         #Página inicial por defecto
         page = 1
@@ -89,6 +98,7 @@ class Users(Resource):
                   })
 
         #Insertar recurso
+    @admin_required
     def post(self):
         user = UserModel.from_json(request.get_json())
         # db.session.query(UserModel).get_or_404(user.user_id)

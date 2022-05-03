@@ -6,6 +6,8 @@ from main.models import UserModel
 from main.models import MarkModel
 from sqlalchemy import func
 from datetime import *
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from main.auth.decorators import admin_required
 
 
 #Recurso Poema
@@ -34,6 +36,7 @@ class Poem(Resource):
 
             
 #Recurso Poemas
+@jwt_required(optional=True)
 class Poems(Resource):
     #Obtener Lista de Poemas
     def get(self):
@@ -93,6 +96,7 @@ class Poems(Resource):
         "total": poems.total, "pages": poems.pages, "page": page})
 
     #Insertar recurso
+    #
     def post(self):
         poem = PoemModel.from_json(request.get_json())
         db.session.query(PoemModel).get_or_404(poem.user_id)
