@@ -13,13 +13,19 @@ from main.auth.decorators import admin_required
 #Recurso Usuario
 class User(Resource):
     #Obtener un Usuario
-    @jwt_required
+    @jwt_required(optional=True)
+    # @admin_required
     def get(self, id):
         user = db.session.query(UserModel).get_or_404(id)
-        return user.to_json()
+        #Verificar si se ha ingresado con token
+        current_identity = get_jwt_identity()
+        if current_identity:
+            return user.to_json_short_email()
+        else:
+            return user.to_json_short()
     
     #Eliminar un Usuario
-    #@jwt_required
+    @jwt_required()
     @admin_required
     def delete(self, id):
         user = db.session.query(UserModel).get_or_404(id)
@@ -28,7 +34,7 @@ class User(Resource):
         return '',204
 
     #Modificar un usuario
-    # @jwt_required
+    @jwt_required()
     @admin_required
     def put(self, id):
         user = db.session.query(UserModel).get_or_404(id)

@@ -17,15 +17,20 @@ class User(db.Model):
     poems = db.relationship("Poem", back_populates="user", cascade="all, delete-orphan")
     marks = db.relationship("Mark", back_populates="user", cascade="all, delete-orphan")
     
+    #Funciona como una funcion get, la que se llama para obtener un valor del atributo.
     @property
     def plain_password(self):
         #Mensaje de No Permitido
         raise AttributeError ("Not Allowed")
 
+    #Llama a la funcion generate_password_hash y a partir de la contraseña en formato plano, me genera
+    # una contraseña encriptada.
     @plain_password.setter
     def plain_password(self, password):
         self.passw = generate_password_hash(password)
     
+    #Hace un login y se fija si la contraseña dada es la correcta con la de la DB. Nunca mas se ve
+    # la contraseña en texto plano.
     def validate_pass(self, password):
         return check_password_hash(self.passw, password)
 
@@ -62,6 +67,14 @@ class User(db.Model):
         }
         return user_json
     
+    def to_json_short_email(self):
+        user_json = {
+        'id': self.id,
+        'name': str(self.name),
+        'email': str(self.email),
+        
+        }
+        return user_json
     # def to_json_short_marks(self):
     #     user_json = {
     #         'id': self.id,

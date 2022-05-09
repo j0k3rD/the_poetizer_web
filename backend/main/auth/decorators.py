@@ -26,6 +26,12 @@ def user_identity_lookup(user):
     #Definir ID como atributo identificatorio
     return user.id
 
+#Define el atributo que se utilizará para identificar el usuario
+# @jwt.user_identity_mail_loader
+# def user_identity_lookup(user):
+#     #Definir EMAIL como atributo identificatorio
+#     return user.email
+
 
 #Define que atributos se guardarán dentro del token
 @jwt.additional_claims_loader

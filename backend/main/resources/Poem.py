@@ -50,6 +50,13 @@ class Poems(Resource):
     #Obtener Lista de Poemas
     @jwt_required(optional=True)
     def get(self,id):
+        #Verificar si se ha ingresado con token
+        # current_identity = get_jwt_identity()
+        # if current_identity:
+        #     return poem.to_json()
+        # else:
+        #     return poem.to_json_public()
+
         #Obtener valores del request
         filters = request.data
         poems = db.session.query(PoemModel)
@@ -117,12 +124,26 @@ class Poems(Resource):
         current_user = get_jwt_identity()
         #Asociar proyecto a usuario
         poem.poetId = current_user
-        try:
-            db.session.add(poem)
-            db.session.commit()
-        except Exception as error:
-            return 'Invalid Format', 400
-        return poem.to_json(), 201
+
+        n_marks = poem.count_score()
+        # n_poems = int(poem.id)
+
+        # if n_poems <= 5:
+        #     try:
+        #         db.session.add(poem)
+        #         db.session.commit()
+        #     except Exception as error:
+        #         return 'Invalid Format', 400
+        #     return poem.to_json(), 201
+        if n_marks < 0:
+            return 'You have to rate 5 poems before posting a new one. '
+        else:
+            try:
+                db.session.add(poem)
+                db.session.commit()
+            except Exception as error:
+                return 'Invalid Format', 400
+            return poem.to_json(), 201
 
 
 

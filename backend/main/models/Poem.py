@@ -1,3 +1,4 @@
+from operator import le
 import statistics
 from .. import db
 from datetime import *
@@ -18,6 +19,19 @@ class Poem(db.Model):
 
     def __repr__(self):
         return '<Poem: %r %r>' % (self.title, self.user_id, self.body, self.created_at)
+
+
+    def count_score(self):
+        score_list = []
+        if len(self.marks) == 0:
+            count = 0
+        else:
+            for mark in self.marks:
+                score = mark.score
+                score_list.append(score)
+            count = len(score_list)
+        return count
+
 
     def avg_score(self):
         score_list = []

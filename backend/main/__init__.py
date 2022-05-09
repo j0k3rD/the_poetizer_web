@@ -6,6 +6,7 @@ from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 
+
 #Inicializar API de Flask-Restful
 api = Api()
 #Inicializar SQLAlchemy
@@ -50,7 +51,7 @@ def create_app():
 
     from main.auth import routes
     #Importar blueprint
-    app.register_blueprint(auth.routes.auth)
+    app.register_blueprint(routes.auth)
     #Aqui se inicializaran el resto de los m
     #retornar aplicaciion inicializada
     api.init_app(app)

@@ -2,7 +2,8 @@ from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
 from main.models import MarkModel
-
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from main.auth.decorators import admin_required
 
 # Recurso Calificacion
 class Mark(Resource):
@@ -12,6 +13,8 @@ class Mark(Resource):
         return mark.to_json()   
     
     #Eliminar una calificacion
+    @jwt_required()
+    @admin_required
     def delete(self, id):
         mark = db.session.query(MarkModel).get_or_404(id)
         db.session.delete(mark)
@@ -19,6 +22,7 @@ class Mark(Resource):
         return '',204
 
     #Agregar una calificacion
+    @jwt_required()
     def put(self, id):
         mark = db.session.query(MarkModel).get_or_404(id)
         data = request.get_json().items()
@@ -37,6 +41,7 @@ class Marks(Resource):
 
     
     #Insertar recurso
+    @jwt_required()
     def post(self):
         mark = MarkModel.from_json(request.get_json())
         # db.session.query(MarkModel).get_or_404(mark.poem_id)
