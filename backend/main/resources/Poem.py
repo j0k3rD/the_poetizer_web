@@ -55,9 +55,9 @@ class Poems(Resource):
             #Obtener valores del request
             filters = request.data
             poems = db.session.query(PoemModel)
-            # poems = db.session.query(PoemModel).get_or_404(id)  ####
             page = 1
             per_page = 5
+
             ## Creacion de Filtros
             filters = request.get_json().items()
             for key, value in filters:
@@ -66,7 +66,7 @@ class Poems(Resource):
                 #(Cantidad de elementos que va a mostrar por pagina)
                 if key == "per_page":
                     per_page = int(value) 
-            # Filtro Titulo del Poema
+
             #Verificar si se ha ingresado con token
             current_user = get_jwt_identity()
             #Asociar poema a usuario
@@ -74,13 +74,14 @@ class Poems(Resource):
             if request.get_json():
                 #Si ha ingresado un Token lo deja ver los poemas que no son de el.
                 if current_user:
-                    #Creo la variable 'user' donde traigo cual usuario es igual al id de current_user.
+                    #Creo la variable 'user' donde traigo cual usuario es igual al id de current_user. (TENER CUIDADO CON LOS PARENTESIS)
                     poems = db.session.query(PoemModel).filter(PoemModel.user_id != current_user).order_by(PoemModel.created_at).outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by(MarkModel.score)
                 
                 #Si no ha ingresado un Token lo deja ver todos.
                 else:
-                    ## Creacion de Filtros
+                    # Recorrer los filtros
                     for key, value in filters:
+                        #Filtro Titulo del Poema
                         if key == 'title':
                             poems = poems.filter(PoemModel.title.like('%'+value+'%'))
                         # Filtro ID del Autor del Poema
