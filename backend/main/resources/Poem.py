@@ -11,7 +11,7 @@ from sqlalchemy import func
 from datetime import *
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from main.auth.decorators import admin_required
-
+from flask_jwt_extended import verify_jwt_in_request, get_jwt
 
 #Recurso Poema
 class Poem(Resource):
@@ -30,9 +30,23 @@ class Poem(Resource):
     @jwt_required()
     def delete(self, id):
         poem = db.session.query(PoemModel).get_or_404(id)
-        db.session.delete(poem)
-        db.session.commit()
-        return '',204
+        #Verificar si se ha ingresado con token
+        current_user = get_jwt_identity()
+        #Asociar poema a usuario
+        poem.poetId = current_user
+        
+        #Obtener claims de adentro del JWT
+        claims = get_jwt()
+            #Funcion para que solo el ADMIN o el DUEÑO DEL POEMA pueda borrar el mismo.
+        if claims['rol'] =="admin" or poem.user_id == current_user:
+            try:
+                db.session.delete(poem)
+                db.session.commit()
+            except Exception as error:
+                return 'Invalid Format',204
+            return poem.to_json(), 201
+        else:
+            return 'You have no permission to delete this Poem. You have to be OWNER!', 403
 
     ##NO VA EL PUT DE POEMAS, pero lo dejo por las dudas mas adelante :) 
     #Modificar un Poema
