@@ -57,15 +57,10 @@ class Poems(Resource):
         current_identity = get_jwt_identity()
         #Asociar poema a usuario
         poem.poetId = current_user
-
         #Si ha ingresado un Token lo deja ver los poemas que no son de el.
         if current_identity:
             #Creo la variable 'user' donde traigo cual usuario es igual al id de current_user.
             user = db.session.query(UserModel).get(current_user)
-
-            
-
-
         #Si no ha ingresado un Token lo deja ver todos.
         else:
             #Obtener valores del request
@@ -74,58 +69,57 @@ class Poems(Resource):
             poems = db.session.query(PoemModel).get_or_404(id)  ####
             page = 1
             per_page = 5
+        if request.get_json():
+            ## Creacion de Filtros
+            filters = request.get_json().items()
+            for key, value in filters:
+                if key == "page":
+                    page = int(value)
+                #(Cantidad de elementos que va a mostrar por pagina)
+                if key == "per_page":
+                    per_page = int(value) 
+                # Filtro Titulo del Poema
+                if key == 'title':
+                    poems = poems.filter(PoemModel.title.like('%'+value+'%'))
+                # Filtro ID del Autor del Poema
+                if key == 'user_id':
+                    poems = poems.filter(PoemModel.user_id == value)
+                # # Filtro Valoracion del Poema
+                if key == 'rating':
+                    poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).having(func.avg(MarkModel.score) == float(value))
+                #Filtro de Rango Fecha
+                # Filtro Fecha Creacion del Poema - GTE mayor igual a esta
+                if key == 'create_at[gt]':
+                    poems = poems.filter(PoemModel.created_at >= datetime.strptime(value, '%d-%m-%Y'))
+                # Filtro Fecha Creacion del Poema - LTE lesser 
+                if key == 'create_at[lt]':
+                    poems = poems.filter(PoemModel.created_at <= datetime.strptime(value, '%d-%m-%Y'))
+                # Filtro Nombre Autor
+                if key == 'username':
+                    poems = poems.username(PoemModel.user.has(UserModel.username.like('%'+value+'%')))
 
-            if request.get_json():
-                ## Creacion de Filtros
-                filters = request.get_json().items()
-                for key, value in filters:
-                    if key == "page":
-                        page = int(value)
-                    #(Cantidad de elementos que va a mostrar por pagina)
-                    if key == "per_page":
-                        per_page = int(value) 
-                    # Filtro Titulo del Poema
-                    if key == 'title':
-                        poems = poems.filter(PoemModel.title.like('%'+value+'%'))
-                    # Filtro ID del Autor del Poema
-                    if key == 'user_id':
-                        poems = poems.filter(PoemModel.user_id == value)
-                    # # Filtro Valoracion del Poema
-                    if key == 'rating':
-                        poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).having(func.avg(MarkModel.score) == float(value))
-                    #Filtro de Rango Fecha
-                    # Filtro Fecha Creacion del Poema - GTE mayor igual a esta
-                    if key == 'create_at[gt]':
-                        poems = poems.filter(PoemModel.created_at >= datetime.strptime(value, '%d-%m-%Y'))
-                    # Filtro Fecha Creacion del Poema - LTE lesser 
-                    if key == 'create_at[lt]':
-                        poems = poems.filter(PoemModel.created_at <= datetime.strptime(value, '%d-%m-%Y'))
-                    # Filtro Nombre Autor
-                    if key == 'username':
-                        poems = poems.username(PoemModel.user.has(UserModel.username.like('%'+value+'%')))
-
-                    #Ordenamiento
-                    if key == "sort_by":
-                        #Ordenamiento ascendente por fechas
-                        if value == "date_time":
-                            poems = poems.order_by(PoemModel.date_time)
-                        #Ordenamiento descendente por fechas
-                        if value == "date_time[desc]":
-                            poems = poems.order_by(PoemModel.date_time.desc())
-                        #Ordenamiento por promedio de Calificaciones
-                        if value == "mark":
-                            poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by((MarkModel.score))
-                        #Ordenamiento por promedio Descendente de Calificaciones
-                        if value == "mark[desc]":
-                            poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by((MarkModel.score).desc())
-                        if value == "autor_name":
-                            poems=poems.outerjoin(PoemModel.user).group_by(UserModel.id).order_by((UserModel.name))
-                        #Ordenamiento Nombre Autor Descendente 
-                        if value == "autor_name[desc]":
-                            poems=poems.outerjoin(PoemModel.user).group_by(UserModel.id).order_by((UserModel.name).desc())
-            poems = poems.paginate(page, per_page, True, 10)       
-            return jsonify({"poems":[poem.to_json_short() for poem in poems.items],
-            "total": poems.total, "pages": poems.pages, "page": page})
+                #Ordenamiento
+                if key == "sort_by":
+                    #Ordenamiento ascendente por fechas
+                    if value == "date_time":
+                        poems = poems.order_by(PoemModel.date_time)
+                    #Ordenamiento descendente por fechas
+                    if value == "date_time[desc]":
+                        poems = poems.order_by(PoemModel.date_time.desc())
+                    #Ordenamiento por promedio de Calificaciones
+                    if value == "mark":
+                        poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by((MarkModel.score))
+                    #Ordenamiento por promedio Descendente de Calificaciones
+                    if value == "mark[desc]":
+                        poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by((MarkModel.score).desc())
+                    if value == "autor_name":
+                        poems=poems.outerjoin(PoemModel.user).group_by(UserModel.id).order_by((UserModel.name))
+                    #Ordenamiento Nombre Autor Descendente 
+                    if value == "autor_name[desc]":
+                        poems=poems.outerjoin(PoemModel.user).group_by(UserModel.id).order_by((UserModel.name).desc())
+        poems = poems.paginate(page, per_page, True, 10)       
+        return jsonify({"poems":[poem.to_json_short() for poem in poems.items],
+        "total": poems.total, "pages": poems.pages, "page": page})
 
     #Insertar recurso
     @jwt_required()
