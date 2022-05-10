@@ -3,7 +3,6 @@ from locale import currency
 from flask_restful import Resource
 from flask import request, jsonify
 import jwt
-
 from .. import db
 from main.models import PoemModel
 from main.models import UserModel
@@ -52,29 +51,36 @@ class Poem(Resource):
 class Poems(Resource):
     #Obtener Lista de Poemas
     @jwt_required(optional=True)
-    def get(self,id):
+    def get(self):
             #Obtener valores del request
             filters = request.data
             poems = db.session.query(PoemModel)
-            poems = db.session.query(PoemModel).get_or_404(id)  ####
+            # poems = db.session.query(PoemModel).get_or_404(id)  ####
             page = 1
             per_page = 5
+            ## Creacion de Filtros
+            filters = request.get_json().items()
+            for key, value in filters:
+                if key == "page":
+                    page = int(value)
+                #(Cantidad de elementos que va a mostrar por pagina)
+                if key == "per_page":
+                    per_page = int(value) 
+            # Filtro Titulo del Poema
             #Verificar si se ha ingresado con token
             current_user = get_jwt_identity()
             #Asociar poema a usuario
             poems.poetId = current_user
-            #Si no ha ingresado un Token lo deja ver todos.
             if request.get_json():
-                if not current_user:
+                #Si ha ingresado un Token lo deja ver los poemas que no son de el.
+                if current_user:
+                    #Creo la variable 'user' donde traigo cual usuario es igual al id de current_user.
+                    poems = db.session.query(PoemModel).filter(PoemModel.user_id != current_user).order_by(PoemModel.created_at).outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by(MarkModel.score)
+                
+                #Si no ha ingresado un Token lo deja ver todos.
+                else:
                     ## Creacion de Filtros
-                    filters = request.get_json().items()
                     for key, value in filters:
-                        if key == "page":
-                            page = int(value)
-                        #(Cantidad de elementos que va a mostrar por pagina)
-                        if key == "per_page":
-                            per_page = int(value) 
-                        # Filtro Titulo del Poema
                         if key == 'title':
                             poems = poems.filter(PoemModel.title.like('%'+value+'%'))
                         # Filtro ID del Autor del Poema
@@ -93,33 +99,29 @@ class Poems(Resource):
                         # Filtro Nombre Autor
                         if key == 'username':
                             poems = poems.username(PoemModel.user.has(UserModel.username.like('%'+value+'%')))
-                #Si ha ingresado un Token lo deja ver los poemas que no son de el.
-                if current_user:
-                    #Creo la variable 'user' donde traigo cual usuario es igual al id de current_user.
-                    users = db.session.query(UserModel).get(current_user)
-
-                #Ordenamiento
-                if key == "sort_by":
-                    #Ordenamiento ascendente por fechas
-                    if value == "date_time":
-                        poems = poems.order_by(PoemModel.date_time)
-                    #Ordenamiento descendente por fechas
-                    if value == "date_time[desc]":
-                        poems = poems.order_by(PoemModel.date_time.desc())
-                    #Ordenamiento por promedio de Calificaciones
-                    if value == "mark":
-                        poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by((MarkModel.score))
-                    #Ordenamiento por promedio Descendente de Calificaciones
-                    if value == "mark[desc]":
-                        poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by((MarkModel.score).desc())
-                    if value == "autor_name":
-                        poems=poems.outerjoin(PoemModel.user).group_by(UserModel.id).order_by((UserModel.name))
-                    #Ordenamiento Nombre Autor Descendente 
-                    if value == "autor_name[desc]":
-                        poems=poems.outerjoin(PoemModel.user).group_by(UserModel.id).order_by((UserModel.name).desc())
-        poems = poems.paginate(page, per_page, True, 10)       
-        return jsonify({"poems":[poem.to_json_short() for poem in poems.items],
-        "total": poems.total, "pages": poems.pages, "page": page})
+                
+                        #Ordenamiento
+                        if key == "sort_by":
+                            #Ordenamiento ascendente por fechas
+                            if value == "date_time":
+                                poems = poems.order_by(PoemModel.created_at)
+                            #Ordenamiento descendente por fechas
+                            if value == "date_time[desc]":
+                                poems = poems.order_by(PoemModel.created_at.desc())
+                            #Ordenamiento por promedio de Calificaciones
+                            if value == "mark":
+                                poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by((MarkModel.score))
+                            #Ordenamiento por promedio Descendente de Calificaciones
+                            if value == "mark[desc]":
+                                poems=poems.outerjoin(PoemModel.marks).group_by(PoemModel.id).order_by((MarkModel.score).desc())
+                            if value == "autor_name":
+                                poems=poems.outerjoin(PoemModel.user).group_by(UserModel.id).order_by((UserModel.name))
+                            #Ordenamiento Nombre Autor Descendente 
+                            if value == "autor_name[desc]":
+                                poems=poems.outerjoin(PoemModel.user).group_by(UserModel.id).order_by((UserModel.name).desc())
+                poems = poems.paginate(page, per_page, True, 10)       
+                return jsonify({"poems":[poem.to_json_short() for poem in poems.items],
+                "total": poems.total, "pages": poems.pages, "page": page})
 
     #Insertar recurso
     @jwt_required()
