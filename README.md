@@ -8,3 +8,12 @@ Prof. Andrea Navarro - @AndreaNavarroMoreno
 
 ## TP2
   - cURL
+
+## TP3
+  - Pagination
+
+## TP4
+  - Auth JWT
+ 
+## TP5
+  - Email Sending
