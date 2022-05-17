@@ -24,6 +24,7 @@ class User(Resource):
         else:
             return user.to_json_short()
     
+
     #Eliminar un Usuario
     @jwt_required()
     @admin_required
@@ -45,6 +46,7 @@ class User(Resource):
         db.session.commit()
         return user.to_json(), 201
         
+
 #Recurso Usuarios
 class Users(Resource):
     #Obtener Lista de Usuarios
@@ -103,7 +105,8 @@ class Users(Resource):
                   'page': page
                   })
 
-        #Insertar recurso
+
+    #Insertar recurso
     @admin_required
     def post(self):
         user = UserModel.from_json(request.get_json())

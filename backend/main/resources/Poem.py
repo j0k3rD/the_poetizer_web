@@ -13,6 +13,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from main.auth.decorators import admin_required
 from flask_jwt_extended import verify_jwt_in_request, get_jwt
 
+
 #Recurso Poema
 class Poem(Resource):
     #Obtener un Poema
@@ -26,6 +27,7 @@ class Poem(Resource):
         else:
             return poem.to_json_public()        
 
+
     #Eliminar un Poema
     @jwt_required()
     def delete(self, id):
@@ -37,8 +39,8 @@ class Poem(Resource):
         
         #Obtener claims de adentro del JWT
         claims = get_jwt()
-            #Funcion para que solo el ADMIN o el DUEÑO DEL POEMA pueda borrar el mismo.
-        if claims['rol'] =="admin" or poem.user_id == current_user:
+        #Funcion para que solo el ADMIN o el DUEÑO DEL POEMA pueda borrar el mismo.
+        if claims['rol'] == "admin" or poem.user_id == current_user:
             try:
                 db.session.delete(poem)
                 db.session.commit()
@@ -47,6 +49,7 @@ class Poem(Resource):
             return poem.to_json(), 201
         else:
             return 'You have no permission to delete this Poem. You have to be OWNER!', 403
+
 
     ##NO VA EL PUT DE POEMAS, pero lo dejo por las dudas mas adelante :) 
     #Modificar un Poema
@@ -138,6 +141,7 @@ class Poems(Resource):
                 return jsonify({"poems":[poem.to_json_short() for poem in poems.items],
                 "total": poems.total, "pages": poems.pages, "page": page})
 
+
     #Insertar recurso
     @jwt_required()
     def post(self):
@@ -145,11 +149,13 @@ class Poems(Resource):
         poem = PoemModel.from_json(request.get_json())
         #Obtener id del usuario autenticado
         current_user = get_jwt_identity()
-        #Asociar proyecto a usuario
+        #Asociar poema a usuario
         poem.poetId = current_user
+
 
         #Creo la variable 'user' donde traigo cual usuario es igual al id de current_user.
         user = db.session.query(UserModel).get(current_user)
+
 
         #Funcion para que solo pueda añadir poemas si es su primer poema o ya ha hecho 5 calificaciones.
         if len(user.poems) == 0 or len(user.marks)/len(user.poems) > 5: ##Debe ser 5
