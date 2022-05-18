@@ -1,4 +1,3 @@
-from operator import le
 import statistics
 from .. import db
 from datetime import *

@@ -2,6 +2,7 @@ from flask_restful import Resource
 from flask import request, jsonify
 from .. import db
 from main.models import MarkModel
+from main.models import UserModel
 from flask_jwt_extended import verify_jwt_in_request, get_jwt
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from main.auth.decorators import admin_required
@@ -15,7 +16,6 @@ class Mark(Resource):
     
     #Eliminar una calificacion
     @jwt_required()
-    @admin_required
     def delete(self, id):
         mark = db.session.query(MarkModel).get_or_404(id)
         #Verificar si se ha ingresado con token
@@ -25,8 +25,9 @@ class Mark(Resource):
         
         #Obtener claims de adentro del JWT
         claims = get_jwt()
+
         #Funcion para que solo el ADMIN o el DUEÑO DEL POEMA pueda borrar el mismo.
-        if claims['rol'] == "admin" or mark.user_id == current_user:
+        if mark.user_id == current_user or claims['rol'] == "admin":
             try:
                 db.session.delete(mark)
                 db.session.commit()
@@ -46,8 +47,6 @@ class Mark(Resource):
         #Asociar calificacion a usuario
         mark.markId = current_user
 
-        #Obtener claims de adentro del JWT
-        claims = get_jwt()
         #Funcion para que solo el DUEÑO DE LA CALIFICACION pueda modificar la misma.
         if mark.user_id == current_user:
             try:
@@ -63,7 +62,7 @@ class Mark(Resource):
             return 'You have no permission to delete this Mark. You have to be OWNER!', 403
 
 
-# Recurso Calificaciones
+#Recurso Calificaciones
 class Marks(Resource):
     #Obtener Lista de Calificaciones
     def get(self):
@@ -82,13 +81,16 @@ class Marks(Resource):
         #Asociar mark a usuario
         mark.markId = current_user
 
+        #Obtener claims de adentro del JWT
+        claims = get_jwt()
+
         #Funcion para que solo los POETAS puedan agregar Calificaciones.
-        if mark.user_id == current_user:
+        if current_user and claims["rol"] != "admin":
             try:
-                db.session.delete(mark)
+                db.session.add(mark)
                 db.session.commit()
             except Exception as error:
-                return 'Invalid Format',204
+                return 'Invalid Format', 400
             return mark.to_json(), 201
         else:
             return 'You have no permission to post a Mark. You have to be a POET!', 403

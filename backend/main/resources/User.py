@@ -34,6 +34,7 @@ class User(Resource):
         db.session.commit()
         return '',204
 
+
     #Modificar un usuario
     @jwt_required()
     @admin_required

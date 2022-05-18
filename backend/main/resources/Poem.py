@@ -39,6 +39,7 @@ class Poem(Resource):
         
         #Obtener claims de adentro del JWT
         claims = get_jwt()
+
         #Funcion para que solo el ADMIN o el DUEÑO DEL POEMA pueda borrar el mismo.
         if claims['rol'] == "admin" or poem.user_id == current_user:
             try:
@@ -88,6 +89,7 @@ class Poems(Resource):
             current_user = get_jwt_identity()
             #Asociar poema a usuario
             poems.poetId = current_user
+            
             if request.get_json():
                 #Si ha ingresado un Token lo deja ver los poemas que no son de el.
                 if current_user:
@@ -152,13 +154,14 @@ class Poems(Resource):
         #Asociar poema a usuario
         poem.poetId = current_user
 
-
         #Creo la variable 'user' donde traigo cual usuario es igual al id de current_user.
         user = db.session.query(UserModel).get(current_user)
 
+        #Obtener claims de adentro del JWT
+        claims = get_jwt()
 
         #Funcion para que solo pueda añadir poemas si es su primer poema o ya ha hecho 5 calificaciones.
-        if len(user.poems) == 0 or len(user.marks)/len(user.poems) > 5: ##Debe ser 5
+        if len(user.poems) == 0 or len(user.marks)/len(user.poems) > 5 and claims['rol'] != "admin": ##Debe ser 5 
             try:
                 db.session.add(poem)
                 db.session.commit()
@@ -166,7 +169,7 @@ class Poems(Resource):
                 return 'Invalid Format', 400
             return poem.to_json(), 201
         else:
-            return 'You have to rate 5 poems before posting a new one. ', 404
+            return 'You have to rate 5 poems before posting a new one. (ADMINS cant post a poem)', 404
 
 
 
