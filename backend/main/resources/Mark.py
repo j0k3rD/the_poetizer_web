@@ -1,11 +1,16 @@
+#Importar librerias necesarias
 from flask_restful import Resource
-from flask import request, jsonify
+from flask import Flask, request, jsonify
 from .. import db
 from main.models import MarkModel
 from main.models import UserModel
 from flask_jwt_extended import verify_jwt_in_request, get_jwt
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from main.auth.decorators import admin_required
+#Importo la libreria para Email
+from flask_mail import Mail
+from main.mail.functions import sendMail
+
 
 # Recurso Calificacion
 class Mark(Resource):
@@ -84,14 +89,21 @@ class Marks(Resource):
         #Obtener claims de adentro del JWT
         claims = get_jwt()
 
+        #Creo la variable 'user' donde traigo cual usuario es igual al id de current_user.
+        user = db.session.query(UserModel).get(current_user)
+        #Creo la variable 'poem' donde traigo cual el poema del usuario que calificamos.
+        poem = db.session.query()
+
         #Funcion para que solo los POETAS puedan agregar Calificaciones.
-        if current_user and claims["rol"] != "admin":
+        if user and claims["rol"] != "admin":
             try:
                 db.session.add(mark)
                 db.session.commit()
+                #Enviar mail de Poema Calificado
+                sent = sendMail([user.email],"Your Poem has been qualified!",'register',user = user)
             except Exception as error:
-                return 'Invalid Format', 400
-            return mark.to_json(), 201
+                db.session.rollback()
+                return 'Invalid Format', 409
         else:
             return 'You have no permission to post a Mark. You have to be a POET!', 403
 

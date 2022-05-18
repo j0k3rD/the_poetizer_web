@@ -1,11 +1,12 @@
-from crypt import methods
 from flask import request, jsonify, Blueprint
 from .. import db
 from main.models import UserModel
 from flask_jwt_extended import jwt_required, get_jwt_identity,create_access_token
 
+
 #Blueprint para acceder a los metodos de autenticacion
 auth = Blueprint('auth',__name__, url_prefix='/auth')
+
 
 #Metodo de logueo
 @auth.route('/login', methods=['POST'])
@@ -26,6 +27,7 @@ def login():
             return data, 200
     else:
         return 'Incorrect password', 401
+
 
 ## ESTE METODO NO SE USA EN ESTE PROYECTO PERO LO DEJO COMENTADO PARA DESPUES :)
 # #Método de registro

@@ -1,3 +1,4 @@
+#Importo las Librerias Necesarias
 import os
 import resource
 from flask import Flask
@@ -5,6 +6,8 @@ from dotenv import load_dotenv
 from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
+#Importo la libreria FlaskMail
+from flask_mail import Mail
 
 
 #Inicializar API de Flask-Restful
@@ -13,6 +16,8 @@ api = Api()
 db = SQLAlchemy()
 #Inicializar JWT
 jwt = JWTManager()
+#Inicializo Email
+mailsender = Mail()
 
 def create_app():
     #inicializar Flask
@@ -49,9 +54,23 @@ def create_app():
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = int(os.getenv('JWT_ACCESS_TOKEN_EXPIRES'))
     jwt.init_app(app)
 
+    #Me traigo las rutas
     from main.auth import routes
     #Importar blueprint
     app.register_blueprint(routes.auth)
+    
+    #Configuración de email
+    app.config['MAIL_HOSTNAME'] = os.getenv('MAIL_HOSTNAME')
+    app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+    app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
+    app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS')
+    app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+    app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+    app.config['FLASKY_MAIL_SENDER'] = os.getenv('FLASKY_MAIL_SENDER')
+    #Inicializar en app
+    mailsender.init_app(app)
+
+
     #Aqui se inicializaran el resto de los m
     #retornar aplicaciion inicializada
     api.init_app(app)
