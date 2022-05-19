@@ -9,8 +9,7 @@
         border:1px solid black;
         padding:30px;
         background-color:white;
-        margin:10px;
-
+        margin:20px;
       }
       body{
         background-color: lightgray;
@@ -42,12 +41,12 @@
       }
 
   </style>
-  <body>
+  <body style="background-color: lightgray;">
   <br/>
-  <div class="main">
-    <h1>{{user.name}} your Poem "{{poem.title}}" has been rating!</h1>
-    <p>{{user1.name}} commented on your poem, come in to read!.</p>
-    <!-- <div class="services">
+  <div class="main" style="border: 1px solid black;padding: 30px;background-color: white;margin: 50px;">
+    <h1 style="font-weight: bold;font-size: 25px;color: #001d62;">WELCOME {{user.name}} TO POETS APP!</h1>
+    <p>Congratulations! You have been selected to be {{user.rol}} on our page!</p>
+    <!-- <div class="services" style="background-color: #94beff;box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);padding: 10px;border: 1px solid black;width: 250px;">
       <p>Con nuestro servicio podras:</p>
         <ul>
              <li><a>Cargar tus proyectos</a></li>
@@ -55,7 +54,9 @@
              <li><a>Buscar proyectos</a></li>
         </ul>
     </div> -->
-  <br/>
+    <br>
+  
 </div>
+
 </body>
 </html>

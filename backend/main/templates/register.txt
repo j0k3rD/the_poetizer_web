@@ -1,0 +1,3 @@
+WELCOME {{user.name}} TO POETS APP!
+
+Congratulations! You have been selected to be {{user.rol}} on our page!

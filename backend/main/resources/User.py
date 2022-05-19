@@ -8,6 +8,9 @@ from main.models import UserModel
 from main.models import MarkModel
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from main.auth.decorators import admin_required
+#Importo la libreria para Email
+from flask_mail import Mail
+from main.mail.functions import sendMail
 
 
 #Recurso Usuario
@@ -112,6 +115,24 @@ class Users(Resource):
     def post(self):
         user = UserModel.from_json(request.get_json())
         # db.session.query(UserModel).get_or_404(user.user_id)
-        db.session.add(user)
-        db.session.commit()
-        return user.to_json(), 201
+        
+        #Consulta para verificar si ya existe un Usuario con ese Email
+        exists_email = db.session.query(UserModel).filter(UserModel.email == user.email).scalar() is not None
+        
+        #Consulta para verificar si ya existe un Usuario con ese Nombre
+        exists_name = db.session.query(UserModel).filter(UserModel.name == user.name).scalar() is not None
+
+        if exists_email:
+            return 'Duplicated Email. User already exists!', 409
+        elif exists_name:
+            return 'Duplicated Name. The name is in use..', 409
+        else:
+            try:
+                db.session.add(user)
+                db.session.commit()
+                #Enviar email al user añadido.
+                sent = sendMail([user.email],"You have been Registered in POETS APP!",'register',user= user,rol=user)
+            except Exception as error:
+                db.session.rollback()
+                return 'Invalid Format', 409
+            return user.to_json(), 201

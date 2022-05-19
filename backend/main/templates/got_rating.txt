@@ -1,4 +1,4 @@
-{{user.name}} Your Poem has been rating! 
+{{user.name}} your Poem "{{poem.title}}" has been rating!
 
-{{user1.name}}commented on your poem, come in to read!.
+{{user1.name}} commented on your poem, come in to read!.
 
