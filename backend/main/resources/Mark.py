@@ -4,6 +4,7 @@ from flask import Flask, request, jsonify
 from .. import db
 from main.models import MarkModel
 from main.models import UserModel
+from main.models import PoemModel
 from flask_jwt_extended import verify_jwt_in_request, get_jwt
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from main.auth.decorators import admin_required
@@ -91,8 +92,7 @@ class Marks(Resource):
 
         #Creo la variable 'user' donde traigo cual usuario es igual al id de current_user.
         user = db.session.query(UserModel).get(current_user)
-        #Creo la variable 'poem' donde traigo cual el poema del usuario que calificamos.
-        poem = db.session.query()
+
 
         #Funcion para que solo los POETAS puedan agregar Calificaciones.
         if user and claims["rol"] != "admin":
@@ -100,7 +100,8 @@ class Marks(Resource):
                 db.session.add(mark)
                 db.session.commit()
                 #Enviar mail de Poema Calificado
-                sent = sendMail([user.email],"Your Poem has been qualified!",'register',user = user)
+                #[] email del usuario dueño del poema que se le hizo la calificacion.
+                sent = sendMail([mark.poem.user.email],"Your Poem has been qualified!",'got_rating',user= mark)
             except Exception as error:
                 db.session.rollback()
                 return 'Invalid Format', 409
