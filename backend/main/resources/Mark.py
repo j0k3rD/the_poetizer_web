@@ -93,7 +93,6 @@ class Marks(Resource):
         #Creo la variable 'user' donde traigo cual usuario es igual al id de current_user.
         user = db.session.query(UserModel).get(current_user)
 
-
         #Funcion para que solo los POETAS puedan agregar Calificaciones.
         if user and claims["rol"] != "admin":
             try:
@@ -101,7 +100,7 @@ class Marks(Resource):
                 db.session.commit()
                 #Enviar mail de Poema Calificado
                 #[] email del usuario dueño del poema que se le hizo la calificacion.
-                sent = sendMail([mark.poem.user.email],"Your Poem has been qualified!",'got_rating',user= mark)
+                sent = sendMail([mark.poem.user.email],"Your Poem has been qualified!",'got_rating',user1= user,user= mark.poem.user,poem=mark.poem)
             except Exception as error:
                 db.session.rollback()
                 return 'Invalid Format', 409
