@@ -81,7 +81,7 @@ class User(db.Model):
     #         'name': str(self.name),
     #         'num_poems': len(self.poems),
     #     }
-    #     return user_json
+    #     return user_json #########
     
     def to_json_complete(self):
         user_json = {
