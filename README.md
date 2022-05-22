@@ -1,6 +1,14 @@
 ## Programacion-I
 Prof. Andrea Navarro - @AndreaNavarroMoreno
 
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+En este proyecto nos enfocaremos en crear una página web para Poetas.
+
+Teniendo en cuenta los siguientes topicos: 
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
   ##
 
 ## TP1
