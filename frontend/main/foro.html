@@ -13,92 +13,88 @@
   </head>
 
   <body>
+    <!-- ===================================================== -->
+    <!-- NAVBAR MENU -->
+    <header>    
+      <nav class="navbar navbar-expand-lg bg-transparent p-2" id="menu">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <span class="text-white fs-1 fw-bold">
+              the poetizer
+            </span> 
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+              </li>
+
+            <!-- TODO: agregar lista EN-ES, que se pueda elegir el idioma de la pagina, por defecto EN -->
+              <li class="nav-item">
+                <a class="nav-link" href="#">Languaje</a>
+              </li>
+
+            </ul>
+
+            <!-- TODO: cambiar el boton por uno de icono que se despliegue -->
+            <form class="d-flex" role="search">
+              <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-primary btn-primary-outline-success" type="button">Search</button>
+            </form>
+
+          </div>
+        </div>
+      </nav>
+
+      <div class="container d-flex justify-content-center" id="phrase-txt">
+        <p>"La poesía no quiere adeptos, quiere amantes"</p>
+      </div>
+
+      <div class="container d-flex justify-content-center" id="welcome-txt">
+        <p>"WELCOME {user.name}"</p>
+      </div>
+
+      <form class="d-flex justify-content-center" role="go-home" id="btn-home">
+        <button class="btn btn-primary btn-primary-outline-success" type="button">HOME</button>
+      </form>
+
+      <div class="container d-flex justify-content-center" id="tf-txt">
+        <p>tp</p>
+      </div>
+    </header>
+
 
     <!-- ===================================================== -->
-    <!-- BG IMAGE -->
-    <div class="bg-img" style="background-image: url('./pictures/arte2.jpg');">
-      <div class="color-overlay justify-content-center align-items-center">
-        <!-- ===================================================== -->
-        <!-- NAVBAR MENU -->
-        <nav class="navbar navbar-expand-lg bg-transparent p-2" id="menu">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-              <span class="text-white fs-1 fw-bold">
-                the poetizer
-              </span> 
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                </li>
-
-              <!-- TODO: agregar lista EN-ES, que se pueda elegir el idioma de la pagina, por defecto EN -->
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Languaje</a>
-                </li>
-
-              </ul>
-
-              <!-- TODO: cambiar el boton por uno de icono que se despliegue -->
-              <form class="d-flex" role="search">
-                <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-primary btn-primary-outline-success" type="button">Search</button>
-              </form>
-
-            </div>
-          </div>
-        </nav>
-
-        <div class="container d-flex justify-content-center" id="phrase-txt">
-          <p>"La poesía no quiere adeptos, quiere amantes"</p>
-        </div>
-
-        <div class="container d-flex justify-content-center" id="welcome-txt">
-          <p>"WELCOME {user.name}"</p>
-        </div>
-
-        <form class="d-flex justify-content-center" role="go-home" id="btn-home">
-          <button class="btn btn-primary btn-primary-outline-success" type="button">HOME</button>
-        </form>
-
-        <div class="container d-flex justify-content-center" id="tf-txt">
-          <p>tp</p>
-        </div>
-
-        <!-- ===================================================== -->
-      </div>  
-    </div>
-
     <!-- ===================================================== -->
     <!-- HOME-->
     <!-- NAVBAR HOME -->
-    <nav class="navbar navbar-expand-lg bg-primary">
-      <div class="container-fluid">
-        <a class="navbar-brand " href="#">the poetizer</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="my-poems">My Poems</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="my-ratings">My Ratings</a>
-            </li>
-          </ul>
+    <div class="home-header">
+      <nav class="navbar navbar-expand-lg bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand " href="#">the poetizer</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="my-poems">My Poems</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="my-ratings">My Ratings</a>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
-
+      </nav>
+    </div>
     <!-- ===================================================== -->
 
     <!-- ===================================================== -->
