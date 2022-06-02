@@ -1,0 +1,22 @@
+/* Importo las fuentes que voy a usar */
+@import url('https://fonts.googleapis.com/css2?family=Nuosu+SIL&display=swap');
+
+body {
+    font-family: 'Nuosu SIL', serif;
+    overflow-x: hidden;
+    background-image: url("pictures/arte1.jpg");
+}
+
+/* =====================MENU========================== */
+
+#menu li > a{
+    font-size: 18px;
+    font-weight: bold;
+    color: #3f3f3f;
+}
+
+#menu form > button{
+    font-size: 18px;
+    font-weight: bold;
+}
+
