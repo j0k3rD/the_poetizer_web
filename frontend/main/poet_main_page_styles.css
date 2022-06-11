@@ -1,0 +1,229 @@
+/* Importo las fuentes que voy a usar */
+@import url('https://fonts.googleapis.com/css2?family=Nuosu+SIL&display=swap');
+
+body {
+    font-family: 'Nuosu SIL', serif;
+    overflow-x: hidden;
+    background-color: #f9f9f9;
+
+    /* CARDS */
+    align-items: center;
+    justify-content: center;
+
+}
+
+header {
+    height: 60vh;
+    width: 100%;
+    background-image: url(./pictures/arte4.jpg);
+    /* padding: 1px; */
+    color: white;
+    /* align-items: center;
+    justify-content: center; */
+    /* background-position: cover;
+    background-position: center; */
+    background-blend-mode: soft-light;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* =====================MENU========================== */
+
+#menu li > a{
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+#menu form > button{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#phrase-txt p{
+    margin-top: 2em;
+    font-size: 150%;
+    font-weight: bold;
+    text-align: center;
+    /* background-color: aqua; */
+    color: white;
+    padding: 5px;
+}
+
+#welcome-txt p{
+    margin-top: 1em;
+    font-size: 100%;
+    font-weight: bold;
+    text-align: center;
+    /* background-color: aqua; */
+    color: white;
+    padding: 5px;
+}
+
+#btn-home button{
+    color: #000000;
+    background-color: #73c6b6;
+    border-color: #ffffff;
+    font-weight: bolder;
+    font-size: 15px;
+    padding: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#tf-txt p{
+    font-size: 150%;
+    font-weight: bolder;
+    text-align: center;
+    color: white;
+    padding: 1px;
+}
+
+
+/* =====================HOME========================== */
+
+.home-header {
+    background-color: #457b9d;
+    border-bottom-style:solid;
+    border-bottom-color: #bbe5ff;
+    border-bottom-right-radius: 10px;
+}
+
+.home-header .navbar-brand{
+    text-shadow: 1px 1px 2px black;
+    color: white;
+    font-size: 30px;
+}
+
+.home-header p{
+    font-size: 15px;
+}
+
+.home-header .navbar .navbar-nav .dropdown-menu{
+    background-color: #78c4f7;
+}
+
+/* =====================FILTERS========================== */
+.poems-filter{
+    margin-top: 1em;
+    margin-left: 2em;
+    object-position: left;
+    width: 10%;
+}
+
+/* =====================BTN ADD NEW POEM========================== */
+.btn-new{
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 2em;
+    padding: 2px 2px 2px 2px;
+    background-color: #a8dadc;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-align: center;
+    border-color: #026e5e;
+    border-radius: 10px;
+}
+
+
+/* =====================POEMS CARDS========================== */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.poems-card-text{
+    margin-top: 20px;
+    margin-left: 10em;
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.card {
+    width: 800px;
+    height: 250px;
+    display: flex;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 5px 10px #000000;
+    border-radius: 10px;
+    transition: 0.1s;
+    margin-top: 3em;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 20px #000000;
+}
+
+.card .img-card {
+    background: url(pictures/rosa.jpg);
+    width: 40%;
+    height: 100%;
+    background-size: cover;
+}
+
+.card .content{
+    width: 60%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 50px 150px 50px;
+    padding: 10px 15px;
+}
+
+.card .content .poem-title h3 {
+    color: #026e5e;
+    text-align: left;
+    font-size: 20px;
+}
+
+.card .content .poem-title span {
+    color: #000000;
+    font-size: 12px;
+    padding: 2px;
+    text-align: left;
+}
+
+.card .content .poem-text p{
+    margin-top: 10px;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 15px;
+    text-align: left;
+}
+
+.card .content .btn-container button{
+    background-color: #017ed1;
+    padding: 5px 10px;
+    color: #fff;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.card .content .btn-container button:hover {
+    background: #000000;
+}
+
+/* =====================PAGINATION========================== */
+
+.paginate{
+    margin-top: 3em;
+    
+}
+
+/* =====================FOOTER========================== */
+
+.footer {
+    background-color: #1d3557;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.footer p{
+    color: #afafaf;
+}
