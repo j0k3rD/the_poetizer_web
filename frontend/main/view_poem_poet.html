@@ -16,30 +16,41 @@
         <!-- ===================================================== -->
         <!-- HOME-->
         <!-- NAVBAR HOME -->
-        <div class="row">
-            <div class="col-md-12 header-container">
-                <div class="home-header">
-                    <nav class="navbar navbar-expand-lg">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">the poetizer</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item container-fluid justify-content-center>
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <form class="d-flex justify-content-center" role="go-home" id="btn-login">
-                                <button class="btn btn-primary btn-primary-outline-success" type="button data-toggle="button" aria-pressed="false" autocomplete="off"">LOGIN</button>
-                            </form>
-                        </ul>
-                        </div>
+        <div class="home-header">
+            <nav class="navbar navbar-expand-lg">
+              <div class="container-fluid">
+                <a class="navbar-brand" href="#">the poetizer</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="my-poems">My Poems</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="my-ratings">My Ratings</a>
+                    </li>
+                    <div class="dropdown text-end">
+                      <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="./pictures/avatar.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                      </a>
+                      <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                        <li><a class="dropdown-item" href="#">USER DETAILS</a></li>
+                        <li><a class="dropdown-item" href="#">EDIT USER CREDENTIALS</a></li>
+                        <li><a class="dropdown-item text-danger" href="#">DELETE ACCOUNT</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Sign out</a></li>
+                      </ul>
                     </div>
-                    </nav>
+                  </ul>
                 </div>
-                <div class="ad container-fluid justify-content-center"></div>
-            </div>
-        </div>
+              </div>
+            </nav>
+          </div>
         <!-- ===================================================== -->
 
         <!-- ===================================================== -->

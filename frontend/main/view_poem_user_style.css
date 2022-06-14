@@ -223,7 +223,7 @@ transform: translate(-50%, -50%);
 /* =====================FOOTER========================== */
 
 .footer {
-    position: relative;
+    position: absolute;
     margin-top: 1.7em;
     bottom: 0;
     width: 100%;

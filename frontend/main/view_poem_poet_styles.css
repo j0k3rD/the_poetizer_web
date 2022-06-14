@@ -15,18 +15,14 @@ body {
 /* =====================HOME========================== */
 
 .home-header {
-    justify-content: center;
-    height: 100%;
     background-color: #457b9d;
-    border-width: 5px;
-    border-bottom-style: solid;
+    border-bottom-style:solid;
     border-bottom-color: #bbe5ff;
     border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
 }
 
 .home-header .navbar-brand{
-    text-shadow: 1px 1px 2px rgb(59, 59, 59);
+    text-shadow: 1px 1px 2px black;
     color: white;
     font-size: 30px;
 }
@@ -35,37 +31,16 @@ body {
     font-size: 15px;
 }
 
-.home-header .nav-item{
-    color: #000000;
-    font-weight: bolder;
-    font-size: 15px;
-    padding: auto;
-    margin: 20px 10px 10px;
-}
-
-.home-header .navbar .navbar-nav .dropdown-menu {
+.home-header .navbar .navbar-nav .dropdown-menu{
     background-color: #78c4f7;
 }
 
-.ad {
-    height: 20px;
-    background-color: #f1faee;
-    border-width: 2px;
-    border-bottom-style: solid;
-    border-bottom-color: #cbcbcb;
-    border-bottom-right-radius: 50px;
-    border-bottom-left-radius: 50px;
-}
-
-#btn-login button{
-    color: #000000;
-    background-color: #73c6b6;
-    border-color: #ffffff;
-    font-weight: bolder;
-    font-size: 15px;
-    padding: auto;
-    margin-top: 20px;
-    margin-bottom: 10px;
+/* =====================FILTERS========================== */
+.poems-filter{
+    margin-top: 1em;
+    margin-left: 2em;
+    object-position: left;
+    width: 10%;
 }
 
 /* =====================POEM CARD========================== */
@@ -249,7 +224,7 @@ transform: translate(-50%, -50%);
 /* =====================FOOTER========================== */
 
 .footer {
-    position: relative;
+    position: absolute;
     margin-top: 1.7em;
     bottom: 0;
     width: 100%;
