@@ -15,13 +15,8 @@ body {
 header {
     height: 70vh;
     width: 100%;
-    background-image: url(./pictures/arte4.jpg);
-    /* padding: 1px; */
+    background-image: url(/frontend/main/static/img/arte4.jpg);
     color: white;
-    /* align-items: center;
-    justify-content: center; */
-    /* background-position: cover;
-    background-position: center; */
     background-blend-mode: soft-light;
     background-color: rgba(0, 0, 0, 0.2);
 }
