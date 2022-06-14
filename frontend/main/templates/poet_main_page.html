@@ -41,11 +41,11 @@
             </ul>
 
             <!-- TODO: cambiar el boton por uno de icono que se despliegue -->
-            <form class="d-flex" role="search">
-              <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-primary btn-primary-outline-success" type="button">Search</button>
+            <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+              <i class="fas fa-search" aria-hidden="true"></i>
+              <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+                aria-label="Search">
             </form>
-
           </div>
         </div>
       </nav>
@@ -107,29 +107,9 @@
       </nav>
     </div>
     <!-- ===================================================== -->
-    
-
-    <!-- ===================================================== -->
-    <!-- FILTERS -->
-
-    <div class="row section-1">
-      <!--Columna -->
-      <div class="col-md-12 ">
-        <div id="filterbar">
-          <select class="poems-filter">
-              <option value="">Filter by DATE</option>
-              <option value="">Filter by TITLE</option>
-              <option value="selected">Filter by RATING</option>
-          </select>
-        </div>
-      </div><!--Fin de la columna -->
-     </div><!--Fin de la fila -->
-    <!-- ===================================================== -->
-
-
+  
     <!-- ===================================================== -->
     <!-- BUTTON ADD NEW POEM -->
-    
     <div class="row section-1">
       <!--Columna -->
       <div class="col-md-12 ">
@@ -142,10 +122,28 @@
 
     <!-- ===================================================== -->
     <!-- POEMS CARDS -->
-
     <div>
       <h1 class="poems-card-text">POEMS LIST</h1>
     </div>
+
+
+      <!-- ===================================================== -->
+    <!-- FILTERS -->
+    <div class="row section-1">
+      <!--Columna -->
+      <div class="col-md-12 ">
+        <div id="filterbar">
+          <select class="poems-filter">
+              <option value="">Filter by DATE</option>
+              <option value="">Filter by TITLE</option>
+              <option value="selected">Filter by RATING</option>
+          </select>
+        </div>
+      </div><!--Fin de la columna -->
+     </div><!--Fin de la fila -->
+
+
+    <!-- ===================================================== -->
     <!-- CARD 1 -->
     <div class="card container d-flex justify-content-center">
       <div class="img-card"></div>

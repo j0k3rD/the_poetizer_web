@@ -102,19 +102,26 @@ header {
     background-color: #78c4f7;
 }
 
+.active-pink-2 input.form-control[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
+}
+
+
 /* =====================FILTERS========================== */
 .poems-filter{
     margin-top: 1em;
-    margin-left: 2em;
+    margin-left: 16em;
     object-position: left;
     width: 10%;
 }
 
 /* =====================BTN ADD NEW POEM========================== */
 .btn-new{
+    position: absolute;
     margin-top: 1em;
     margin-bottom: 1em;
-    margin-left: 2em;
+    margin-left: 55em;
     padding: 2px 2px 2px 2px;
     background-color: #a8dadc;
     font-size: 20px;
