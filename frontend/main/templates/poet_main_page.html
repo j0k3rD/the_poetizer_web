@@ -29,7 +29,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                <a class="nav-link active" aria-current="page" href="/frontend/main/templates/poet_main_page.html">Home</a>
               </li>
 
             <!-- TODO: agregar lista EN-ES, que se pueda elegir el idioma de la pagina, por defecto EN -->
@@ -81,21 +81,21 @@
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{url_for('main.index')}}">Home</a>
+                <a class="nav-link active" aria-current="page" href="poet_main_page.html">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="my-poems">My Poems</a>
+                <a class="nav-link" href="">My Poems</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="my-ratings">My Ratings</a>
+                <a class="nav-link" href="">My Ratings</a>
               </li>
               <div class="dropdown text-end">
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                   <img src="/frontend/main/static/img/avatar.png" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                  <li><a class="dropdown-item" href="#">USER DETAILS</a></li>
-                  <li><a class="dropdown-item" href="#">EDIT USER CREDENTIALS</a></li>
+                  <li><a class="dropdown-item" href="/frontend/main/templates/view_poet_credentials.html">USER DETAILS</a></li>
+                  <li><a class="dropdown-item" href="/frontend/main/templates/view_edit_profile.html"EDIT USER CREDENTIALS</a></li>
                   <li><a class="dropdown-item text-danger" href="#">DELETE ACCOUNT</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">Sign out</a></li>
@@ -114,7 +114,7 @@
       <!--Columna -->
       <div class="col-md-12 ">
         <div id="new-poem-btn">
-          <button class="btn-new">NEW+</button>
+          <a class="btn-new" href="/frontend/main/templates/view_add_poem.html">NEW+</a>
         </div>
       </div><!--Fin de la columna -->
      </div><!--Fin de la fila -->

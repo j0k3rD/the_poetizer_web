@@ -126,8 +126,6 @@ header {
     border-color: #026e5e;
     border-radius: 10px;
 }
-
-
 /* =====================POEMS CARDS========================== */
 *{
     margin: 0;
@@ -162,8 +160,7 @@ header {
 }
 
 .card .img-card {
-    background: url(pictures/rosa.jpg);
-    width: 40%;
+    background: url(/frontend/main/static/img/rosa.jpg);
     height: 100%;
     background-size: cover;
 }
