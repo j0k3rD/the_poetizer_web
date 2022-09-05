@@ -22,4 +22,8 @@ def edit_profile():
 def credentials():
     return render_template('view_poet_credentials.html')
 
+@main.route("/login")
+def login():
+    return render_template('view_login.html')
+
 

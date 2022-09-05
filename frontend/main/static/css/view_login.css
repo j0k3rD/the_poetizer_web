@@ -16,13 +16,15 @@ body {
 
 .home-header {
     background-color: #457b9d;
-    border-bottom-style:solid;
+    border-width: 5px;
+    border-bottom-style: solid;
     border-bottom-color: #bbe5ff;
     border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
 .home-header .navbar-brand{
-    text-shadow: 1px 1px 2px black;
+    text-shadow: 1px 1px 2px rgb(59, 59, 59);
     color: white;
     font-size: 30px;
 }
@@ -35,62 +37,32 @@ body {
     background-color: #78c4f7;
 }
 
-body.dark {
-	background: #292C35;
+.ad {
+    height: 90px;
+    background-color: #f1faee;
+    border-width: 5px;
+    border-bottom-style: solid;
+    border-bottom-color: #cbcbcb;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 }
 
-.checkbox {
-	opacity: 0;
-	position: absolute;
+.welcome-ad{
+    text-align: left;
+    margin-left: 20em;
+    margin-top: 1px;
 }
 
-.label {
-	background-color: #111;
-	border-radius: 50px;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 5px;
-	position: relative;
-	height: 26px;
-	width: 50px;
-	transform: scale(1.3px);
+.ad-txt{
+    padding: 1px;
+    text-align: center;
+    margin-top: 1px;
+    margin-bottom: 3px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.label .ball {
-	background-color: #fff;
-	border-radius: 50%;
-	position: absolute;
-	top: 2px;
-	left: 2px;
-	height: 22px;
-	width: 22px;
-	transform: translateX(0px);
-	transition: transform 0.2s linear;
-}
-
-.checkbox:checked + .label .ball {
-	transform: translateX(24px);
-}
-
-
-.fa-moon {
-	color: #f1c40f;
-}
-
-.fa-sun {
-	color: #f39c12;
-}
-/* =====================FILTERS========================== */
-.poems-filter{
-    margin-top: 1em;
-    margin-left: 2em;
-    object-position: left;
-    width: 10%;
-}
-
-/* =====================POEM CARD========================== */
+/* =====================CARD========================== */
 *{
     margin: 0;
     padding: 0;
@@ -98,24 +70,15 @@ body.dark {
 }
 
 .principal-container {
-    display: block;
-    background-color: #fff;
-    box-shadow: 0 5px 8px #000000;
-    justify-content: center;
-    margin-top: 1em;
-    background-color:hsl(0, 0%, 100%);
-    min-height:500px;
-    border-radius: 20px;
-}
-
-.card {
-    display: inline-block;
     text-align: center;
-    margin-top: 20px;
-    margin-left: 220px;
-    width: 425px;
-    height: 450px;
-    border-radius: 10px;
+    margin: auto;
+    padding: 10px;
+    background-color: #bbe5ff;
+    box-shadow: 0 5px 8px #000000;
+    background-color:hsl(0, 0%, 100%);
+    height: 300px;
+    width: 500px;
+    border-radius: 20px;
 }
 
 h1{
@@ -129,20 +92,12 @@ h2{
 }
 
 h3{
-    justify-content: center;
     font-size: 15px;
     background-color: #afafaf;
     border-radius: 10px;
     padding: 2px;
     width: 50%;
-    text-align: center;
     margin-left: 100px;
-}
-
-.circle-img {
-    position: relative;
-    text-align: center;
-    font-weight: bold;
 }
 
 .text {
@@ -160,18 +115,11 @@ h3{
     border-radius: 20px;
 }
 
-.btn-back{
-    position: relative;
-    margin-left: 750px;
-    margin-bottom: 10px;
-}
-
 
 /* =====================FOOTER========================== */
 
 .footer {
     position: absolute;
-    margin-top: 1.7em;
     bottom: 0;
     width: 100%;
     height: 25px;
