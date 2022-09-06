@@ -10,14 +10,15 @@ POEMS = [
             {"id":2,"poetname":"Emilia","title":"White Rose","body":"En el fin de los tiempos"},
             ]
 
-
-@poem.route('/')
-# def index():
-#     #Mostrar template
-#     return render_template('view_poem_poet.html')
-
+#Ver un poema determinado
 @poem.route('/view/<int:id>')
 def view(id):
     #Mostrar template
     return render_template('view_poem_poet.html')
+
+#Crear un poema nuevo
+@poem.route('/create')
+def create():
+    #Mostrar template
+    return render_template('view_add_poem.html')
 

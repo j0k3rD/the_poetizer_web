@@ -8,8 +8,8 @@ def create_app():
     #Cargar variables de entorno
     load_dotenv()
     #Importar Blueprints
-    from main.routes import routes, poem, user
-    app.register_blueprint(routes.main)
+    from main.routes import main, poem, user
+    app.register_blueprint(main.main)
     app.register_blueprint(user.user)
     app.register_blueprint(poem.poem)
     #Aqui se inicializaran el resto de los m

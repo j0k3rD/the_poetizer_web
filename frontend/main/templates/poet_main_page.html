@@ -30,7 +30,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/frontend/main/templates/poet_main_page.html">Home</a>
+                <a class="nav-link active" aria-current="page" href="{{url_for('main.index')}}">Home</a>
               </li>
 
             <!-- TODO: agregar lista EN-ES, que se pueda elegir el idioma de la pagina, por defecto EN -->
@@ -66,7 +66,7 @@
       </div>
 
       <form class="d-flex justify-content-center" role="go-home" id="btn-home">
-        <button class="btn btn-primary btn-primary-outline-success" type="button data-toggle="button" aria-pressed="false" autocomplete="off"">HOME</button>
+        <button class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off">HOME</button>
       </form>
 
       <div class="container d-flex justify-content-center" id="tf-txt">
@@ -101,10 +101,9 @@
                   <img src="/frontend/main/static/img/avatar.png" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                  <li><a class="dropdown-item" href="/frontend/main/templates/view_poet_credentials.html">USER DETAILS</a></li>
-                  <li><a class="dropdown-item" href="/frontend/main/templates/view_edit_profile.html"EDIT USER CREDENTIALS</a></li>
+                  <li><a class="dropdown-item" href="{{url_for('user.details',id=1)}}">USER DETAILS</a></li>
+                  <li><a class="dropdown-item" href="{{url_for('user.edit_profile')}}">EDIT USER CREDENTIALS</a></li>
                   <li><a class="dropdown-item text-danger" href="#">DELETE ACCOUNT</a></li>
-                  <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" href="#">Sign out</a></li>
                 </ul>
               </div>
@@ -121,7 +120,7 @@
       <!--Columna -->
       <div class="col-md-12 ">
         <div id="new-poem-btn">
-          <a class="btn-new" href="/frontend/main/templates/view_add_poem.html">NEW+</a>
+          <a class="btn-new" href="{{url_for('poem.create')}}">NEW+</a>
         </div>
       </div><!--Fin de la columna -->
      </div><!--Fin de la fila -->
@@ -149,7 +148,6 @@
       </div><!--Fin de la columna -->
      </div><!--Fin de la fila -->
 
-
     <!-- ===================================================== -->
     <!-- CARD 1 -->
     <div class="card container d-flex justify-content-center">
@@ -163,7 +161,7 @@
           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus ab officiis, omnis odit exercitationem libero ratione architecto illum tempore iusto dignissimos aliquid ad facilis accusamus.</p>
         </div>
         <div class="btn-container">
-          <a href="{{url_for('poem.index',id=1)}}">View All</a>
+          <a href="{{url_for('poem.view',id=1)}}">View All</a>
         </div>
       </div>
     </div>

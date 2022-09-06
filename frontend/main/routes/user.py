@@ -9,13 +9,12 @@ USERS = [
             {"id":2,"firstname":"Julieta","lastname":"Gonzales","email":"j.gonzales@escuela.com"}
             ]
 
-
-@user.route('/')
-def index():
+@user.route('/details/<int:id>')
+def details(id):
     #Mostrar template
-    return render_template('user_.html' )
+    return render_template('view_poet_credentials.html' )
 
-@user.route('/view/<int:id>')
-def view(id):
+@user.route('/edit_profile')
+def view_edit_profile():
     #Mostrar template
-    return render_template('user_view.html' )
+    return render_template('view_edit_profile.html' )
