@@ -5,7 +5,12 @@ from flask import Blueprint, redirect, render_template, url_for, request
 main = Blueprint('main', __name__, url_prefix='/')
 
 @main.route('/')
-def index():
+def index_poet():
+    #Redireccionar a función de vista
+    return render_template('poet_main_page.html')
+
+@main.route('/')
+def index_user():
     #Redireccionar a función de vista
     return render_template('user_main_page.html')
 
