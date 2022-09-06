@@ -5,3 +5,5 @@ share/python-wheels
 lib/python3.8/site-packages
 pyvenv.cfg
 clases
+include/site/python3.10/greenlet
+lib/python3.10/site-packages

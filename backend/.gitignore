@@ -6,3 +6,5 @@ lib/python3.8/site-packages
 pyvenv.cfg
 bin
 include/site/python3.8/greenlet
+include/site/python3.10/greenlet
+lib/python3.10/site-packages
