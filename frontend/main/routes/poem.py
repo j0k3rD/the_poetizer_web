@@ -16,6 +16,7 @@ def view_poet(id):
     #Mostrar template
     return render_template('view_poem_poet.html')
 
+#Ver un poema determinado
 @poem.route('/view/<int:id>')
 def view_user(id):
     #Mostrar template
