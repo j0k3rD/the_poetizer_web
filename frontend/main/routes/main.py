@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, render_template, url_for, request 
+from flask import Blueprint, redirect, render_template, url_for
 # import flask_login import UserMixin
 
 #Crear Blueprint

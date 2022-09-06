@@ -9,9 +9,9 @@ def create_app():
     load_dotenv()
     #Importar Blueprints
     from main.routes import main, poem, user
-    app.register_blueprint(main.main)
-    app.register_blueprint(user.user)
-    app.register_blueprint(poem.poem)
+    app.register_blueprint(routes.main.main)
+    app.register_blueprint(routes.user.user)
+    app.register_blueprint(routes.poem.poem)
     #Aqui se inicializaran el resto de los m
     #retornar aplicaciion inicializada
     return app

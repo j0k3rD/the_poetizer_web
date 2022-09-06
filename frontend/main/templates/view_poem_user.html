@@ -8,7 +8,7 @@
         <!-- Bootstrap CSS -->
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.rtl.min.css" integrity="sha384-dc2NSrAXbAkjrdm9IYrX10fQq9SDG6Vjz7nQVKdKcJl3pC+k37e7qJR5MVSCS+wR" crossorigin="anonymous"> 
-        <link rel="stylesheet" href="/frontend/main/static/css/view_poem_user_style.css">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/view_poem_user_styles.css')}}">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <title>the poetizer / Poets Place</title>
@@ -29,7 +29,7 @@
                         </button>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/frontend/main/templates/user_main_page.html">Home</a>
+                                <a class="nav-link active" aria-current="page" href="{{url_for('main.index_user')}}">Home</a>
                             </li>
                             <div>
                                 <input type="checkbox" class="checkbox" id="chk" />
@@ -40,7 +40,7 @@
                                 </label>
                               </div>
                             <form class="d-flex justify-content-center" role="go-home" id="btn-login">
-                                <button class="btn btn-primary btn-primary-outline-success" type="button data-toggle="button" aria-pressed="false" autocomplete="off"">LOGIN</button>
+                                <a href="{{url_for('main.login')}}">LOGIN</a>
                             </form>
                         </ul>
                         </div>
@@ -97,11 +97,11 @@
                                 <h3>RATINGS AVG</h3>
                             </div>
                             <div class="star-img">
-                                <img src="/frontend/main/static/img/star.png" alt="mdo" width="40" height="40" class="rounded-circle">
+                                <img src="{{url_for('static', filename='img/star.png')}}" alt="mdo" width="40" height="40" class="rounded-circle">
                                 <div class="centered">#</div>
                             </div>
                             <div class="btn-back">
-                                <a type="button" class="btn btn-outline-secondary" href="/frontend/main/templates/poet_main_page.html">Back Home</a>
+                                <a type="button" class="btn btn-outline-secondary" href="{{url_for('main.index_user')}}">Back Home</a>
                             </div>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
 
         <!-- Option 1: Bootstrap Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-        <script src="/frontend/main/static/js/dark_mode.js"></script>
+        <script src="{{url_for('static', filename='js/dark_mode.js')}}"></script>
 
     </body>
 </html>
