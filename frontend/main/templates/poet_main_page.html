@@ -30,7 +30,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{url_for('main.index')}}">Home</a>
+                <a class="nav-link active" aria-current="page" href="{{url_for('main.index_poet')}}">Home</a>
               </li>
 
             <!-- TODO: agregar lista EN-ES, que se pueda elegir el idioma de la pagina, por defecto EN -->
@@ -88,7 +88,7 @@
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{url_for('main.index')}}">Home</a>
+                <a class="nav-link active" aria-current="page" href="{{url_for('main.index_poet')}}">Home</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="">My Poems</a>
@@ -161,7 +161,7 @@
           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus ab officiis, omnis odit exercitationem libero ratione architecto illum tempore iusto dignissimos aliquid ad facilis accusamus.</p>
         </div>
         <div class="btn-container">
-          <a href="{{url_for('poem.view',id=1)}}">View All</a>
+          <a href="{{url_for('poem.view_poet',id=1)}}">View All</a>
         </div>
       </div>
     </div>
@@ -178,7 +178,7 @@
           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus ab officiis, omnis odit exercitationem libero ratione architecto illum tempore iusto dignissimos aliquid ad facilis accusamus.</p>
         </div>
         <div class="btn-container">
-          <a href="{{url_for('poem.index',id=2)}}">View All</a>
+          <a href="{{url_for('poem.view_poet',id=2)}}">View All</a>
         </div>
       </div>
     </div>
@@ -195,7 +195,7 @@
           <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus ab officiis, omnis odit exercitationem libero ratione architecto illum tempore iusto dignissimos aliquid ad facilis accusamus.</p>
         </div>
         <div class="btn-container">
-          <a href="{{url_for('poem.index',id=3)}}">View All</a>
+          <a href="{{url_for('poem.view_poet',id=3)}}">View All</a>
         </div>
       </div>
     </div>

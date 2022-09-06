@@ -15,6 +15,7 @@ def details(id):
     return render_template('view_poet_credentials.html' )
 
 @user.route('/edit_profile')
-def view_edit_profile():
+def edit_profile():
     #Mostrar template
     return render_template('view_edit_profile.html' )
+
