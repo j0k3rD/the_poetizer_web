@@ -16,7 +16,7 @@ body {
 header {
     height: 60vh;
     width: 100%;
-    background-image: url(/frontend/main/static/img/arte4.jpg);
+    background-image: url({/frontend/static/img/arte4.jpg});
     color: white;
     background-blend-mode: soft-light;
     background-color: rgba(0, 0, 0, 0.2);
