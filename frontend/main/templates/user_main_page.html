@@ -1,4 +1,8 @@
 {% extends 'base.html'%}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="/frontend/main/static/css/user_main_page_styles.css">
+{% endblock %}
 {% block content %}
 
       <div class="visitor-menu justify-content-center">
@@ -55,7 +59,6 @@
 
     <!-- ===================================================== -->
     <!-- FILTERS -->
-
     <div class="row section-1">
       <!--Columna -->
       <div class="col-md-12 ">
