@@ -1,11 +1,34 @@
 {% extends 'base.html' %}
-    {% block head %}
+    {% block menu %}
     {{ super() }}
-        <link rel="stylesheet" href="/frontend/main/static/css/view_login.css">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/view_login.css')}}">
     {% endblock %} 
-    {% block content %}
-        <!-- ===================================================== -->
+    
+    {% block content_navbar %}
+    <!-- ===================================================== -->
+    <!-- HOME-->
+    <!-- NAVBAR HOME -->
+                <form class="d-flex justify-content-center" role="go-home" id="btn-login">
+                    <a class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off" href="{{url_for('main.login')}}">LOGIN</a>
+                </form>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
 
+    <div class="ad container-fluid justify-content-center">
+        <div class="welcome-ad">
+            <p>👋 HELLO</p>
+        </div>
+        <div class="ad-txt">
+            <p>REGISTER ON OUR PAGE TO SHARE YOUR ART, POET!</p>
+        </div>
+    </div>
+    <!-- ===================================================== -->
+    {% endblock %}
+    
+    {% block content %}
         <!-- ===================================================== -->
         <!-- VIEW ALL POEM INFO -->
         <!-- POEM -->

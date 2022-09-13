@@ -1,28 +1,71 @@
 {% extends 'base.html' %}
-{% block head %}
-{{ super() }}
-<link rel="stylesheet" href="/frontend/main/static/css/user_main_page_styles.css">
-{% endblock %}    
-    {% block menu %}
-    {{ super() }}
-      <div class="visitor-menu justify-content-center">
-        <form class="d-flex justify-content-center" role="go-home" id="btn-login">
-            <a class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off" href="{{url_for('main.login')}}">LOGIN</a>
-        </form>
-        <div class="divide-line d-flex container justify-content-center">
-            <hr>
+  {% block menu %}
+  {{ super() }}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/user_main_page_styles.css')}}">
+  {% endblock %}    
+  {% block content_menu %}
+    <header>    
+      <nav class="navbar navbar-expand-lg bg-transparent p-2" id="menu">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <span class="text-white fs-1 fw-bold">
+              the poetizer
+            </span> 
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{url_for('main.index_poet')}}">Home</a>
+              </li>
+
+            <!-- TODO: agregar lista EN-ES, que se pueda elegir el idioma de la pagina, por defecto EN -->
+              <li class="nav-item">
+                <a class="nav-link" href="#">Languaje</a>
+              </li>
+            </ul>
+            
+            <!-- TODO: cambiar el boton por uno de icono que se despliegue -->
+            <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+              <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+                aria-label="Search">
+            </form>
+            <div>
+              <input type="checkbox" class="checkbox" id="chk" />
+              <label class="label" for="chk">
+                <i class="fas fa-moon"></i>
+                <i class="fas fa-sun"></i>
+                <div class="ball"></div>
+              </label>
+            </div>
+          </div>
         </div>
-        <form class="d-flex justify-content-center" role="go-home" id="btn-visitor">
-            <a class="btn btn-outline-secondary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off">VISITOR</a>
-        </form>
+      </nav>
+      <div class="container d-flex justify-content-center" id="phrase-txt">
+        <p>"La poesía no quiere adeptos, quiere amantes"</p>
       </div>
-      <div class="container d-flex justify-content-center" id="tf-txt">
-        <p>tp</p>
-      </div>
+        <div class="visitor-menu justify-content-center">
+          <form class="d-flex justify-content-center" role="go-home" id="btn-login">
+              <a class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off" href="{{url_for('main.login')}}">LOGIN</a>
+          </form>
+          <div class="divide-line d-flex container justify-content-center">
+              <hr>
+          </div>
+          <form class="d-flex justify-content-center" role="go-home" id="btn-visitor">
+              <a class="btn btn-outline-secondary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off">VISITOR</a>
+          </form>
+        </div>
+        <div class="container d-flex justify-content-center" id="tf-txt">
+          <p>tp</p>
+        </div>
     </header>
     <!-- ===================================================== -->
     {% endblock%}
-    {% block navbar %}
+
+    {% block content_navbar %}
     <!-- ===================================================== -->
     <!-- HOME-->
     <!-- NAVBAR HOME -->
@@ -45,6 +88,7 @@
     </div>
     <!-- ===================================================== -->
     {% endblock %}
+    
     {% block content %}
     <!-- ===================================================== -->
     <!-- FILTERS -->
@@ -116,5 +160,23 @@
         </div>
       </div>
     </div>
+    <!-- ===================================================== -->
+    <!-- ===================================================== -->
+      <!-- PAGINATION -->
+      <div class="paginate">    
+          <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+              <li class="page-item disabled">
+              <a class="page-link">Previous</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+              </li>
+          </ul>
+          </nav>
+      </div>
     <!-- ===================================================== -->
     {% endblock %}

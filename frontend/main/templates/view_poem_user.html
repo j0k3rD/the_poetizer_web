@@ -1,8 +1,23 @@
 {% extends 'base.html' %}
-    {% block head %}
+    {% block menu %}
     {{ super() }}
-        <link rel="stylesheet" href="/frontend/main/static/css/view_poem_user_style.css">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/view_poem_user_style.css')}}">
     {% endblock %}  
+
+    {% block content_navbar %}
+    <!-- ===================================================== -->
+    <!-- HOME-->
+    <!-- NAVBAR HOME -->
+                <form class="d-flex justify-content-center" role="go-home" id="btn-login">
+                    <a class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off" href="{{url_for('main.login')}}">LOGIN</a>
+                </form>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- ===================================================== -->
+    {% endblock %}
 
     {% block content %}
         <!-- ===================================================== -->
