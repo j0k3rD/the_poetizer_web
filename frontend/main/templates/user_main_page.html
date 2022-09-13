@@ -1,10 +1,10 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 {% block head %}
 {{ super() }}
 <link rel="stylesheet" href="/frontend/main/static/css/user_main_page_styles.css">
-{% endblock %}
-{% block content %}
-
+{% endblock %}    
+    {% block menu %}
+    {{ super() }}
       <div class="visitor-menu justify-content-center">
         <form class="d-flex justify-content-center" role="go-home" id="btn-login">
             <a class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off" href="{{url_for('main.login')}}">LOGIN</a>
@@ -20,23 +20,12 @@
         <p>tp</p>
       </div>
     </header>
-
     <!-- ===================================================== -->
+    {% endblock%}
     {% block navbar %}
     <!-- ===================================================== -->
     <!-- HOME-->
     <!-- NAVBAR HOME -->
-    <div class="home-header">
-      <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">the poetizer</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{url_for('main.index_user')}}">Home</a>
-                </li>
                 <form class="d-flex justify-content-center" role="go-home" id="btn-login">
                     <a class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off" href="{{url_for('main.login')}}">LOGIN</a>
                 </form>
@@ -56,7 +45,7 @@
     </div>
     <!-- ===================================================== -->
     {% endblock %}
-
+    {% block content %}
     <!-- ===================================================== -->
     <!-- FILTERS -->
     <div class="row section-1">

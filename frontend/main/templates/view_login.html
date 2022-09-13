@@ -1,41 +1,9 @@
-{% extends 'base.html'%}
-{% block head %}
-{{ super() }}
-<link rel="stylesheet" href="/frontend/main/static/css/view_login.css">
-{% endblock %}
-{% block content %}
-
-        <!-- ===================================================== -->
-        <!-- HOME-->
-        <!-- NAVBAR HOME -->
-        <div class="home-header">
-            <nav class="navbar navbar-expand-lg">
-              <div class="container-fluid">
-                  <a class="navbar-brand" href="{{url_for('main.index_user')}}">the poetizer</a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="{{url_for('main.index_user')}}">Home</a>
-                      </li>
-                      <form class="d-flex justify-content-center" role="go-home" id="btn-login">
-                          <a class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off" href="{{url_for('main.login')}}">LOGIN</a>
-                      </form>
-                  </ul>
-                </div>
-              </div>
-            </nav>
-          </div>
-      
-          <div class="ad container-fluid justify-content-center">
-              <div class="welcome-ad">
-                  <p>👋 HELLO</p>
-              </div>
-              <div class="ad-txt">
-                  <p>REGISTER ON OUR PAGE TO SHARE YOUR ART, POET!</p>
-              </div>
-          </div>
+{% extends 'base.html' %}
+    {% block head %}
+    {{ super() }}
+        <link rel="stylesheet" href="/frontend/main/static/css/view_login.css">
+    {% endblock %} 
+    {% block content %}
         <!-- ===================================================== -->
 
         <!-- ===================================================== -->
@@ -72,4 +40,4 @@
             </div>
             <div class="col-lg-2 col-md-1"></div>
         </div>
-{% endblock %}
+    {% endblock %}

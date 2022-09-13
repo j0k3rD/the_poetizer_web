@@ -1,68 +1,45 @@
-<!-- ===================================================== -->
-    <!-- NAVBAR MENU -->
-    <header>    
-      <nav class="navbar navbar-expand-lg bg-transparent p-2" id="menu">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            <span class="text-white fs-1 fw-bold">
-              the poetizer
-            </span> 
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+{% extends 'base.html'%}
+  {% block menu %}
+    <div class="container d-flex justify-content-center" id="welcome-txt">
+      <p>"WELCOME {user.name}"</p>
+      
+    </div>
 
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{url_for('main.index_poet')}}">Home</a>
-              </li>
+    <form class="d-flex justify-content-center" role="go-home" id="btn-home">
+      <button class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off">HOME</button>
+    </form>
 
-            <!-- TODO: agregar lista EN-ES, que se pueda elegir el idioma de la pagina, por defecto EN -->
-              <li class="nav-item">
-                <a class="nav-link" href="#">Languaje</a>
-              </li>
-            </ul>
-            
-            <!-- TODO: cambiar el boton por uno de icono que se despliegue -->
-            <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
-              <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-                aria-label="Search">
-            </form>
-            <div>
-              <input type="checkbox" class="checkbox" id="chk" />
-              <label class="label" for="chk">
-                <i class="fas fa-moon"></i>
-                <i class="fas fa-sun"></i>
-                <div class="ball"></div>
-              </label>
-            </div>
+    <div class="container d-flex justify-content-center" id="tf-txt">
+      <p>tp</p>
+    </div>
+  {% endblock %}
+        <!-- ===================================================== -->
+        {% block navbar %}
+                  <li class="nav-item">
+                  <a class="nav-link" href="">My Poems</a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link" href="">My Ratings</a>
+                  </li>
+                  <div class="dropdown text-end">
+                  <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="{{url_for('static', filename='img/avatar.png')}}" alt="mdo" width="32" height="32" class="rounded-circle">
+                  </a>
+                  <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                      <li><a class="dropdown-item" href="{{url_for('user.details',id=1)}}">USER DETAILS</a></li>
+                      <li><a class="dropdown-item" href="{{url_for('user.edit_profile')}}">EDIT USER CREDENTIALS</a></li>
+                      <li><a class="dropdown-item text-danger" href="#">DELETE ACCOUNT</a></li>
+                      <li><a class="dropdown-item" href="#">Sign out</a></li>
+                  </ul>
+                  </div>
+              </ul>
+              </div>
           </div>
-        </div>
-      </nav>
-
-      <div class="container d-flex justify-content-center" id="phrase-txt">
-        <p>"La poesía no quiere adeptos, quiere amantes"</p>
+          </nav>
       </div>
-
-      <div class="container d-flex justify-content-center" id="welcome-txt">
-        <p>"WELCOME {user.name}"</p>
-        
-      </div>
-
-      <form class="d-flex justify-content-center" role="go-home" id="btn-home">
-        <a href="{{url_for('main.index_poet')}}">HOME</a>
-      </form>
-
-      <div class="container d-flex justify-content-center" id="tf-txt">
-        <p>tp</p>
-      </div>
-    </header>
-    <!-- ===================================================== -->  
-  
-    {% extends 'base.html'%}
+    {% endblock %}
+    <!-- ===================================================== -->
     {% block content %}
-  
     <!-- ===================================================== -->
     <!-- BUTTON ADD NEW POEM -->
     <div class="row section-1">
