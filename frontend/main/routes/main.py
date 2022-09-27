@@ -1,4 +1,6 @@
 from flask import Blueprint, redirect, render_template, url_for
+import requests, json
+
 # import flask_login import UserMixin
 
 #Crear Blueprint
@@ -16,6 +18,15 @@ def index_user():
 
 @main.route("/login")
 def login():
+    api_url = "http://127.0.0.1:8500/auth/login"
+
+    #Envio de logueo
+    data = {"email":"santi123@gmail.com", "password":"abc"}
+    headers = {"Content-Type" : "application/json"}
+    response = requests.post(api_url, json = data, headers= headers)
+
+    #Obtener el token desde response.
+    token = json.loads(response.text)
+    token = token["access_token"]
+
     return render_template('view_login.html')
-
-
