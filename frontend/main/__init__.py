@@ -12,6 +12,7 @@ def create_app():
     app.register_blueprint(routes.main.main)
     app.register_blueprint(routes.user.user)
     app.register_blueprint(routes.poem.poem)
-    #Aqui se inicializaran el resto de los m
+    
+    
     #retornar aplicaciion inicializada
     return app
