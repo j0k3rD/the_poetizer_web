@@ -107,59 +107,26 @@
     <!-- ===================================================== -->
 
     <!-- ===================================================== -->
-    <!-- POEMS CARDS -->
-
-    <h1 class="poems-card-text">POEMS LIST</h1>
-    <!-- CARD 1 -->
-    <div class="card container d-flex justify-content-center">
-      <div class="img-card"></div>
-      <div class="content">
-        <div class="poem-title">
-          <h3>{Poem title}</h3>
-          <span>{Poet Name}</span>
-        </div>
-        <div class="poem-text">
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus ab officiis, omnis odit exercitationem libero ratione architecto illum tempore iusto dignissimos aliquid ad facilis accusamus.</p>
-        </div>
-        <div class="btn-container">
-          <a href="{{url_for('poem.view_user',id=0)}}">View All</a>
-        </div>
-      </div>
-    </div>
-  
-    <!-- CARD 2 -->
-    <div class="card container d-flex justify-content-center">
-      <div class="img-card"></div>
-      <div class="content">
-        <div class="poem-title">
-          <h3>{Poem title}</h3>
-          <span>{Poet Name}</span>
-        </div>
-        <div class="poem-text">
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus ab officiis, omnis odit exercitationem libero ratione architecto illum tempore iusto dignissimos aliquid ad facilis accusamus.</p>
-        </div>
-        <div class="btn-container">
-          <a href="{{url_for('poem.view_user',id=1)}}">View All</a>
+    <tbody>
+      {% for poem in poems %}
+      <!-- CARD 1 -->
+      <div class="card container d-flex justify-content-center">
+        <div class="img-card"></div>
+        <div class="content">
+          <div class="poem-title">
+            <h3>{{poem.title}}</h3>
+            <span>{{poem.user.name}}</span>
+          </div>
+          <div class="poem-text">
+            <p>{{poem.body}}</p>
+          </div>
+          <div class="btn-container">
+            <a href="{{url_for('poem.view_user',id=1)}}">View All</a>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- CARD 3 -->
-    <div class="card container d-flex justify-content-center">
-      <div class="img-card"></div>
-      <div class="content">
-        <div class="poem-title">
-          <h3>{Poem title}</h3>
-          <span>{Poet Name}</span>
-        </div>
-        <div class="poem-text">
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus ab officiis, omnis odit exercitationem libero ratione architecto illum tempore iusto dignissimos aliquid ad facilis accusamus.</p>
-        </div>
-        <div class="btn-container">
-          <a href="{{url_for('poem.view_user',id=2)}}">View All</a>
-        </div>
-      </div>
-    </div>
+      {% endfor %}
+    </tbody>
     <!-- ===================================================== -->
     <!-- ===================================================== -->
       <!-- PAGINATION -->

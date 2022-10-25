@@ -35,7 +35,7 @@ class User(db.Model):
         return check_password_hash(self.passw, password)
 
     def __repr__(self):
-        return '< User: %r %r >' % (self.name, self.email, self.passw, self.rol)
+        return '< User: %r %r >' % (self.name, self.passw, self.email, self.rol)
 
     #Convertir Objeto en JSON
     def to_json(self):
@@ -44,7 +44,7 @@ class User(db.Model):
             'name': str(self.name),
             # 'email': str(self.email),
             # 'passw': str(self.passw),
-            # 'rol': str(self.rol),
+            'rol': str(self.rol),
             'poems':[poem.to_json_short() for poem in self.poems],
             'num_poems': len(self.poems),
             'num_marks': len(self.marks),

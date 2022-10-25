@@ -32,35 +32,64 @@
         <!-- ===================================================== -->
         <!-- VIEW ALL POEM INFO -->
         <!-- POEM -->
-        <div class="row">
-            <!-- Espacio en blanco -->
-            <div class="col-lg-2 col-md-1"></div>
-            <div class="col-lg-8 col-md-10 principal-container">
-                <div class="row">
-                    <!--POEM -->
-                    <div class="poem-title">
-                        <form class="login-form">
-                            <div class="form-group row">
-                                <label class="text" for="">Enter NICKNAME</label>
-                                <div class="col-sm-12">
-                                    <input type="text" class="form-control" id="inputNickname" placeholder="neruda123">
+
+        <form method="POST" id="form1" action="{{url_for('main.login')}}">
+            <div class="row">
+                <!-- Espacio en blanco -->
+                <div class="col-lg-2 col-md-1"></div>
+                <div class="col-lg-8 col-md-10 principal-container">
+                    <div class="row">
+                        <!--POEM -->
+                        <div class="poem-title">
+                                <div class="form-group row">
+                                    <label class="text" for="">Enter EMAIL</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="email" placeholder="neruda123@gmail.com" name="email">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                        <form action="">
-                            <div class="form-group row">
-                                <label class="text" for="">Enter PASSWORD</label>
-                                <div class="col-sm-12">
-                                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                <div class="form-group row">
+                                    <label class="text" for="">Enter PASSWORD</label>
+                                    <div class="col-sm-12">
+                                        <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                        </div>
+                        <button class="btn btn-primary btn-primary-outline-success" type="submit">SIGN IN</button>
                     </div>
-                    <form class="d-flex justify-content-center" role="go-home" id="btn-apply">
-                        <button class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off">SIGN IN</button>
-                    </form>
                 </div>
+                <div class="col-lg-2 col-md-1"></div>
             </div>
-            <div class="col-lg-2 col-md-1"></div>
-        </div>
+
+                <!-- Agrego un par de alertas para cuando se logea -->
+                <!-- <div id="alertSI" class="alert alert-success alert-dismissible fade show" role="alert">Login OK!</div>
+                <div id="alertNO" class="alert alert-danger" role="alert">No data entered!</div>
+        </form> -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="/frontend/main/static/js/dark_mode.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Activa las alertas al intentar realizar el logeo a la pagina -->
+    <!-- <script>
+        $(document).ready(function() {
+            $("#alertSI").hide();
+            $("#alertNO").hide();
+            $("form1").submit(function(e){
+                e.preventDefault();
+                email = $.trim($("#email").val());
+                pass = $.trim($("#password").val());
+                if (email.lenght>0 && pass.lenght>0) {
+                    $("#alertSI").fadeTo(2000, 500).slideUp(500, function(){
+                        $("#alertSI").slideUp(500);
+                    });
+                }else{
+                    $("#alertNO").fadeTo(2000, 500).slideUp(500, function(){
+                        $("#alertNO").slideUp(500);
+                    });
+            }
+            });
+        });
+    </script> -->
     {% endblock %}

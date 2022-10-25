@@ -14,22 +14,24 @@
             <div class="col-lg-8 col-md-10 principal-container">
                 <div class="row">
                     <!--POEM -->
-                    <div class="card">
-                        <div class="poem-title">
-                            <div class="poemtitle">
-                                <input class="form-control" type="poemtitle" placeholder="POEM TITLE..">
+                    <form method="POST" id="form2" action="/poem/create">
+                        <div class="card">
+                            <div class="poem-title">
+                                <div class="poemtitle">
+                                    <input class="form-control" type="poemtitle" name="title" placeholder="POEM TITLE..">
+                                </div>
+                                <div class="poembody">
+                                    <textarea class="form-control" name="body" rows="3" placeholder="INSERT YOUR POEM HERE.."></textarea>
+                                </div>
                             </div>
-                            <div class="poembody">
-                                <textarea class="form-control" id="" rows="3" placeholder="INSERT YOUR POEM HERE.."></textarea>
-                              </div>
+                            <!-- <form class="d-flex justify-content-center" role="go-home" id="btn-post"> -->
+                                <button class="btn btn-primary btn-primary-outline-success" type="submit">POST</button>
+                            <!-- </form> -->
                         </div>
-                        <form class="d-flex justify-content-center" role="go-home" id="btn-post">
-                            <a class="btn btn-primary btn-primary-outline-success" type="button data-toggle="button" aria-pressed="false" autocomplete="off"">POST</a>
-                        </form>
-                    </div>
-                    <div class="btn-back">
-                        <a type="button" class="btn btn-outline-secondary" href="{{url_for('main.index_poet')}}">Back Home</a>
-                    </div>
+                        <div class="btn-back">
+                            <a type="button" class="btn btn-outline-secondary" href="{{url_for('main.index_poet')}}">Back Home</a>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="col-lg-2 col-md-1"></div>

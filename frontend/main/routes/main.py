@@ -1,47 +1,74 @@
-from flask import Blueprint, redirect, render_template, url_for, make_response, request
+from flask import Blueprint, redirect, render_template, url_for, make_response, request, current_app
 import requests, json
+from . import functions as f    
 
 #Crear Blueprint
 main = Blueprint('main', __name__, url_prefix='/')
 
+# api_url = f'{current_app.config["API_URL"]}'
+
 @main.route('/poet')
 def index_poet():
-    api_url = "http://127.0.0.1:8500/login"
-    data = {"page": 1, "perpage": 1}
-    jwt = request.cookies.get("access_token")
-    print(jwt)
-    headers = {"Content-Type" : "application/json", "Authorization": "BEARER {}".format(jwt)}
-    response = requests.get(api_url, json=data, headers=headers)
-    print(response.status_code)
-    # response = requests.post(api_url, json = data, headers= headers)
+    
+    api_url = f'{current_app.config["API_URL"]}'
 
-    list_poems = json.loads(response.text)
-    print(list_poems)
+    jwt = f.get_jwt()
+    response = f.get_poems(api_url)
+
+    poems = json.loads(response.text)
+    list_poems = poems["poems"]
+
     #Redireccionar a función de vista
-    return render_template('poet_main_page.html', poems=poems["poems"])
-
+    return render_template('poet_main_page.html', jwt=jwt, poems=list_poems)
 
 @main.route('/user')
 def index_user():
+    api_url = f'{current_app.config["API_URL"]}/poems'
+    
+    jwt = f.get_jwt()
+    response = f.get_poems(api_url)
+
+    print(response)
+    poems = json.loads(response.text)
+    list_poems = poems["poems"]
+
     #Redireccionar a función de vista
-    return render_template('user_main_page.html')
+    return render_template('user_main_page.html', poems=list_poems)
 
 
-@main.route("/login")
+@main.route("/login", methods=["GET", "POST"])
 def login():
-    api_url = "http://127.0.0.1:8500/auth/login"
-    #Envio de logueo
-    data = {"email":"santi123@gmail.com", "password":"abc"}
-    headers = {"Content-Type" : "application/json"}
-    response = requests.post(api_url, json=data, headers=headers)
+    if(request.method == "POST"):
+        #Obtener datos del formulario - Esto lo traigo del HTML con los name de los inputs.
+        email = request.form.get("email")
+        password = request.form.get("password")
+        
+        if email != None and password != None:
+            api_url = f'{current_app.config["API_URL"]}/auth/login'
+            #Envio de logueo
+            data = {"email": email, "password":password}
+            headers = {"Content-Type" : "application/json"}
 
-    #Obtener el token desde response.
-    token = json.loads(response.text)
-    token = token["access_token"]
+            response = requests.post(api_url, json=data, headers=headers)
 
-    resp = make_response(render_template("view_login.html"))
-    resp.set_cookie("access_token", token)
-    return resp
+            if (response.ok):
+                #Obtener el token desde response.
+                response = json.loads(response.text)
+                token = response["access_token"]
+                user_id = str(response["id"])
 
 
-    # return render_template('view_login.html')
+                api_url = f'{current_app.config["API_URL"]}'
+                response = f.get_poems(api_url)
+
+                poems = json.loads(response.text)
+                list_poems = poems["poems"]
+
+                resp = make_response(render_template("poet_main_page.html", poems=list_poems))
+                resp.set_cookie("access_token", token)
+                resp.set_cookie("id", user_id)
+                return resp
+            
+        return render_template("view_login.html", error="Usuario o contraseña incorrectos")
+    else:
+        return render_template("view_login.html")

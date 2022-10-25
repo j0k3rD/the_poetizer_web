@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, url_for, redirect
-
+from flask import Blueprint, render_template, url_for, redirect, json, current_app, request
+import requests
+from . import functions as f
 
 #Crear Blueprint
 poem = Blueprint('poem', __name__, url_prefix='/poem')
@@ -19,12 +20,35 @@ def view_poet(id):
 #Ver un poema determinado
 @poem.route('/view_user/<int:id>')
 def view_user(id):
+    if request.cookies.get('jwt') is None:
+        return render_template('view_poem_user.html')
+    jwt = f.get_jwt()
+    #Guardamos la info del usuario en una variable.
+    user_info = f.get_user_info(f'{current_app.config["API_URL"]}/view_user/{id}')
+    user_info = json.loads(user_info.text)
+
     #Mostrar template
-    return render_template('view_poem_user.html')
+    return render_template('view_poem_user.html', jwt = jwt, user_info = user_info)
+
 
 #Crear un poema nuevo
-@poem.route('/create')
+@poem.route('/create', methods=['GET', 'POST'])
 def create():
-    #Mostrar template
-    return render_template('view_add_poem.html')
+    if request.cookies.get('access_token'):
+        if request.method == 'POST':
+            title = request.form['title']
+            body = request.form['body']
+            print(title)
+            print(body)
+            jwt = f.get_jwt()
+            id = f.get_id()
+            print(id)
+            data = {"user_id": id, "title": title, "body": body}
+            headers = {"Content-Type" : "application/json", "Authorization": f"Bearer {jwt}"}
+            response = requests.post(f'{current_app.config["API_URL"]}/poems', json=data, headers=headers)
+            print(response)
 
+        #Mostrar template
+        return render_template('view_add_poem.html')
+    else:
+        return redirect(url_for('main.login'))
