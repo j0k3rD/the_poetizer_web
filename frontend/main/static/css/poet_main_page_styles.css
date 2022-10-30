@@ -16,10 +16,8 @@ body {
 header {
     height: 60vh;
     width: 100%;
-    background-image: url({/frontend/static/img/arte4.jpg});
     color: white;
-    background-blend-mode: soft-light;
-    background-color: rgba(0, 0, 0, 0.2);
+
 }
 
 /* =====================MENU========================== */
@@ -154,7 +152,7 @@ body.dark {
 
 /* =====================FILTERS========================== */
 .poems-filter{
-    margin-top: 1em;
+    margin-top: 2em;
     margin-left: 16em;
     object-position: left;
     width: 10%;
@@ -188,8 +186,21 @@ a.btn-new{
     text-align: left;
     font-size: 20px;
     font-weight: bold;
-    text-decoration: underline;
+    display: inline-block;
+    position: relative;
+    color: rgb(95, 92, 92);
 }
+
+.poems-card-text:after {
+    content: "";
+    height: 1px;
+    width: 50%;
+    background-color: rgb(150, 150, 150);
+    position: absolute;
+    bottom: -.5em;
+    left: 50%;
+    transform: translate(-50%);
+  }
 
 .card {
     width: 800px;
@@ -209,15 +220,23 @@ a.btn-new{
 }
 
 .card .img-card {
-    background: url(/frontend/main/static/img/rosa.jpg);
-    height: 100%;
+    width: 40%;
+    height: 10%;
     background-size: cover;
+}
+
+.card .img-card img{
+    width: 300px;
+    background-size: cover;
+    background-blend-mode: soft-light;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+    margin-left: 31em;
 }
 
 .card .content{
     width: 60%;
     height: 100%;
-    display: grid;
     grid-template-rows: 50px 150px 50px;
     padding: 10px 15px;
 }
@@ -259,7 +278,6 @@ a.btn-new{
 
 .paginate{
     margin-top: 3em;
-    
 }
 
 /* =====================FOOTER========================== */

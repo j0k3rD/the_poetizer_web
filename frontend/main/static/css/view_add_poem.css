@@ -130,15 +130,17 @@ textarea{
 /* =====================FOOTER========================== */
 
 .footer {
-    position: flex;
     margin-top: 1.7em;
-    bottom: 0;
-    width: 100%;
     height: 25px;
     background-color: #1d3557;
     text-align: center;
     font-size: 15px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;            /* Footer height */
 }
+
 
 .footer p{
     padding: 1px;
