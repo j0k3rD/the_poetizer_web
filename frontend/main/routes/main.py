@@ -11,6 +11,9 @@ main = Blueprint('main', __name__, url_prefix='/')
 def index_poet():
     
     api_url = f'{current_app.config["API_URL"]}'
+    user_id = f.get_id()
+    user = f.get_user(user_id)
+    user = json.loads(user.text)
 
     jwt = f.get_jwt()
     response = f.get_poems(api_url)
@@ -19,13 +22,12 @@ def index_poet():
     list_poems = poems["poems"]
 
     #Redireccionar a función de vista
-    return render_template('poet_main_page.html', jwt=jwt, poems=list_poems)
+    return render_template('poet_main_page.html', user=user, jwt=jwt, poems=list_poems)
 
-@main.route('/user')
+@main.route('/')
 def index_user():
     api_url = f'{current_app.config["API_URL"]}/poems'
     
-    jwt = f.get_jwt()
     response = f.get_poems(api_url)
 
     print(response)
@@ -63,10 +65,13 @@ def login():
 
                 poems = json.loads(response.text)
                 list_poems = poems["poems"]
+                user = f.get_user(user_id)
+                user = json.loads(user.text)
 
-                resp = make_response(render_template("poet_main_page.html", poems=list_poems))
+                resp = make_response(render_template("poet_main_page.html", poems=list_poems, user=user))
                 resp.set_cookie("access_token", token)
                 resp.set_cookie("id", user_id)
+                
                 return resp
             
         return render_template("view_login.html", error="Usuario o contraseña incorrectos")

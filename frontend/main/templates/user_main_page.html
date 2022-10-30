@@ -4,7 +4,15 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/user_main_page_styles.css')}}">
   {% endblock %}    
   {% block content_menu %}
-    <header>    
+    <header>
+      <style>
+        body
+        {
+          background-image: url("{{url_for('static', filename='img/arte3.jpg')}}");
+          background-repeat: no-repeat;
+          background-size: 100% 30%;
+        }
+      </style>
       <nav class="navbar navbar-expand-lg bg-transparent p-2" id="menu">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
@@ -19,7 +27,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{url_for('main.index_poet')}}">Home</a>
+                <a class="nav-link active" aria-current="page" href="{{url_for('main.index_user')}}">Home</a>
               </li>
 
             <!-- TODO: agregar lista EN-ES, que se pueda elegir el idioma de la pagina, por defecto EN -->
@@ -49,7 +57,7 @@
       </div>
         <div class="visitor-menu justify-content-center">
           <form class="d-flex justify-content-center" role="go-home" id="btn-login">
-              <a class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off" href="{{url_for('main.login')}}">LOGIN</a>
+              <a class="btn btn-primary btn-primary-outline-success" type="button" href="{{url_for('main.login')}}">LOGIN</a>
           </form>
           <div class="divide-line d-flex container justify-content-center">
               <hr>
@@ -65,12 +73,16 @@
     <!-- ===================================================== -->
     {% endblock%}
 
+    {% block btn %}
+    <a class="nav-link active" aria-current="page" href="{{url_for('main.index_user')}}">Home</a>
+    {% endblock %}
+
     {% block content_navbar %}
     <!-- ===================================================== -->
     <!-- HOME-->
     <!-- NAVBAR HOME -->
                 <form class="d-flex justify-content-center" role="go-home" id="btn-login">
-                    <a class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off" href="{{url_for('main.login')}}">LOGIN</a>
+                    <a class="btn btn-primary btn-primary-outline-success" type="button" href="{{url_for('main.login')}}">LOGIN</a>
                 </form>
             </ul>
           </div>
@@ -121,7 +133,7 @@
             <p>{{poem.body}}</p>
           </div>
           <div class="btn-container">
-            <a href="{{url_for('poem.view_user',id=1)}}">View All</a>
+            <a type="btn btn-primary btn-primary-outline-success" href="{{url_for('poem.view_user',id=poem.id)}}">View All</a>
           </div>
         </div>
       </div>

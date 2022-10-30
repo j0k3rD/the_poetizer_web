@@ -9,7 +9,6 @@ body {
     /* CARDS */
     align-items: center;
     justify-content: center;
-
 }
 
 header {
@@ -264,7 +263,7 @@ body.dark {
     text-align: left;
 }
 
-.card .content .btn-container button{
+.card .content .btn-container a{
     background-color: #017ed1;
     padding: 5px 10px;
     color: #fff;
@@ -274,7 +273,7 @@ body.dark {
     cursor: pointer;
 }
 
-.card .content .btn-container button:hover {
+.card .content .btn-container a:hover {
     background: #000000;
 }
 

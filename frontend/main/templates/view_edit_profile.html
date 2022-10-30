@@ -40,7 +40,7 @@
                         <img src="{{url_for('static', filename='img/avatar.png')}}" alt="mdo" width="32" height="32" class="rounded-circle">
                       </a>
                       <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" href="{{url_for('user.details')}}">USER DETAILS</a></li>
+                        <li><a class="dropdown-item" href="">USER DETAILS</a></li>
                         <li><a class="dropdown-item" href="{{url_for('user.edit_profile')}}">EDIT USER CREDENTIALS</a></li>
                         <div>
                           <input type="checkbox" class="checkbox" id="chk" />
@@ -73,7 +73,7 @@
                     <!--POEM -->
                     <div class="card">
                         <div class="poem-title">
-                            <form action="">
+                          <form method="POST" id="form3" action="/poem/create">
                                 <div class="form-group">
                                     <label class="text" for="">Enter New NICKNAME</label>
                                     <input type="nick" class="form-control" id="" placeholder="neruda123">

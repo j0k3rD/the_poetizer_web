@@ -9,7 +9,7 @@
     <!-- HOME-->
     <!-- NAVBAR HOME -->
                 <form class="d-flex justify-content-center" role="go-home" id="btn-login">
-                    <a class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off" href="{{url_for('main.login')}}">LOGIN</a>
+                    <a class="btn btn-primary btn-primary-outline-success" type="button" href="{{url_for('main.login')}}">LOGIN</a>
                 </form>
             </ul>
           </div>
@@ -32,11 +32,11 @@
                     <div class="col-md-6 poem-container">
                         <div class="card">
                             <div class="poem-title">
-                                <h3>{Poem title}</h3>
-                                <span>{Poet Name}</span>
+                                <h3>{{poem.title}}</h3>
+                                <span>{{poem.user.name}}</span>
                             </div>
                             <div class="poem-text">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus ab officiis, omnis odit exercitationem libero ratione architecto illum tempore iusto dignissimos aliquid ad facilis accusamus.</p>
+                                <p>{{poem.body}}</p>
                             </div>
                         </div>
                     </div>

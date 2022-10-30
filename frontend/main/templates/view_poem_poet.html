@@ -40,8 +40,8 @@
                         <img src="{{url_for('static', filename='img/avatar.png')}}" alt="mdo" width="32" height="32" class="rounded-circle">
                       </a>
                       <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" href="{{url_for('user.details')}}">USER DETAILS</a></li>
-                        <li><a class="dropdown-item" href="{{url_for('user.edit_profile')}}">EDIT USER CREDENTIALS</a></li>
+                        <li><a class="dropdown-item" href="">USER DETAILS</a></li>
+                        <li><a class="dropdown-item" href="">EDIT USER CREDENTIALS</a></li>
                         <div>
                           <input type="checkbox" class="checkbox" id="chk" />
                           <label class="label" for="chk">
@@ -74,11 +74,11 @@
                     <div class="col-md-6 poem-container">
                         <div class="card">
                             <div class="poem-title">
-                                <h3>{Poem title}</h3>
-                                <span>{Poet Name}</span>
+                                <h3>{{poem.title}}</h3>
+                                <span>{{poem.user.name}}</span>
                             </div>
                             <div class="poem-text">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus ab officiis, omnis odit exercitationem libero ratione architecto illum tempore iusto dignissimos aliquid ad facilis accusamus.</p>
+                                <p>{{poem.body}}</p>
                             </div>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                                 <hr>
                             </div>
                             <div class="title-avg">
-                                <h3>RATINGS AVG</h3>
+                                <h3>{RATINGS AVG}</h3>
                             </div>
                             <div class="star-img">
                                 <img src="{{url_for('static', filename='img/star.png')}}" alt="mdo" width="40" height="40" class="rounded-circle">

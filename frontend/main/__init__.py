@@ -7,7 +7,8 @@ login_manager = LoginManager()
 
 def create_app():
     #inicializar Flask
-    app=Flask(__name__)
+    app=Flask(__name__, static_url_path='/static')
+    
     #Cargar variables de entorno
     load_dotenv()
 

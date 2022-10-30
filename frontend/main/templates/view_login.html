@@ -8,57 +8,56 @@
     <!-- ===================================================== -->
     <!-- HOME-->
     <!-- NAVBAR HOME -->
-                <form class="d-flex justify-content-center" role="go-home" id="btn-login">
-                    <a class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off" href="{{url_for('main.login')}}">LOGIN</a>
-                </form>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </div>
-
+    <div>
+        <form class="d-flex justify-content-center" role="go-home" id="btn-login">
+            <a class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off" href="{{url_for('main.login')}}">LOGIN</a>
+        </form>
+    <!-- ===================================================== -->
+    {% endblock %}
+    {% block ad %}
     <div class="ad container-fluid justify-content-center">
         <div class="welcome-ad">
             <p>👋 HELLO</p>
         </div>
-        <div class="ad-txt">
-            <p>REGISTER ON OUR PAGE TO SHARE YOUR ART, POET!</p>
-        </div>
     </div>
-    <!-- ===================================================== -->
+    <div class="ad-txt">
+        <p>REGISTER ON OUR PAGE TO SHARE YOUR ART, POET!</p>
+    </div>
     {% endblock %}
     
     {% block content %}
         <!-- ===================================================== -->
         <!-- VIEW ALL POEM INFO -->
         <!-- POEM -->
-
-        <form method="POST" id="form1" action="{{url_for('main.login')}}">
-            <div class="row">
-                <!-- Espacio en blanco -->
-                <div class="col-lg-2 col-md-1"></div>
-                <div class="col-lg-8 col-md-10 principal-container">
-                    <div class="row">
-                        <!--POEM -->
-                        <div class="poem-title">
-                                <div class="form-group row">
-                                    <label class="text" for="">Enter EMAIL</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="email" placeholder="neruda123@gmail.com" name="email">
+        <div>
+            <form method="POST" id="form1" action="{{url_for('main.login')}}">
+                <div class="row">
+                    <!-- Espacio en blanco -->
+                    <div class="col-lg-2 col-md-1"></div>
+                    <div class="col-lg-8 col-md-10 principal-container">
+                        <div class="row">
+                            <!--POEM -->
+                            <div class="poem-title">
+                                    <div class="form-group row">
+                                        <label class="text" for="">Enter EMAIL</label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" id="email" placeholder="neruda123@gmail.com" name="email">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="text" for="">Enter PASSWORD</label>
-                                    <div class="col-sm-12">
-                                        <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                                    <div class="form-group row">
+                                        <label class="text" for="">Enter PASSWORD</label>
+                                        <div class="col-sm-12">
+                                            <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                                        </div>
                                     </div>
-                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-primary-outline-success" type="submit">SIGN IN</button>
                         </div>
-                        <button class="btn btn-primary btn-primary-outline-success" type="submit">SIGN IN</button>
                     </div>
+                    <div class="col-lg-2 col-md-1"></div>
                 </div>
-                <div class="col-lg-2 col-md-1"></div>
-            </div>
+            </form>
+        </div>
 
                 <!-- Agrego un par de alertas para cuando se logea -->
                 <!-- <div id="alertSI" class="alert alert-success alert-dismissible fade show" role="alert">Login OK!</div>

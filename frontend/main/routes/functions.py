@@ -4,8 +4,15 @@ from flask import Blueprint, url_for, render_template, make_response, request, c
 import requests, json
 
 #Obtengo los poemas del poeta ayudandome del id del mismo.
-def get_poems_by_id(api_url, id, page=1, perpage=3):
-    data = {"page": page, "perpage": perpage, "user_id": id} 
+# def get_poems_by_id(api_url, id, page=1, perpage=3):
+#     data = {"page": page, "perpage": perpage, "user_id": id} 
+
+#Obtengo un poema en especifico.
+def get_poem(id):
+    api_url = f'{current_app.config["API_URL"]}/poem/{id}'
+    headers = get_headers()
+    return requests.get(api_url, headers=headers)
+
 
 #Obtengo todos los poemas de la base de datos.
 def get_poems(api_url, page=1, perpage=3):
@@ -15,12 +22,23 @@ def get_poems(api_url, page=1, perpage=3):
     return requests.get(api_url, json=data, headers=headers)
 
 #Obtengo los datos del usuario.
-def get_user_info(api_url):
+def get_user_info(id):
+    api_url = f'{current_app.config["API_URL"]}/user/{id}'
     #Obtengo el jwt del logue e instancio el header y le agrego el jwt.
     headers = get_headers()
 
     #Creamos el response y le enviamos el data y headers
     return requests.get(api_url, headers=headers)
+
+#Obtener un usuario en especifico.
+def get_user(id):
+    api_url = f'{current_app.config["API_URL"]}/user/{id}'
+    headers = get_headers()
+    return requests.get(api_url, headers=headers)
+
+#Obtengo el json txt.
+def json_load(response):
+    return json.loads(response.text)
 
 #Obtengo el email del usuario
 def get_headers(without_token = False):
@@ -38,15 +56,14 @@ def get_jwt():
 def get_id():
     return request.cookies.get("id")
 
-
 #Obtengo el nombre del usuario
 def get_username(user_id):
     headers = get_headers()
-    api_url = f'{current_app.config["API_URL"]}'
+    api_url = f'{current_app.config["API_URL"]}/user/{user_id}'
 
     response = requests.get(api_url, headers=headers)
     user = json.loads(response.text)
-    return user["username"]
+    return user["name"]
 
 def add_poem(api_url, title, content):
     data = {"title": title, "content": content}

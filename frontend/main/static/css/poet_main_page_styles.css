@@ -161,7 +161,7 @@ body.dark {
 }
 
 /* =====================BTN ADD NEW POEM========================== */
-.btn-new{
+a.btn-new{
     position: absolute;
     margin-top: 1em;
     margin-bottom: 1em;
@@ -242,7 +242,7 @@ body.dark {
     text-align: left;
 }
 
-.card .content .btn-container button{
+.card .content .btn-container a{
     background-color: #017ed1;
     padding: 5px 10px;
     color: #fff;
@@ -252,10 +252,9 @@ body.dark {
     cursor: pointer;
 }
 
-.card .content .btn-container button:hover {
+.card .content .btn-container a:hover {
     background: #000000;
 }
-
 /* =====================PAGINATION========================== */
 
 .paginate{

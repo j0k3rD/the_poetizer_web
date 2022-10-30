@@ -1,7 +1,7 @@
-{% extends 'base.html'%}
-{% block head %}
+{% extends 'base.html' %}
+{% block menu %}
 {{ super() }}
-<link rel="stylesheet" href="/frontend/main/static/css/view_add_poem.css">
+<link rel="stylesheet" href="{{url_for('static', filename='css/view_add_poem.css')}}">
 {% endblock %}
 
 {% block content %}
@@ -36,4 +36,4 @@
             </div>
             <div class="col-lg-2 col-md-1"></div>
         </div>
-        {% endblock %}
+{% endblock %}

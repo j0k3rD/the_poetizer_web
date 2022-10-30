@@ -12,23 +12,26 @@ poem = Blueprint('poem', __name__, url_prefix='/poem')
 #             ]
 
 #Ver un poema determinado
-@poem.route('/view_poet/<int:id>')
-def view_poet(id):
-    #Mostrar template
-    return render_template('view_poem_poet.html')
+# @poem.route('/view_poet/<int:id>')
+# def view_poet(id):
+#     #Mostrar template
+#     return render_template('view_poem_poet.html')
 
 #Ver un poema determinado
 @poem.route('/view_user/<int:id>')
 def view_user(id):
-    if request.cookies.get('jwt') is None:
-        return render_template('view_poem_user.html')
-    jwt = f.get_jwt()
-    #Guardamos la info del usuario en una variable.
-    user_info = f.get_user_info(f'{current_app.config["API_URL"]}/view_user/{id}')
-    user_info = json.loads(user_info.text)
+    if request.cookies.get('access_token'):
+        jwt = f.get_jwt()
+        poem = f.get_poem(id)
+        poem = json.loads(poem.text)
+        print(poem)
 
-    #Mostrar template
-    return render_template('view_poem_user.html', jwt = jwt, user_info = user_info)
+        #Mostrar template
+        return render_template('view_poem_poet.html', jwt = jwt, poem = poem)
+    else:
+        poem = f.get_poem(id)
+        poem = json.loads(poem.text)
+        return render_template('view_poem_user.html', poem=poem)
 
 
 #Crear un poema nuevo
