@@ -1,0 +1,13 @@
+# pack-refs with: peeled fully-peeled sorted 
+1486c01b6a1ef7e4e93ea5d9380097529e570a7b refs/remotes/origin/main
+dc28c3a46097ba41ad0f12637a35be93ebfeaf78 refs/tags/TP1
+5b359050c0d78b9417c2eb7f33ec2b26ae859eab refs/tags/TP2
+703d19fb91f85a61e7020aebce6179be8b84f544 refs/tags/TP3
+^0a501609f7a7fe276145120c17217c370328988e
+f75ddb576822041058b56f8078d9458811d275a0 refs/tags/TP4
+^f9d7edf9b9fd7e53b907b1f69020629070e2b6e0
+17cbc21bbc05c11c3fc56d78de82d5a8f5e25285 refs/tags/TP5
+929ceffe2733d7418b83943d1766c3d93e845f23 refs/tags/TP6
+98e6260bee49a2bcd46c5f9198a579e34a1116b5 refs/tags/TP7
+c176d388ab9cc8e238c8a565bef2b3340c2919f8 refs/tags/TP7-Templates/Enrutamiento
+32acf214c095478dc70c2be37c68ed12f815e47a refs/tags/TP8-Herencia-Jinja2

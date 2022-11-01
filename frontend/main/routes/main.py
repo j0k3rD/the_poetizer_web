@@ -1,15 +1,13 @@
-from flask import Blueprint, redirect, render_template, url_for, make_response, request, current_app
+from flask import Blueprint, render_template, make_response, request, current_app, redirect, url_for
 import requests, json
 from . import functions as f    
 
 #Crear Blueprint
 main = Blueprint('main', __name__, url_prefix='/')
 
-# api_url = f'{current_app.config["API_URL"]}'
 
 @main.route('/poet')
 def index_poet():
-    
     api_url = f'{current_app.config["API_URL"]}'
     user_id = f.get_id()
     user = f.get_user(user_id)
@@ -23,6 +21,7 @@ def index_poet():
 
     #Redireccionar a función de vista
     return render_template('poet_main_page.html', user=user, jwt=jwt, poems=list_poems)
+
 
 @main.route('/')
 def index_user():
@@ -77,3 +76,8 @@ def login():
         return render_template("view_login.html", error="Usuario o contraseña incorrectos")
     else:
         return render_template("view_login.html")
+
+
+@main.route("/logout")
+def logout():
+    pass

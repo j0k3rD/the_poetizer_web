@@ -70,10 +70,20 @@ class Mark(Resource):
 
 #Recurso Calificaciones
 class Marks(Resource):
-    #Obtener Lista de Calificaciones
     def get(self):
+        if request.get_json():
+            filters = request.get_json().items()
+            for key, value in filters:
+                if key == "poem_id":
+                    return self.show_marks_by_poem_id(value)
+
         marks = db.session.query(MarkModel).all()
-        return jsonify([mark.to_json_short() for mark in marks])
+        return jsonify([mark.to_json() for mark in marks])
+
+    def show_marks_by_poem_id(self, id):
+        marks = db.session.query(MarkModel)
+        marks = marks.filter(MarkModel.poem.has(PoemModel.id == id)).all()
+        return jsonify([mark.to_json() for mark in marks])
 
     
     #Insertar recurso

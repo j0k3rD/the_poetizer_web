@@ -3,93 +3,38 @@
   {{ super () }}
   <link rel="stylesheet" href="{{url_for('static', filename='css/poet_main_page_styles.css')}}">
   {% endblock %}
-  {% block content_menu %}
-  <header>    
-    <nav class="navbar navbar-expand-lg bg-transparent p-2" id="menu">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-          <span class="text-white fs-1 fw-bold">
-            the poetizer
-          </span> 
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{{url_for('main.index_poet')}}">Home</a>
-            </li>
-
-          <!-- TODO: agregar lista EN-ES, que se pueda elegir el idioma de la pagina, por defecto EN -->
-            <li class="nav-item">
-              <a class="nav-link" href="#">Languaje</a>
-            </li>
-          </ul>
-          
-          <!-- TODO: cambiar el boton por uno de icono que se despliegue -->
-          <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
-            <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-              aria-label="Search">
-          </form>
-          <div>
-            <input type="checkbox" class="checkbox" id="chk" />
-            <label class="label" for="chk">
-              <i class="fas fa-moon"></i>
-              <i class="fas fa-sun"></i>
-              <div class="ball"></div>
-            </label>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <div class="container d-flex justify-content-center" id="phrase-txt">
-      <p>"La poesía no quiere adeptos, quiere amantes"</p>
-    </div>
-    <div class="container d-flex justify-content-center" id="welcome-txt">
-      <p>"WELCOME {{username}}!"</p>
-    </div>
-    <form class="d-flex justify-content-center" role="go-home" id="btn-home">
-      <a class="btn btn-primary btn-primary-outline-success" href="{{url_for('main.index_poet')}}">HOME</a>
-    </form>
-
-    <div class="container d-flex justify-content-center" id="tf-txt">
-      <p>tp</p>
-    </div>
+  <!-- ===================================================== -->
+  {% block btn %}
+  <a class="nav-link active" aria-current="page" href="{{url_for('main.index_poet')}}">Home</a>
   {% endblock %}
 
-        <!-- ===================================================== -->
-
-        {% block btn %}
-        <a class="nav-link active" aria-current="page" href="{{url_for('main.index_poet')}}">Home</a>
-        {% endblock %}
-
-    {% block content_navbar %}
-          <li class="nav-item">
-            <a class="nav-link" href="">My Poems</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="">My Ratings</a>
-          </li>
-          <div class="dropdown text-end">
-            <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="{{url_for('static', filename='img/avatar.png')}}" alt="mdo" width="32" height="32" class="rounded-circle">
-            </a>
-          <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-              <li><a class="dropdown-item" href="{{url_for('user.details',id=1)}}">USER DETAILS</a></li>
-              <li><a class="dropdown-item" href="{{url_for('user.edit_profile')}}">EDIT USER CREDENTIALS</a></li>
-              <li><a class="dropdown-item text-danger" href="#">DELETE ACCOUNT</a></li>
-              <li><a class="dropdown-item" href="#">Sign out</a></li>
-          </ul>
-          </div>
-          </ul>
-          </div>
+  {% block content_navbar %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('poem.my_poems', id=user.id)}}">My Poems</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">My Ratings</a>
+        </li>
+        <div class="dropdown text-end">
+          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="{{url_for('static', filename='img/avatar.png')}}" alt="mdo" width="32" height="32" class="rounded-circle">
+          </a>
+        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+            <li><a class="dropdown-item" href="{{url_for('user.details',id=user.id)}}">USER DETAILS</a></li>
+            <li><a class="dropdown-item" href="{{url_for('user.edit_profile')}}">EDIT USER CREDENTIALS</a></li>
+            <li><a class="dropdown-item text-danger" href="#">DELETE ACCOUNT</a></li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+        </ul>
         </div>
-        </nav>
+        </ul>
+        </div>
       </div>
-    {% endblock %}
-    <!-- ===================================================== -->
+      </nav>
+    </div>
+  {% endblock %}
+  <!-- ===================================================== -->
+    
     {% block content %}
     <!-- ===================================================== -->
     <!-- BUTTON ADD NEW POEM -->
@@ -97,7 +42,7 @@
       <!--Columna -->
       <div class="col-md-12 ">
         <div id="new-poem-btn">
-          <a class="btn-new" href="{{url_for('poem.create')}}">NEW+</a>
+          <a type="button" class="btn btn-primary btn-new" href="{{url_for('poem.create')}}">NEW+</a>
         </div>
       </div><!--Fin de la columna -->
      </div><!--Fin de la fila -->
@@ -126,8 +71,7 @@
 
     <!-- ===================================================== -->
     <tbody>
-      <form method="GET" id="form3" action="{{url_for('poem.view_poem')}}">
-        {% for poem in poems %}
+      {% for poem in poems %}
         <!-- CARD 1 -->
         <div class="card container d-flex justify-content-center">
           <div class="img-card"></div>
@@ -140,11 +84,10 @@
               <p>{{poem.body}}</p>
             </div>
             <div class="btn-container">
-              <button id="view_btn" type="submit">View All</button>
+              <a type="button" href="{{url_for('poem.view_user', id=poem.id)}}" id="view_btn">View All</a>
             </div>
-      </form>
-      </div>
-      </div>
+          </div>
+        </div>
       {% endfor %}
     </tbody>
     <!-- ===================================================== -->
