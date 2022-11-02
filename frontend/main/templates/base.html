@@ -14,32 +14,89 @@
         {% block content_menu %}{% endblock %}
         {% endblock %}
 
-        {% block navbar %}
-        <!-- ===================================================== -->
-        <!-- HOME-->
-        <!-- NAVBAR HOME -->
-        <div class="home-header">
-            <nav class="navbar navbar-expand-lg">
-              <div class="container-fluid">
-                <a class="navbar-brand" href="#">the poetizer</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarText">
-                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li class="nav-item">
-                        {% block btn %}{% endblock %}
-                      </li>
-                      {% block content_navbar %}{% endblock %}
+        <!-- Dentro de HTML puedo usar funciones de Flask, como es hacer una request para saber
+si el usuario esta logeado o no, y mostrar el navbar correspondiente. -->
+
+    {% if jwt %}
+    <!-- ===================================================== -->
+      <!-- HOME-->
+      <!-- NAVBAR POETAS -->
+      <div class="home-header">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">the poetizer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{url_for('main.index_poet')}}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('poem.my_poems')}}">My Poems</a>
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a class="nav-link" href="">My Ratings</a>
+                  </li> -->
+                  <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="{{url_for('static', filename='img/avatar.png')}}" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                  <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                      <li><a class="dropdown-item" href="{{url_for('user.details')}}">USER DETAILS</a></li>
+                      <!-- <li><a class="dropdown-item" href="{{url_for('user.edit_profile')}}">EDIT USER CREDENTIALS</a></li> -->
+                      <li><a class="dropdown-item text-danger" href="#">DELETE ACCOUNT</a></li>
+                      <li><a class="dropdown-item" href="{{url_for('main.logout')}}">Sign out</a></li>
                   </ul>
                   </div>
+                  </ul>
+                  </div>
+                </div>
+                </nav>
               </div>
-            </nav>
+              </ul>
+              </div>
+          </div>
+        </nav>
+    </div>
+    <!-- ===================================================== -->
+
+    {% else %}
+    <!-- ===================================================== -->
+    <!-- HOME-->
+    <!-- NAVBAR USUARIOS COMUNES -->
+    <div class="home-header">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">the poetizer</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                </li>
+                <div>
+                  <form class="d-flex justify-content-center" role="go-home" id="btn-login">
+                      <a class="btn btn-primary btn-primary-outline-success" type="button" href="{{url_for('main.login')}}">LOGIN</a>
+                  </form>
+            </ul>
+            </div>
         </div>
-        {% block ad %}{% endblock %}
-        
-        {% endblock %}
-        <!-- ===================================================== -->
+      </nav>
+    </div>
+    <div class="ad container-fluid justify-content-center">
+      <div class="welcome-ad">
+          <p>👋 HELLO</p>
+      </div>
+      <div class="text-ad">
+          <p>REGISTER ON OUR PAGE TO SHARE YOUR ART, POET!</p>
+      </div>
+    </div>
+    <!-- ===================================================== -->
+    {% endif %}
+
         {% block content %}
         {% endblock %}
         <!-- ===================================================== -->

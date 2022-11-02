@@ -8,19 +8,22 @@ main = Blueprint('main', __name__, url_prefix='/')
 
 @main.route('/poet')
 def index_poet():
-    api_url = f'{current_app.config["API_URL"]}'
-    user_id = f.get_id()
-    user = f.get_user(user_id)
-    user = json.loads(user.text)
-
     jwt = f.get_jwt()
-    response = f.get_poems(api_url)
+    if jwt:
+        api_url = f'{current_app.config["API_URL"]}'
+        user_id = f.get_id()
+        user = f.get_user(user_id)
+        user = json.loads(user.text)
 
-    poems = json.loads(response.text)
-    list_poems = poems["poems"]
+        response = f.get_poems(api_url)
 
-    #Redireccionar a función de vista
-    return render_template('poet_main_page.html', user=user, jwt=jwt, poems=list_poems)
+        poems = json.loads(response.text)
+        list_poems = poems["poems"]
+
+        #Redireccionar a función de vista
+        return render_template('poet_main_page.html', user=user, jwt=jwt, poems=list_poems)
+    else:
+        return redirect(url_for('main.login'))
 
 
 @main.route('/')
@@ -30,13 +33,15 @@ def index_user():
     response = f.get_poems(api_url)
 
     print(response)
+    jwt = f.get_jwt()
     poems = json.loads(response.text)
     list_poems = poems["poems"]
 
     #Redireccionar a función de vista
-    return render_template('user_main_page.html', poems=list_poems)
+    return render_template('user_main_page.html', poems=list_poems, jwt=jwt)
 
 
+### Desafio, sacar el login de la URL
 @main.route("/login", methods=["GET", "POST"])
 def login():
     if(request.method == "POST"):
@@ -67,7 +72,7 @@ def login():
                 user = f.get_user(user_id)
                 user = json.loads(user.text)
 
-                resp = make_response(render_template("poet_main_page.html", poems=list_poems, user=user))
+                resp = make_response(render_template("poet_main_page.html", poems=list_poems, user=user, jwt=token))
                 resp.set_cookie("access_token", token)
                 resp.set_cookie("id", user_id)
                 
@@ -77,7 +82,10 @@ def login():
     else:
         return render_template("view_login.html")
 
-
+#Se deslogea el usuario
 @main.route("/logout")
 def logout():
-    pass
+    resp = make_response(redirect(url_for("main.login")))
+    resp.delete_cookie("access_token")
+    resp.delete_cookie("id")
+    return resp

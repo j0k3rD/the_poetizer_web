@@ -26,10 +26,26 @@ def view_user(id):
         return render_template('view_poem_user.html', poem=poem)
 
 
+#Ver mi lista de poemas
+@poem.route('/my_poems')
+def my_poems():
+    jwt = f.get_jwt()
+    if jwt:
+        user = auth.load_user(jwt)
+        resp = f.get_poems_by_id(user["id"])
+        poems = json.loads(resp.text)
+        poemsList = poems["poems"]
+
+        return render_template('view_poet_mypoems.html', jwt = jwt, poems = poemsList)
+    else:
+        return redirect(url_for('main.login'))
+
+
 #Crear un poema nuevo
 @poem.route('/create', methods=['GET', 'POST'])
 def create():
-    if request.cookies.get('access_token'):
+    jwt = f.get_jwt()
+    if jwt:
         if request.method == 'POST':
             title = request.form['title']
             body = request.form['body']
@@ -44,28 +60,13 @@ def create():
                 print(response)
                 if response.ok:
                     response = f.json_load(response)
-                    return redirect(url_for('poem.view_user', id=response["id"]))
+                    return redirect(url_for('poem.view_user', id=response["id"], jwt=jwt))
                 else:
                     return redirect(url_for('poem.create'))
             else:
                 return redirect(url_for('poem.create'))
         else:
             #Mostrar template
-            return render_template('view_add_poem.html')
-    else:
-        return redirect(url_for('main.login'))
-
-
-#Ver mi lista de poemas
-@poem.route('/my_poems/<int:id>')
-def my_poems(id):
-    jwt = f.get_jwt()
-    if jwt:
-        user = auth.load_user(jwt)
-        resp = f.get_poems_by_id(user["id"])
-        poems = json.loads(resp.text)
-        poemsList = poems["poems"]
-
-        return render_template('view_poet_mypoems.html', jwt = jwt, poems = poemsList)
+            return render_template('view_add_poem.html', jwt=f.get_jwt())
     else:
         return redirect(url_for('main.login'))

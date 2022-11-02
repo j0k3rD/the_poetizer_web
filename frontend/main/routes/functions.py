@@ -99,4 +99,9 @@ def get_jwt():
 def get_id():
     return request.cookies.get("id")
 
+
+#Hacer redirect
+
+def redirect_to(url):
+    return redirect(url_for(url))
 #--------------- Utilidades -----------------#

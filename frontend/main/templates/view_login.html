@@ -4,27 +4,6 @@
         <link rel="stylesheet" href="{{url_for('static', filename='css/view_login.css')}}">
     {% endblock %} 
     
-    {% block content_navbar %}
-    <!-- ===================================================== -->
-    <!-- HOME-->
-    <!-- NAVBAR HOME -->
-    <div>
-        <form class="d-flex justify-content-center" role="go-home" id="btn-login">
-            <a class="btn btn-primary btn-primary-outline-success" type="button" data-toggle="button" aria-pressed="false" autocomplete="off" href="{{url_for('main.login')}}">LOGIN</a>
-        </form>
-    <!-- ===================================================== -->
-    {% endblock %}
-    {% block ad %}
-    <div class="ad container-fluid justify-content-center">
-        <div class="welcome-ad">
-            <p>👋 HELLO</p>
-        </div>
-    </div>
-    <div class="ad-txt">
-        <p>REGISTER ON OUR PAGE TO SHARE YOUR ART, POET!</p>
-    </div>
-    {% endblock %}
-    
     {% block content %}
         <!-- ===================================================== -->
         <!-- VIEW ALL POEM INFO -->
