@@ -44,19 +44,22 @@
                         <div class="vl"></div>
                     </div>
                     <!-- COMMENTS AND RATING -->
-                    <div class="col-md-6 second-container">
+                      <div class="col-md-6 second-container">
                         <div class="comment justify-content-center">
                             <div class="title">
                                 <h3>COMMENTS</h3>
                             </div>
-                            <div class="comment-text">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloribus ab officiis, omnis odit exercitationem libero ratione architecto illum tempore iusto.</p>
-                            </div>
-                            <div class="comment-text">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                            <div class="comments-container">
+                                <tbody>
+                                {% for mark in marks %}
+                                <div class="comment-text">
+                                    <h8>{{mark.user.name}}</h8>
+                                    <p>{{mark.commentary}}</p>
+                                </div>
+                                {% endfor %}
+                                </tbody>
                             </div>
                         </div>
-
                         <div class="ratings container justify-content-center">
                             <div class="divide-line container justify-content-center">
                                 <hr>
@@ -66,15 +69,19 @@
                             </div>
                             <div class="star-img">
                                 <img src="{{url_for('static', filename='img/star.png')}}" alt="mdo" width="40" height="40" class="rounded-circle">
-                                <div class="centered">#</div>
-                            </div>
-                            <div class="btn-back">
-                                <a type="button" class="btn btn-outline-secondary" href="{{url_for('main.index_user')}}">Back Home</a>
+                                <div class="centered">{{poem.mark_avg}}</div>
                             </div>
                         </div>
-                    </div>
+                          <div class="btn-back">
+                              <a type="button" class="btn btn-outline-secondary" href="{{url_for('main.index_user')}}">Back Home</a>
+                          </div>
+                        </div>
+                        <div class="add-com container justify-content-center">
+                        </div>
+                      </div>
                 </div>
             </div>
             <div class="col-lg-2 col-md-1"></div>
         </div>
+        <!-- ===================================================== -->
     {% endblock %}

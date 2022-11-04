@@ -31,7 +31,6 @@ class Poem(db.Model):
     #         count = len(score_list)
     #     return count
 
-
     def avg_score(self):
         score_list = []
         if len(self.marks) == 0:
@@ -40,7 +39,7 @@ class Poem(db.Model):
             for mark in self.marks:
                 score = mark.score
                 score_list.append(score)
-            avg = statistics.mean(score_list)
+            avg = round(statistics.mean(score_list),1)
         return avg
 
     #Convertir Objeto en JSON
@@ -72,6 +71,7 @@ class Poem(db.Model):
             'title': self.title,
             'user': self.user.to_json_short(),
             'body': str(self.body),
+            'mark_avg': self.avg_score(),
         }
         return poem_json
 

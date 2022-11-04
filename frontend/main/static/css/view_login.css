@@ -11,6 +11,10 @@ body {
     justify-content: center;
 }
 
+body.dark {
+    background-color: #292C35;
+}
+
 header {
     height: 70vh;
     width: 100%;
@@ -127,13 +131,19 @@ header {
     font-weight: bold;
 }
 
-body.dark {
-	background: #292C35;
+#btn-login a{
+    color: #000000;
+    background-color: #73c6b6;
+    border-color: #ffffff;
+    font-weight: bolder;
+    font-size: 15px;
+    padding: auto;
+    margin-bottom: 1px;
 }
 
 .checkbox {
 	opacity: 0;
-	position: absolute;
+    position: absolute;
 }
 
 .label {
@@ -145,6 +155,8 @@ body.dark {
 	justify-content: space-between;
 	padding: 5px;
 	position: relative;
+    margin-top: 5px;
+    margin-left: 1em;
 	height: 26px;
 	width: 50px;
 	transform: scale(1.3px);
@@ -165,7 +177,6 @@ body.dark {
 .checkbox:checked + .label .ball {
 	transform: translateX(24px);
 }
-
 
 .fa-moon {
 	color: #f1c40f;

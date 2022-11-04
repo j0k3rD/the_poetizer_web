@@ -5,19 +5,21 @@ body {
     font-family: 'Nuosu SIL', serif;
     overflow-x: hidden;
     background-color: #f9f9f9;
+	transition: background 0.2s linear;
 
     /* CARDS */
     align-items: center;
     justify-content: center;
 }
 
+body.dark {
+    background-color: #292C35;
+}
+
 header {
-    height: 70vh;
+    height: 60vh;
     width: 100%;
-    background-image: url(/frontend/main/static/img/arte4.jpg);
     color: white;
-    background-blend-mode: soft-light;
-    background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* =====================MENU========================== */
@@ -43,87 +45,44 @@ header {
     padding: 5px;
 }
 
-#btn-login a{
+#btn-login button{
     color: #000000;
     background-color: #73c6b6;
     border-color: #ffffff;
     font-weight: bolder;
     font-size: 15px;
     padding: auto;
-    margin-bottom: 1px;
-}
-
-.divide-line hr{
-    width: 30%;
-    border: 1px solid white;
-}
-
-#btn-visitor button{
-    color: #ffffff;
-    font-size: 15px;
-    padding: auto;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 10px;
 }
 
+#welcome-txt p{
+    margin-top: 1em;
+    font-size: 100%;
+    font-weight: bold;
+    text-align: center;
+    /* background-color: aqua; */
+    color: white;
+    padding: 5px;
+}
+
+#btn-home button{
+    color: #000000;
+    background-color: #73c6b6;
+    border-color: #ffffff;
+    font-weight: bolder;
+    font-size: 15px;
+    padding: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 #tf-txt p{
-    margin-top: 2em;
     font-size: 150%;
     font-weight: bolder;
     text-align: center;
     color: white;
     padding: 1px;
-}
-
-
-/* =====================HOME========================== */
-
-.home-header {
-    background-color: #457b9d;
-    border-width: 5px;
-    border-bottom-style: solid;
-    border-bottom-color: #bbe5ff;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
-
-.home-header .navbar-brand{
-    text-shadow: 1px 1px 2px rgb(59, 59, 59);
-    color: white;
-    font-size: 30px;
-}
-
-.home-header p{
-    font-size: 15px;
-}
-
-.home-header .navbar .navbar-nav .dropdown-menu{
-    background-color: #78c4f7;
-}
-
-.ad {
-    height: 90px;
-    background-color: #f1faee;
-    border-width: 5px;
-    border-bottom-style: solid;
-    border-bottom-color: #cbcbcb;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
-
-.welcome-ad{
-    text-align: left;
-    margin-left: 20em;
-    margin-top: 1px;
-}
-
-.text-ad{
-    padding: 1px;
-    text-align: center;
-    margin-top: 1px;
-    margin-bottom: 3px;
-    font-size: 20px;
-    font-weight: bold;
 }
 
 .checkbox {
@@ -140,8 +99,7 @@ header {
 	justify-content: space-between;
 	padding: 5px;
 	position: relative;
-    margin-top: 5px;
-    margin-left: 2em;
+    margin-left: 7.2em;
 	height: 26px;
 	width: 50px;
 	transform: scale(1.3px);
@@ -171,12 +129,59 @@ header {
 .fa-sun {
 	color: #f39c12;
 }
+
+
+/* =====================HOME========================== */
+
+.home-header {
+    background-color: #457b9d;
+    border-bottom-style:solid;
+    border-bottom-color: #bbe5ff;
+    border-bottom-right-radius: 10px;
+}
+
+.home-header .navbar-brand{
+    text-shadow: 1px 1px 2px black;
+    color: white;
+    font-size: 30px;
+}
+
+.home-header p{
+    font-size: 15px;
+}
+
+.home-header .navbar .navbar-nav .dropdown-menu{
+    background-color: #78c4f7;
+}
+
+.active-pink-2 input.form-control[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #f48fb1;
+    box-shadow: 0 1px 0 0 #f48fb1;
+}
+
+
 /* =====================FILTERS========================== */
 .poems-filter{
     margin-top: 2em;
     margin-left: 16em;
     object-position: left;
     width: 10%;
+}
+
+/* =====================BTN ADD NEW POEM========================== */
+a.btn-new{
+    position: absolute;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 55em;
+    padding: 2px 2px 2px 2px;
+    background-color: #a8dadc;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-align: center;
+    border-color: #026e5e;
+    border-radius: 10px;
 }
 /* =====================POEMS CARDS========================== */
 *{
@@ -233,7 +238,7 @@ header {
 .card .img-card img{
     width: 300px;
     background-size: cover;
-    background-blend-mode: soft-light;
+    background-blend-mode: soft-light;  
     background-color: rgba(0, 0, 0, 0.9);
     border-radius: 10px;
     margin-left: 31em;
@@ -279,7 +284,6 @@ header {
 .card .content .btn-container a:hover {
     background: #000000;
 }
-
 /* =====================PAGINATION========================== */
 
 .paginate{

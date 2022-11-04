@@ -16,14 +16,14 @@ def view_user(id):
         poem = json.loads(poem.text)
         resp = f.get_marks_by_poem_id(id)
         marks = json.loads(resp.text)
-        print(poem)
-
         #Mostrar template
         return render_template('view_poem_poet.html', jwt = jwt, poem = poem, marks = marks)
     else:
         poem = f.get_poem(id)
         poem = json.loads(poem.text)
-        return render_template('view_poem_user.html', poem=poem)
+        resp = f.get_marks_by_poem_id(id)
+        marks = json.loads(resp.text)
+        return render_template('view_poem_user.html', poem=poem, marks = marks)
 
 
 #Ver mi lista de poemas

@@ -5,14 +5,22 @@
   {% endblock %}    
   {% block content_menu %}
     <header>
-      <style>
-        body
-        {
-          background-image: url("{{url_for('static', filename='img/arte3.jpg')}}");
-          background-repeat: no-repeat;
-          background-size: 100% 30%;
-        }
-      </style>
+    <!-- Agrego algunos estilos para que funcionen bien las imagenes con el darkmode -->
+    <style>
+      body
+      {
+        background-image: url("{{url_for('static', filename='img/arte3.jpg')}}");
+        background-repeat: no-repeat;
+        background-size: 100% 30%;
+      }
+      body.dark 
+      {
+        background-image: url("{{url_for('static', filename='img/arte3.jpg')}}");
+	      background-color: #292C35;
+
+      }
+    </style>
+    <!-- Agrego algunos estilos para que funcionen bien las imagenes con el darkmode -->
       <nav class="navbar navbar-expand-lg bg-transparent p-2" id="menu">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
@@ -41,14 +49,6 @@
               <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
                 aria-label="Search">
             </form> -->
-            <div>
-              <input type="checkbox" class="checkbox" id="chk" />
-              <label class="label" for="chk">
-                <i class="fas fa-moon"></i>
-                <i class="fas fa-sun"></i>
-                <div class="ball"></div>
-              </label>
-            </div>
           </div>
         </div>
       </nav>

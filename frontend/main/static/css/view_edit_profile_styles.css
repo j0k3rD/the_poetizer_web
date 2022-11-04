@@ -35,10 +35,6 @@ body {
     background-color: #78c4f7;
 }
 
-body.dark {
-	background: #292C35;
-}
-
 .checkbox {
 	opacity: 0;
 	position: absolute;
@@ -53,6 +49,7 @@ body.dark {
 	justify-content: space-between;
 	padding: 5px;
 	position: relative;
+    margin-left: 7.2em;
 	height: 26px;
 	width: 50px;
 	transform: scale(1.3px);
@@ -146,15 +143,17 @@ body.dark {
 /* =====================FOOTER========================== */
 
 .footer {
-    position: absolute;
     margin-top: 1.7em;
-    bottom: 0;
-    width: 100%;
     height: 25px;
     background-color: #1d3557;
     text-align: center;
     font-size: 15px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.6rem;            /* Footer height */
 }
+
 
 .footer p{
     padding: 1px;

@@ -5,6 +5,7 @@
   {% endblock %}
   {% block content_menu %}
   <header>    
+    <!-- Agrego algunos estilos para que funcionen bien las imagenes con el darkmode -->
     <style>
       body
       {
@@ -12,7 +13,13 @@
         background-repeat: no-repeat;
         background-size: 100% 90%;
       }
+      body.dark 
+      {
+        background-image: url("{{url_for('static', filename='img/arte2.jpg')}}");
+	      background-color: #292C35;
+      }
     </style>
+    <!-- Agrego algunos estilos para que funcionen bien las imagenes con el darkmode -->
     <nav class="navbar navbar-expand-lg bg-transparent p-2" id="menu">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
@@ -29,14 +36,6 @@
               <a class="nav-link active" aria-current="page" href="{{url_for('main.index_poet')}}">Home</a>
             </li>
           </ul>
-          <div>
-            <input type="checkbox" class="checkbox" id="chk" />
-            <label class="label" for="chk">
-              <i class="fas fa-moon"></i>
-              <i class="fas fa-sun"></i>
-              <div class="ball"></div>
-            </label>
-          </div>
         </div>
       </div>
     </nav>

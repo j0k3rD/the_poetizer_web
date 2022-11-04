@@ -33,12 +33,11 @@ def index_user():
     response = f.get_poems(api_url)
 
     print(response)
-    jwt = f.get_jwt()
     poems = json.loads(response.text)
     list_poems = poems["poems"]
 
     #Redireccionar a función de vista
-    return render_template('user_main_page.html', poems=list_poems, jwt=jwt)
+    return render_template('user_main_page.html', poems=list_poems, jwt=None)
 
 
 ### Desafio, sacar el login de la URL

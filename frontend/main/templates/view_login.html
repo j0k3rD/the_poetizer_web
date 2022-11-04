@@ -39,9 +39,9 @@
         </div>
 
                 <!-- Agrego un par de alertas para cuando se logea -->
-                <!-- <div id="alertSI" class="alert alert-success alert-dismissible fade show" role="alert">Login OK!</div>
+                <div id="alertSI" class="alert alert-success alert-dismissible fade show" role="alert">Login OK!</div>
                 <div id="alertNO" class="alert alert-danger" role="alert">No data entered!</div>
-        </form> -->
+        </form>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
@@ -50,15 +50,13 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!-- Activa las alertas al intentar realizar el logeo a la pagina -->
-    <!-- <script>
+    <script>
         $(document).ready(function() {
             $("#alertSI").hide();
             $("#alertNO").hide();
             $("form1").submit(function(e){
                 e.preventDefault();
-                email = $.trim($("#email").val());
-                pass = $.trim($("#password").val());
-                if (email.lenght>0 && pass.lenght>0) {
+                if (jwt) {
                     $("#alertSI").fadeTo(2000, 500).slideUp(500, function(){
                         $("#alertSI").slideUp(500);
                     });
@@ -69,5 +67,5 @@
             }
             });
         });
-    </script> -->
+    </script>
     {% endblock %}
