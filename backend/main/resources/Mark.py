@@ -76,15 +76,29 @@ class Marks(Resource):
             for key, value in filters:
                 if key == "poem_id":
                     return self.show_marks_by_poem_id(value)
+                if key == "user_id":
+                    return self.show_marks_by_user_id(value)
 
+        # page = 1
+        # perpage = 3
         marks = db.session.query(MarkModel).all()
         return jsonify([mark.to_json() for mark in marks])
+        # marks = marks.paginate(page=page, perpage=perpage)
+        # return jsonify({"marks":[mark.to_json() for mark in marks.items], 
+        #                 "total":marks.total, 
+        #                 "pages":marks.pages, 
+        #                 "page":page})
+        
 
     def show_marks_by_poem_id(self, id):
         marks = db.session.query(MarkModel)
         marks = marks.filter(MarkModel.poem.has(PoemModel.id == id)).all()
         return jsonify([mark.to_json() for mark in marks])
 
+    def show_marks_by_user_id(self, id):
+        marks = db.session.query(MarkModel)
+        marks = marks.filter(MarkModel.user.has(UserModel.id == id)).all()
+        return jsonify([mark.to_json() for mark in marks])
     
     #Insertar recurso
     @jwt_required()

@@ -74,6 +74,14 @@ def get_marks_by_poem_id(id):
     headers = get_headers()
     return requests.get(api_url, json = data, headers = headers)
 
+
+#Obtener las calificaciones de un poeta en especifico.
+def get_marks_by_poet_id(id):
+    api_url = f'{current_app.config["API_URL"]}/marks'
+
+    data = {"user_id": id}
+    headers = get_headers()
+    return requests.get(api_url, json = data, headers = headers)
 #--------------- Calificaciones -----------------#
 
 
@@ -117,4 +125,5 @@ def login(email, password):
 
 def get_json(resp):
     return json.loads(resp.text)
+
 #--------------- Utilidades -----------------#

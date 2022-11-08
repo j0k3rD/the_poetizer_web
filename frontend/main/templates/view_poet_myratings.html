@@ -6,18 +6,6 @@
     
     {% block content %}
     <!-- ===================================================== -->
-    <!-- BUTTON ADD NEW POEM -->
-    <div class="row section-1">
-      <!--Columna -->
-      <div class="col-md-12 ">
-        <div id="new-poem-btn">
-          <a type="button" class="btn btn-primary btn-new" href="{{url_for('poem.create')}}">NEW+</a>
-        </div>
-      </div><!--Fin de la columna -->
-     </div><!--Fin de la fila -->
-    <!-- ===================================================== -->
-
-    <!-- ===================================================== -->
     <!-- POEMS CARDS -->
     <div>
       <h1 class="poems-card-text">POEMS LIST</h1>
@@ -40,17 +28,17 @@
 
     <!-- ===================================================== -->
     <tbody>
-      {% for poem in poems %}
+      {% for mark in marks%}
         <!-- CARD 1 -->
         <div class="card container d-flex justify-content-center">
           <div class="img-card"></div>
           <div class="content">
             <div class="poem-title">
-              <h3>{{poem.title}}</h3>
-              <span>{{poem.user.name}}</span>
+              <h3>{{mark.commentary}}</h3>
+              <span></span>
             </div>
             <div class="poem-text">
-              <p>{{poem.body}}</p>
+              <p></p>
             </div>
             <div class="btn-container">
               <a type="button" href="{{url_for('poem.view_user', id=poem.id)}}" id="view_btn">View All</a>
@@ -60,22 +48,4 @@
       {% endfor %}
     </tbody>
     <!-- ===================================================== -->
-    <!-- ===================================================== -->
-    <!-- PAGINATION -->
-      <div class="paginate">    
-        <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-            <a class="page-link">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-        </nav>
-      </div>
-      <!-- ===================================================== -->
 {% endblock %}

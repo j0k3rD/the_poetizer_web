@@ -1,4 +1,3 @@
-from collections import UserList
 from .. import db
 
 class Mark(db.Model):
@@ -41,7 +40,6 @@ class Mark(db.Model):
 
 
     @staticmethod
-
     #Convertir JSON a objeto
     def from_json(mark_json):
         id = mark_json.get('id')

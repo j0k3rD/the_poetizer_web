@@ -40,6 +40,22 @@ def my_poems():
         return redirect(url_for('main.login'))
 
 
+#Ver lista de poemas calificados de un poeta en particular
+@poem.route('/my_ratings')
+def my_ratings():
+    jwt = f.get_jwt()
+    if jwt:
+        user = auth.load_user(jwt)
+        user_id = str(user["id"])
+        resp = f.get_marks_by_poet_id(str(user_id))
+        marks = json.loads(resp.text)
+        poem = f.get_poem(marks["poem_id"])
+        poem = json.loads(poem.text)
+        return render_template('view_poet_myratings.html', jwt=jwt, marks = marks, poem = poem)
+    else:
+        return redirect(url_for('main.login'))
+
+
 #Crear un poema nuevo
 @poem.route('/create', methods=['GET', 'POST'])
 def create():

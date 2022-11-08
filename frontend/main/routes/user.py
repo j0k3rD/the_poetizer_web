@@ -20,15 +20,17 @@ def details():
         return redirect(url_for('main.login'))
 
 
-@user.route('/edit_profile')
-def edit_credentials():
-    jwt = f.get_jwt()
-    if jwt:
-        user = auth.load_user(jwt)
-        # Guardamos la información de usuario en una variable.
-        user_info = f.get_user_info(user["id"])
-        user_info = json.loads(user_info.text)
+# @user.route('/edit_profile')
+# def edit_credentials():
+#     jwt = f.get_jwt()
+#     if jwt:
+#         if request.method == 'POST':
+#             user = auth.load_user(jwt)
+#             # Guardamos la información de usuario en una variable.
+#             user_info = f.get_user_info(user["id"])
+#             user_info = json.loads(user_info.text)
+#             nick = request.form['nick']
 
-        return render_template('edit_poet_credentials.html', jwt = jwt, user_info = user_info)
-    else:
-        return redirect(url_for('main.login'))
+#         return render_template('view_edit_profile.html', jwt = jwt, user_info = user_info)
+#     else:
+#         return redirect(url_for('main.login'))
