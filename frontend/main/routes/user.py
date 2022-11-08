@@ -21,15 +21,14 @@ def details():
 
 
 @user.route('/edit_profile')
-def edit_profile():
+def edit_credentials():
     jwt = f.get_jwt()
     if jwt:
-        #Obtener datos del usuario
-        id = f.get_id()
-        user = f.get_user_info(id)
-        user = json.loads(user.text)
-        print(user)
-        #Mostrar template
-        return render_template('view_edit_profile.html',user = user, jwt = jwt)
+        user = auth.load_user(jwt)
+        # Guardamos la información de usuario en una variable.
+        user_info = f.get_user_info(user["id"])
+        user_info = json.loads(user_info.text)
+
+        return render_template('edit_poet_credentials.html', jwt = jwt, user_info = user_info)
     else:
         return redirect(url_for('main.login'))

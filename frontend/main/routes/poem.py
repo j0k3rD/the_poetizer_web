@@ -35,8 +35,7 @@ def my_poems():
         resp = f.get_poems_by_id(user["id"])
         poems = json.loads(resp.text)
         poemsList = poems["poems"]
-
-        return render_template('view_poet_mypoems.html', jwt = jwt, poems = poemsList)
+        return render_template('view_poet_mypoems.html', jwt=jwt, poems = poemsList)
     else:
         return redirect(url_for('main.login'))
 
@@ -68,5 +67,33 @@ def create():
         else:
             #Mostrar template
             return render_template('view_add_poem.html', jwt=f.get_jwt())
+    else:
+        return redirect(url_for('main.login'))
+
+
+#Agregar un calificación a un poema
+@poem.route('/view_user/<int:id>', methods=['GET', 'POST'])
+def add_mark(id):
+    jwt = f.get_jwt()
+    if jwt:
+        if request.method == 'POST':
+            score = request.form['inlineRadioOptions']
+            commentary = request.form['commentary']
+            user_id = f.get_id()
+            data = {"user_id": user_id, "poem_id": id, "score": score, "commentary": commentary}
+            print(data)
+            headers = f.get_headers(without_token=False)
+            if score != "" and commentary != "":
+                response = requests.post(f'{current_app.config["API_URL"]}/marks', json=data, headers=headers)
+                print(response)
+                if response.ok:
+                    return redirect(url_for('poem.view_user', id=id, jwt=jwt))
+                else:
+                    return redirect(url_for('poem.add_mark', id=id))
+            else:
+                return redirect(url_for('poem.add_mark', id=id))
+        else:
+            #Mostrar template
+            return render_template('view_add_mark.html', jwt=f.get_jwt())
     else:
         return redirect(url_for('main.login'))

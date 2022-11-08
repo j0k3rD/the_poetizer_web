@@ -23,7 +23,7 @@ class User(Resource):
         #Verificar si se ha ingresado con token
         current_identity = get_jwt_identity()
         if current_identity:
-            return user.to_json_short_email()
+            return user.to_json_short_pAm()
         else:
             return user.to_json_short()
     

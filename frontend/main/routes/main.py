@@ -7,23 +7,19 @@ main = Blueprint('main', __name__, url_prefix='/')
 
 
 @main.route('/poet')
-def index_poet():
-    jwt = f.get_jwt()
-    if jwt:
-        api_url = f'{current_app.config["API_URL"]}'
-        user_id = f.get_id()
-        user = f.get_user(user_id)
-        user = json.loads(user.text)
+def index_poet(jwt = None):
+    if jwt==None:
+        jwt = f.get_jwt()
+    
+    resp = f.get_poems(jwt=jwt)
 
-        response = f.get_poems(api_url)
-
-        poems = json.loads(response.text)
-        list_poems = poems["poems"]
-
-        #Redireccionar a función de vista
-        return render_template('poet_main_page.html', user=user, jwt=jwt, poems=list_poems)
-    else:
-        return redirect(url_for('main.login'))
+    poems = f.get_json(resp)
+    poem_list = poems["poems"]
+    user = f.get_user(f.get_id())
+    user = json.loads(user.text)
+    print(user)
+    #Redireccionar a función de vista
+    return render_template('poet_main_page.html', poems = poem_list, user = user, jwt = jwt)
 
 
 @main.route('/')
@@ -37,7 +33,7 @@ def index_user():
     list_poems = poems["poems"]
 
     #Redireccionar a función de vista
-    return render_template('user_main_page.html', poems=list_poems, jwt=None)
+    return render_template('user_main_page.html', poems=list_poems)
 
 
 ### Desafio, sacar el login de la URL
@@ -49,12 +45,7 @@ def login():
         password = request.form.get("password")
         
         if email != None and password != None:
-            api_url = f'{current_app.config["API_URL"]}/auth/login'
-            #Envio de logueo
-            data = {"email": email, "password":password}
-            headers = {"Content-Type" : "application/json"}
-
-            response = requests.post(api_url, json=data, headers=headers)
+            response = f.login(email, password)
 
             if (response.ok):
                 #Obtener el token desde response.
@@ -62,16 +53,7 @@ def login():
                 token = response["access_token"]
                 user_id = str(response["id"])
 
-
-                api_url = f'{current_app.config["API_URL"]}'
-                response = f.get_poems(api_url)
-
-                poems = json.loads(response.text)
-                list_poems = poems["poems"]
-                user = f.get_user(user_id)
-                user = json.loads(user.text)
-
-                resp = make_response(render_template("poet_main_page.html", poems=list_poems, user=user, jwt=token))
+                resp = make_response(index_poet(jwt=token))
                 resp.set_cookie("access_token", token)
                 resp.set_cookie("id", user_id)
                 
@@ -80,6 +62,7 @@ def login():
         return render_template("view_login.html", error="Usuario o contraseña incorrectos")
     else:
         return render_template("view_login.html")
+
 
 #Se deslogea el usuario
 @main.route("/logout")

@@ -62,6 +62,7 @@ class User(db.Model):
         user_json = {
             'id': self.id,
             'name': str(self.name),
+            'email': str(self.email),
             'num_marks': len(self.marks),
             'num_poems': len(self.poems),
         }
@@ -72,7 +73,6 @@ class User(db.Model):
         'id': self.id,
         'name': str(self.name),
         'email': str(self.email),
-        
         }
         return user_json
     # def to_json_short_marks(self):

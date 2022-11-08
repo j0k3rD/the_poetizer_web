@@ -99,8 +99,8 @@ class Poems(Resource):
                 if key == "title":
                     poems = poems.filter(PoemModel.title.like("%" + value + "%"))
                 # Traer poemas por id de usuario.
-                if key == "userID":
-                    poems = poems.filter(PoemModel.userID == value)
+                if key == "user_id":
+                    poems = poems.filter(PoemModel.user_id == value)
                 # Traer poemas mayor al tiempo ingresado.
                 if key == "date_time[gte]":
                     poems = poems.filter(PoemModel.created_at >= datetime.strptime(value, "%d/%m/%Y"))
@@ -150,12 +150,14 @@ class Poems(Resource):
                 # Cantidad de elementos que queres que te traiga por pagina.
                 if key == "perpage":
                     perpage = int(value)
+
                     
         poems = poems.paginate(page, perpage, True, 10)
         return jsonify({"poems":[poem.to_json() for poem in poems.items],
                         "total": poems.total, 
                         "pages": poems.pages, 
                         "page": page})
+
 
     #Insertar recurso
     @jwt_required()

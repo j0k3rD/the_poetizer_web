@@ -22,11 +22,14 @@ def get_poem(id):
 
 
 #Obtengo todos los poemas de la base de datos.
-def get_poems(api_url, page=1, perpage=3):
+def get_poems(jwt = None, page = 1, perpage = 3):
     api_url = f'{current_app.config["API_URL"]}/poems'
     data = {"page": page, "perpage": perpage}
-    headers = get_headers()
-    return requests.get(api_url, json=data, headers=headers)
+    if jwt:
+        headers = get_headers(jwt = jwt)
+    else:
+        headers = get_headers(without_token = True)
+    return requests.get(api_url, json = data, headers = headers)
 
 #--------------- Poems -----------------#
 
@@ -56,8 +59,8 @@ def get_username(user_id):
     api_url = f'{current_app.config["API_URL"]}/user/{user_id}'
     response = requests.get(api_url, headers=headers)
     user = json.loads(response.text)
-    return user["name"]
-
+    return user["name"] 
+    
 #--------------- User -----------------#
 
 
@@ -82,10 +85,11 @@ def json_load(response):
 
 
 #Obtengo el email del usuario
-def get_headers(without_token = False):
-    jwt = get_jwt()
+def get_headers(without_token = False, jwt = None):
+    if jwt == None and without_token == False:
+        return {"Content-Type" : "application/json", "Authorization" : f"Bearer {get_jwt()}"}
     if jwt and without_token == False:
-        return {"Content-Type" : "application/json", "Authorization": f"Bearer {jwt}"}
+        return {"Content-Type" : "application/json", "Authorization" : f"Bearer {jwt}"}
     else:
         return {"Content-Type" : "application/json"}
 
@@ -99,9 +103,18 @@ def get_jwt():
 def get_id():
     return request.cookies.get("id")
 
+#Compruebo si el usuario esta logueado.
+def login(email, password):
+    api_url = f'{current_app.config["API_URL"]}/auth/login'
 
-#Hacer redirect
+    # Envio de logueo.
+    data = {"email": email, "password": password}
+    headers = get_headers(without_token = True)
 
-def redirect_to(url):
-    return redirect(url_for(url))
+    # Generamos la respuesta, mandando endpoint, data diccionario, y el headers que es el formato como aplication json.
+    return requests.post(api_url, json = data, headers = headers)
+
+
+def get_json(resp):
+    return json.loads(resp.text)
 #--------------- Utilidades -----------------#

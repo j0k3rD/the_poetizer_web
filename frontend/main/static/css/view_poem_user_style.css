@@ -331,8 +331,15 @@ left: 50%;
 transform: translate(-50%, -50%);
 }
 
-.btn-back{
-    position: relative;
+.btn a{
+    box-shadow: 0 1px 1px #000000;
+    color: #000000;
+    background-color: #78c4f7;
+    border-color: #ffffff;
+    font-weight: bolder;
+    font-size: 15px;
+    padding: auto;
+    position: absolute;
 }
 
 .rating {

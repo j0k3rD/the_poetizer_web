@@ -203,7 +203,7 @@ a.btn-new{
     height: 250px;
     display: flex;
     overflow: hidden;
-    background-color: #fff;
+    background-color: rgb(134, 134, 134);
     box-shadow: 0 5px 10px #000000;
     border-radius: 10px;
     transition: 0.1s;
@@ -238,7 +238,7 @@ a.btn-new{
 }
 
 .card .content .poem-title h3 {
-    color: #026e5e;
+    color: #76f4e1;
     text-align: left;
     font-size: 20px;
 }

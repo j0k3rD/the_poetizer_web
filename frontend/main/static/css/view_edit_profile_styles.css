@@ -12,6 +12,10 @@ body {
 
 }
 
+body.dark {
+    background-color: #292C35;
+}
+
 /* =====================HOME========================== */
 
 .home-header {
@@ -49,7 +53,7 @@ body {
 	justify-content: space-between;
 	padding: 5px;
 	position: relative;
-    margin-left: 7.2em;
+    margin-left: 10.6em;
 	height: 26px;
 	width: 50px;
 	transform: scale(1.3px);
@@ -89,21 +93,23 @@ body {
 
 .principal-container {
     display: block;
-    background-color: #fff;
     box-shadow: 0 5px 8px #000000;
     justify-content: center;
     margin-top: 1em;
-    background-color:hsl(0, 0%, 100%);
-    min-height:480px;
+    background-color: rgb(134, 134, 134);
+    min-height:500px;
     border-radius: 20px;
 }
 
 .card {
+    background-color: rgb(201, 201, 201);
+    display: inline-block;
     text-align: center;
-    margin: auto;
+    margin-top: 20px;
+    margin-left: 260px;
     width: 425px;
-    height: 440px;
-    border-radius: 10px;
+    height: 450px;
+    border-radius: 10px
 }
 
 .text {
@@ -134,9 +140,17 @@ body {
     margin-bottom: 10px;
 }
 
-.btn-back{
-    margin-left: 750px;
-    margin-bottom: 10px;
+.btn-back a{
+    margin-top: 2em;
+    margin-left: 50em;
+    margin-bottom: 1em;
+    box-shadow: 0 1px 1px #000000;
+    color: #000000;
+    background-color: #78c4f7;
+    border-color: #ffffff;
+    font-weight: bolder;
+    font-size: 15px;
+    padding: auto;
 }
 
 

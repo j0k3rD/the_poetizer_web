@@ -44,34 +44,34 @@
                                 {% endfor %}
                                 </tbody>
                             </div>
-                            <form action="">
+                            <form method="POST" id="form4" action='/poem/view_user/{{poem.id}}'>
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">ADD COMMENT</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea name="commentary" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                 </div>
-                            </form>
-                            <form class="d-flex justify-content-center" role="go-home" id="btn-sendcomment">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                    <label class="form-check-label" for="inlineRadio1">1</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                    <label class="form-check-label" for="inlineRadio2">2</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                                    <label class="form-check-label" for="inlineRadio3">3</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
-                                    <label class="form-check-label" for="inlineRadio4">4</label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option5">
-                                    <label class="form-check-label" for="inlineRadio5">5</label>
+                                <div class="d-flex justify-content-center" role="go-home" id="btn-sendcomment">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1">
+                                        <label class="form-check-label" for="inlineRadio1">1</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">2</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3">
+                                        <label class="form-check-label" for="inlineRadio3">3</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="4">
+                                        <label class="form-check-label" for="inlineRadio4">4</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5">
+                                        <label class="form-check-label" for="inlineRadio5">5</label>
+                                    </div>
+                                    <button class="btn btn-primary btn-primary-outline-success" type="submit">COMMENT</button>
                                 </div>
-                                <button class="btn btn-primary btn-primary-outline-success">COMMENT</button>
                             </form>
                         </div>
                         <div class="ratings container justify-content-center">
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                           <div class="btn-back">
-                              <a type="button" class="btn btn-outline-secondary" href="{{url_for('main.index_poet')}}">Back Home</a>
+                              <a type="button" class="btn" href="{{url_for('main.index_poet')}}">Back Home</a>
                           </div>
                         </div>
                         <div class="add-com container justify-content-center">
