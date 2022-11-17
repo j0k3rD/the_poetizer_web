@@ -1,7 +1,7 @@
 import os
 from flask import Flask
 from dotenv import load_dotenv
-from flask_login import LoginManager, login_required
+from flask_login import LoginManager
 
 login_manager = LoginManager()
 
@@ -14,7 +14,8 @@ def create_app():
 
     #Cargar configuracion
     app.config['API_URL'] = os.getenv('API_URL')
-    login_manager.init_app(app)
+    #Secret Key
+    app.secret_key = os.getenv('SECRET_KEY')
 
     #Importar Blueprints
     from main.routes import main, poem, user

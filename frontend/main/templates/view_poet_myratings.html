@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
   {% block menu %}
   {{ super () }}
-  <link rel="stylesheet" href="{{url_for('static', filename='css/view_poet_mypoems.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/view_myratings.css')}}">
   {% endblock %}
     
     {% block content %}
@@ -28,24 +28,52 @@
 
     <!-- ===================================================== -->
     <tbody>
-      {% for mark in marks%}
+      {% for mark in marks %}
         <!-- CARD 1 -->
-        <div class="card container d-flex justify-content-center">
-          <div class="img-card"></div>
-          <div class="content">
-            <div class="poem-title">
-              <h3>{{mark.commentary}}</h3>
-              <span></span>
-            </div>
-            <div class="poem-text">
-              <p></p>
-            </div>
-            <div class="btn-container">
-              <a type="button" href="{{url_for('poem.view_user', id=poem.id)}}" id="view_btn">View All</a>
-            </div>
+        <div class="row">
+          <!-- Espacio en blanco -->
+          <div class="col-lg-2 col-md-1"></div>
+          <div class="col-lg-8 col-md-10 principal-container">
+              <div class="row">
+                  <!--POEM -->
+                  <div class="col-md-6 poem-container">
+                    <div class="title">
+                      <h3>POEM</h3>
+                    </div>
+                      <div class="card">
+                          <div class="poem-title">
+                              <h3>{{mark.poem.title}}</h3>
+                              <span>Poet: {{mark.user.name}}</span>
+                              <span>Score: {{mark.score}}</span>
+                          </div>
+                          <div class="poem-text">
+                              <p>{{mark.poem.body}}</p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-6 third-container">
+                      <div class="vl"></div>
+                  </div>
+                  <!-- COMMENT -->
+                  <div class="col-md-6 second-container">
+                      <div class="comment justify-content-center">
+                          <div class="title">
+                              <h3>COMMENT</h3>
+                          </div>
+                          <div class="comments-container">
+                              <tbody>
+                              <div class="comment-text">
+                                  <h8>{{mark.user.name}}</h8>
+                                  <p>{{mark.commentary}}</p>
+                              </div>
+                              </tbody>
+                          </div>
+                      </div>
+                  </div>
+              </div>
           </div>
-        </div>
+          <div class="col-lg-2 col-md-1"></div>
+      </div>
       {% endfor %}
-    </tbody>
     <!-- ===================================================== -->
 {% endblock %}

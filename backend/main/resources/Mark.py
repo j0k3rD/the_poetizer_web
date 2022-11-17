@@ -130,6 +130,3 @@ class Marks(Resource):
                 return 'Invalid Format', 409
         else:
             return 'You have no permission to post a Mark. You have to be a POET!', 403
-
-
-

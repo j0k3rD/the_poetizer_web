@@ -180,7 +180,7 @@ body.dark {
     box-shadow: 0 5px 8px #000000;
     justify-content: center;
     margin-top: 1em;
-    background-color:hsl(0, 0%, 100%);
+    background-color: rgb(134, 134, 134);
     min-height:480px;
 }
 
@@ -206,12 +206,13 @@ body.dark {
     display: flex;
     justify-content: center;
     margin: 1em 1em 1em 1em;
-    background-color:#ffffff;
+    background-color: rgb(134, 134, 134);
     height: 450px;
     width: 10px;
 }
 
 .card {
+    background-color: rgb(217, 217, 217);
     display:flex;
     width: 425px;
     height: 440px;
@@ -285,7 +286,7 @@ body.dark {
 }
 
 .ratings {
-    background-color: #ffffff;
+    background-color: rgb(134, 134, 134);
     width: 280px;
     height: 95px;
     border-radius: 10px;
@@ -331,15 +332,13 @@ left: 50%;
 transform: translate(-50%, -50%);
 }
 
-.btn a{
+.btn-back a{
     box-shadow: 0 1px 1px #000000;
     color: #000000;
     background-color: #78c4f7;
     border-color: #ffffff;
     font-weight: bolder;
     font-size: 15px;
-    padding: auto;
-    position: absolute;
 }
 
 .rating {

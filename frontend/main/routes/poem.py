@@ -21,9 +21,10 @@ def view_user(id):
     else:
         poem = f.get_poem(id)
         poem = json.loads(poem.text)
-        resp = f.get_marks_by_poem_id(id)
-        marks = json.loads(resp.text)
-        return render_template('view_poem_user.html', poem=poem, marks = marks)
+        mark = f.get_marks_by_poem_id(id)
+        marks = json.loads(mark.text)
+        #Mostrar template
+        return render_template('view_poem_user.html', poem = poem, marks = marks, jwt=None)
 
 
 #Ver mi lista de poemas
@@ -47,11 +48,9 @@ def my_ratings():
     if jwt:
         user = auth.load_user(jwt)
         user_id = str(user["id"])
-        resp = f.get_marks_by_poet_id(str(user_id))
+        resp = f.get_marks_by_poet_id(user_id)
         marks = json.loads(resp.text)
-        poem = f.get_poem(marks["poem_id"])
-        poem = json.loads(poem.text)
-        return render_template('view_poet_myratings.html', jwt=jwt, marks = marks, poem = poem)
+        return render_template('view_poet_myratings.html', jwt=jwt, marks = marks)
     else:
         return redirect(url_for('main.login'))
 

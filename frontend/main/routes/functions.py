@@ -15,9 +15,13 @@ def get_poems_by_id(id, page = 1, perpage = 3):
 
 
 #Obtengo un poema en especifico.
-def get_poem(id):
+def get_poem(id, jwt = None):
     api_url = f'{current_app.config["API_URL"]}/poem/{id}'
-    headers = get_headers()
+    if jwt:
+        headers = get_headers(jwt=jwt)
+    else:
+        headers = get_headers(without_token=True)
+        
     return requests.get(api_url, headers=headers)
 
 
@@ -30,6 +34,21 @@ def get_poems(jwt = None, page = 1, perpage = 3):
     else:
         headers = get_headers(without_token = True)
     return requests.get(api_url, json = data, headers = headers)
+
+
+#Borrar un poema en especifico.
+def delete_poem(id):
+    api_url = f'{current_app.config["API_URL"]}/poem/{id}'
+    headers = get_headers()
+    return requests.delete(api_url, headers=headers)
+
+
+#Editar un poema en especifico.
+def edit_poem(id, title, content):
+    api_url = f'{current_app.config["API_URL"]}/poem/{id}'
+    data = {"title": title, "content": content}
+    headers = get_headers()
+    return requests.put(api_url, json = data, headers = headers)
 
 #--------------- Poems -----------------#
 
@@ -69,7 +88,6 @@ def get_username(user_id):
 #Obtener las calificaciones de un poema en especifico.
 def get_marks_by_poem_id(id):
     api_url = f'{current_app.config["API_URL"]}/marks'
-
     data = {"poem_id": id}
     headers = get_headers()
     return requests.get(api_url, json = data, headers = headers)
@@ -78,7 +96,6 @@ def get_marks_by_poem_id(id):
 #Obtener las calificaciones de un poeta en especifico.
 def get_marks_by_poet_id(id):
     api_url = f'{current_app.config["API_URL"]}/marks'
-
     data = {"user_id": id}
     headers = get_headers()
     return requests.get(api_url, json = data, headers = headers)
@@ -96,7 +113,7 @@ def json_load(response):
 def get_headers(without_token = False, jwt = None):
     if jwt == None and without_token == False:
         return {"Content-Type" : "application/json", "Authorization" : f"Bearer {get_jwt()}"}
-    if jwt and without_token == False:
+    elif jwt and without_token == False:
         return {"Content-Type" : "application/json", "Authorization" : f"Bearer {jwt}"}
     else:
         return {"Content-Type" : "application/json"}

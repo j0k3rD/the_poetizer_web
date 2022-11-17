@@ -59,6 +59,7 @@ class Poem(db.Model):
         poem_json = {
             'id': self.id,
             'title': self.title,
+            'body': str(self.body),
             'created_at': str(self.created_at.strftime("%d-%m-%Y")),
             'user': self.user.to_json_short(),
             'mark_avg': self.avg_score(),

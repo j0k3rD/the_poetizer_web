@@ -4,6 +4,15 @@
   <link rel="stylesheet" href="{{url_for('static', filename='css/poet_main_page_styles.css')}}">
   {% endblock %}
   {% block content_menu %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          {% for message in messages %}
+              <div class="alert alert-success" role="alert">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      {% endif %}
+    {% endwith %}
   <header>    
     <!-- Agrego algunos estilos para que funcionen bien las imagenes con el darkmode -->
     <style>
@@ -120,14 +129,16 @@
       <div class="paginate">    
         <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-            <a class="page-link">Previous</a>
+            <li class="page-item {% if not poems.has_prev %}
+            disabled {% endif %}">
+              <a class="page-link">Previous</a>
             </li>
             <li class="page-item"><a class="page-link" href="#">1</a></li>
             <li class="page-item"><a class="page-link" href="#">2</a></li>
             <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+            <li class="page-item page-item {% if not poems.has_next %}
+            disabled {% endif %}">
+              <a class="page-link" href="#">Next</a>
             </li>
         </ul>
         </nav>
