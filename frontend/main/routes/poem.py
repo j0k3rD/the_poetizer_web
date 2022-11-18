@@ -8,7 +8,7 @@ poem = Blueprint('poem', __name__, url_prefix='/poem')
 
 
 #Ver un poema determinado
-@poem.route('/view_user/<int:id>')
+@poem.route('/view_user/<int:id>', methods=['GET', 'POST'])
 def view_user(id):
     if request.cookies.get('access_token'):
         jwt = f.get_jwt()
@@ -16,8 +16,36 @@ def view_user(id):
         user_id = int(f.get_id())
         poem = f.get_poem(id)
         poem = json.loads(poem.text)
-        resp = f.get_marks_by_poem_id(id)
-        marks = json.loads(resp.text)
+        mark = f.get_marks_by_poem_id(id)
+        marks = json.loads(mark.text)
+
+        #--- Agregar una Calificacion ---#
+        if request.method == 'POST':
+            if request.form['comment_method'] == 'COMMENT':                 
+                score = request.form['inlineRadioOptions']
+                commentary = request.form['commentary']
+                user_id = f.get_id()
+                if score != "" and commentary != "":
+                    response = f.add_mark(user_id=user_id, poem_id=id, score=score, commentary=commentary)
+                    if response.ok:
+                        flash('Mark added successfully')
+                        return make_response(redirect(url_for('poem.view_user', id=id)))
+                    else:
+                        flash('Error adding mark')
+                        return render_template('view_poem_user.html', poem = poem, marks = marks, jwt=f.get_jwt())
+                else:
+                    return redirect(url_for('poem.my_poems'))
+        
+        #--- Eliminar un Poema ---#
+            if request.form['delete_method'] == 'DELETE':
+                response = f.delete_poem(id, jwt=jwt)
+                if response.ok:
+                    flash('Poem deleted successfully')
+                    return redirect(url_for('poem.my_poems'))
+                else:
+                    flash('Error deleting poem')
+                    return redirect(url_for('poem.my_poems'))  
+
         #Mostrar template
         return render_template('view_poem_poet.html', jwt = jwt, poem = poem, marks = marks, user_id = user_id)
     else:
@@ -88,23 +116,6 @@ def create():
         return redirect(url_for('main.login'))
 
 
-#Borrar un poema
-@poem.route('/view_user/<int:id>', methods=['GET', 'POST', 'DELETE'])
-def delete_poem(id):
-    jwt = f.get_jwt()
-    if jwt:
-        if request.method == 'POST' and request.form['delete_method'] == 'DELETE':
-            response = f.delete_poem(id, jwt=jwt)
-            if response.ok:
-                flash('Poem deleted successfully')
-                return redirect(url_for('poem.my_poems'))
-            else:
-                flash('Error deleting poem')
-                return redirect(url_for('poem.my_poems'))    
-    else:
-        return redirect(url_for('main.login'))
-
-
 #Editar un poema
 @poem.route('/edit_poem/<int:id>', methods=['GET', 'POST'])
 def edit_poem(id):
@@ -133,33 +144,3 @@ def edit_poem(id):
             return render_template('view_edit_poem.html', jwt = jwt, poem = poem)
     else:
         return redirect(url_for('main.login'))
-
-
-# Agregar un calificación a un poema
-@poem.route('/view_user/<int:id>', methods=['GET', 'POST'])
-def add_mark(id):
-    jwt = f.get_jwt()
-    if jwt:
-        if request.method == 'POST' and request.form['comment_method'] == 'COMMENT':                 
-            score = request.form['inlineRadioOptions']
-            commentary = request.form['commentary']
-            user_id = f.get_id()
-            if score != "" and commentary != "":
-                response = f.add_mark(user_id=user_id, poem_id=id, score=score, commentary=commentary)
-                if response.ok:
-                    flash('Mark added successfully')
-                    return make_response(redirect(url_for('poem.view_user', id=id)))
-                else:
-                    flash('Error adding mark')
-                    poem = f.get_poem(id)
-                    poem = json.loads(poem.text)
-                    mark = f.get_marks_by_poem_id(id)
-                    marks = json.loads(mark.text)
-                    return render_template('view_poem_user.html', poem = poem, marks = marks, jwt=f.get_jwt())
-            else:
-                return redirect(url_for('poem.my_poems'))
-        else:
-            return redirect(url_for('poem.my_poems'))
-    else:
-        return redirect(url_for('main.login'))
-

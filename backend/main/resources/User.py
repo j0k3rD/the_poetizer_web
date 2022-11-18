@@ -111,7 +111,9 @@ class Users(Resource):
 
 
     #Insertar recurso
-    @admin_required
+    # @admin_required
+    #Es para que todos lo puedan hacer
+    @jwt_required(optional=True)
     def post(self):
         user = UserModel.from_json(request.get_json())
         # db.session.query(UserModel).get_or_404(user.user_id)

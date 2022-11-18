@@ -67,8 +67,9 @@ def register():
         username = request.form.get("username")
         email = request.form.get("email")
         password = request.form.get("password")
-        if email != "" and password != "":
-            response = f.register(email, password)
+        rol = 'poeta'
+        if username != "" and email != "" and password != "":
+            response = f.register(username, email, password, rol)
             if response.ok:
                 flash("Registered user successfully!", "success")
                 return redirect(url_for("main.login"))

@@ -81,7 +81,8 @@
                                         <label class="form-check-label" for="inlineRadio5">5</label>
                                     </div>
                                     <input type="hidden" name="comment_method" id="comment_call" value="COMMENT">
-                                    <button class="btn btn-primary btn-primary-outline-success" type="submit" href="{{url_for('poem.add_mark', id=poem.id)}}">COMMENT</button>
+                                    <input type="hidden" name="delete_method" id="comment_call" value="">
+                                    <button class="btn btn-primary btn-primary-outline-success" type="submit" href="{{url_for('poem.view_user', id=poem.id)}}">COMMENT</button>
                                 </div>
                             </form>
                         </div>
@@ -102,7 +103,8 @@
                             <div class="btn-delete">
                                 <form method="POST" id='form_delete' action="{{url_for('poem.view_user', id=poem.id)}}">
                                     <input type="hidden" name="delete_method" id="delete_call" value="DELETE">
-                                    <button type="submit" class="btn" href="{{url_for('poem.delete_poem', id=poem.id)}}">Delete Poem</button>
+                                    <input type="hidden" name="comment_method" id="comment_call" value="">
+                                    <button type="submit" class="btn" href="{{url_for('poem.view_user', id=poem.id)}}">Delete Poem</button>
                                 </form>
                             </div>
                             <div class="btn-edit">

@@ -159,16 +159,15 @@ def login(email, password):
 
 
 #Compruebo si el usuario esta registrado.
-def register(name, email, password):
+def register(name, email, password, rol):
     api_url = f'{current_app.config["API_URL"]}/auth/register'
 
     # Envio de logueo.
-    data = {"name": name, "email": email, "password": password}
+    data = {"name": name, "email": email, "passw": password, "rol": rol}
     headers = get_headers(without_token = True)
 
     # Generamos la respuesta, mandando endpoint, data diccionario, y el headers que es el formato como aplication json.
     return requests.post(api_url, json = data, headers = headers)
-
 
 
 def get_json(resp):

@@ -37,10 +37,10 @@ def register():
     user = UserModel.from_json(request.get_json())
     #Verificar si el mail y el nombre ya existen en la db
     exists_email = db.session.query(UserModel).filter(UserModel.email == user.email).scalar() is not None
-    exists_username = db.session.query(UserModel).filter(UserModel.username == user.username).scalar() is not None
+    exists_name = db.session.query(UserModel).filter(UserModel.name == user.name).scalar() is not None
     if exists_email:
         return 'Email already exists', 400
-    elif exists_username:
+    elif exists_name:
         return 'Username already exists', 400
     else:
         try:
@@ -51,4 +51,3 @@ def register():
             db.session.rollback()
             return str(error), 409
         return user.to_json() , 201
-
