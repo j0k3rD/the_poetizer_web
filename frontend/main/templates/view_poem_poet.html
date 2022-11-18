@@ -54,7 +54,7 @@
                                 {% endfor %}
                                 </tbody>
                             </div>
-                            <form method="POST" id="form_commentary" action='/poem/view_user/{{poem.id}}'>
+                            <form method="POST" id="form_commentary" action="{{url_for('poem.view_user', id=poem.id)}}">
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">ADD COMMENT</label>
                                     <textarea name="commentary" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -80,7 +80,8 @@
                                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5">
                                         <label class="form-check-label" for="inlineRadio5">5</label>
                                     </div>
-                                    <button class="btn btn-primary btn-primary-outline-success" type="submit">COMMENT</button>
+                                    <input type="hidden" name="comment_method" id="comment_call" value="COMMENT">
+                                    <button class="btn btn-primary btn-primary-outline-success" type="submit" href="{{url_for('poem.add_mark', id=poem.id)}}">COMMENT</button>
                                 </div>
                             </form>
                         </div>

@@ -93,20 +93,14 @@ def create():
 def delete_poem(id):
     jwt = f.get_jwt()
     if jwt:
-        if request.method == 'POST':
-            method = request.form['delete_method']
-            if method == 'DELETE':
-                response = f.delete_poem(id, jwt=jwt)
-                if response.ok:
-                    flash('Poem deleted successfully')
-                    return redirect(url_for('poem.my_poems'))
-                else:
-                    flash('Error deleting poem')
-                    return redirect(url_for('poem.my_poems'))    
-            else:
+        if request.method == 'POST' and request.form['delete_method'] == 'DELETE':
+            response = f.delete_poem(id, jwt=jwt)
+            if response.ok:
+                flash('Poem deleted successfully')
                 return redirect(url_for('poem.my_poems'))
-        else:
-            return redirect(url_for('poem.my_poems'))
+            else:
+                flash('Error deleting poem')
+                return redirect(url_for('poem.my_poems'))    
     else:
         return redirect(url_for('main.login'))
 
@@ -146,26 +140,43 @@ def edit_poem(id):
 def add_mark(id):
     jwt = f.get_jwt()
     if jwt:
-        if request.method == 'POST':
+        if request.method == 'POST' and request.form['comment_method'] == 'COMMENT':                 
             score = request.form['inlineRadioOptions']
             commentary = request.form['commentary']
             user_id = f.get_id()
-            data = {"user_id": user_id, "poem_id": id, "score": score, "commentary": commentary}
-            print(data)
-            headers = f.get_headers(without_token=False)
             if score != "" and commentary != "":
-                response = requests.post(f'{current_app.config["API_URL"]}/marks', json=data, headers=headers)
-                print(response)
+                response = f.add_mark(user_id=user_id, poem_id=id, score=score, commentary=commentary)
                 if response.ok:
                     flash('Mark added successfully')
-                    return redirect(url_for('poem.view_user', id=id, jwt=jwt))
+                    return make_response(redirect(url_for('poem.view_user', id=id)))
                 else:
                     flash('Error adding mark')
-                    return redirect(url_for('poem.add_mark', id=id))
+                    poem = f.get_poem(id)
+                    poem = json.loads(poem.text)
+                    mark = f.get_marks_by_poem_id(id)
+                    marks = json.loads(mark.text)
+                    return render_template('view_poem_user.html', poem = poem, marks = marks, jwt=f.get_jwt())
             else:
-                return redirect(url_for('poem.add_mark', id=id))
+                return redirect(url_for('poem.my_poems'))
         else:
-            #Mostrar template
-            return render_template('view_add_mark.html', jwt=f.get_jwt())
+            return redirect(url_for('poem.my_poems'))
     else:
         return redirect(url_for('main.login'))
+
+
+
+        #             response = requests.post(f'{current_app.config["API_URL"]}/marks', json=data, headers=headers)
+        #             print(response)
+        #             if response.ok:
+        #                 flash('Mark added successfully')
+        #                 return redirect(url_for('poem.view_user', id=id, jwt=jwt))
+        #             else:
+        #                 flash('Error adding mark')
+        #                 return redirect(url_for('poem.add_mark', id=id))
+        #         else:
+        #             return redirect(url_for('poem.add_mark', id=id))
+        #     else:
+        #         #Mostrar template
+        #         return render_template('view_add_mark.html', jwt=f.get_jwt())
+        # else:
+        #     return redirect(url_for('main.login'))
