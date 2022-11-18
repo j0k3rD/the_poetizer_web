@@ -130,7 +130,11 @@ header {
     font-weight: bold;
 }
 
-#btn-login a{
+#btn-login {
+    text-align: center;
+    margin-left: 1em;
+}
+#btn-register{
     color: #000000;
     background-color: #73c6b6;
     border-color: #ffffff;
@@ -200,57 +204,62 @@ header {
 }
 
 .principal-container {
-    text-align: center;
-    margin: auto;
+    /* text-align: center; */
+    margin-left: 14.4em;
     margin-top: 2em;
     padding: 10px;
     background-color: #bbe5ff;
     box-shadow: 0 5px 8px #000000;
     background-color: rgb(134, 134, 134);
-    height: 310px;
+    height: 350 px;
     width: 500px;
     border-radius: 20px;
 }
 
-h1{
-    font-size: 18px;
-    font-weight: bold;
-}
-
-h2{
-    font-size: 18px;
-    font-weight: bold;
-}
-
-h3{
-    font-size: 15px;
-    background-color: #afafaf;
-    border-radius: 10px;
-    padding: 2px;
-    width: 50%;
-    margin-left: 100px;
-}
-
-.text {
-    margin-top: 10px;
-    font-size: 20px;
-}
-
-.form-control {
-    background-color: #afafaf;
-    color: #000000;
-    margin-bottom: 10px;
-    margin-top: 5px;
-    justify-content: center;
+.name_form {
     text-align: center;
-    border-radius: 20px;
 }
 
-.btn_sign_in {
+.name_label {
+    font-size: 18px;
+}
+
+.email_form {
+    text-align: center;
+}
+
+.email_label {
+    font-size: 18px;
+}
+
+.password_form {
+    text-align: center;
+}
+
+.password_label {
+    font-size: 18px;
+}
+
+#exampleCheck1 {
+    margin-right: 20.5em;
+    margin-top: 1.3em;
+}
+
+.form-check-label {
+    display: flex;
     margin-top: 1em;
-    margin-left: 13.3em;
-    width: 20%;
-    height: 3em;
+    margin-left: 1em;
+}
+
+.input_check {
+    margin-right: 100px;
+}
+
+.btn_submit {
+    margin-top: 0.5em;
+    margin-left: 11.7em;
+    width: 30%;
+    height: 40px;
     box-shadow: 0 1px 1px #000000;
     color: #000000;
     background-color: #78c4f7;
@@ -259,6 +268,7 @@ h3{
     font-weight: bolder;
     font-size: 15px;
 }
+
 
 .container-alert {
     text-align: center;
@@ -271,21 +281,6 @@ h3{
     padding: 2px;
     width: 15%;
     margin-left: 40em;
-}
-
-#exampleCheck1 {
-    margin-right: 20em;
-    margin-top: 0.4em;
-}
-
-.form-check-label {
-    display: flex;
-    margin-top: 1em;
-    margin-left: 1em;
-}
-
-.input_check {
-    margin-right: 100px;
 }
 /* =====================FOOTER========================== */
 

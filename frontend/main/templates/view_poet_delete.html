@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+  {% block menu %}
+  {{ super () }}
+  <link rel="stylesheet" href="{{url_for('static', filename='css/view_poet_delete.css')}}">
+  {% endblock %}
+
+  {% block content_menu %}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          {% for message in messages %}
+              <div class="alert alert-success" role="alert">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% endblock %}
+
+    {% block content %}
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Are you sure you want to DELETE your account?</h5>
+              <p class="card-text">If you delete your account, you will not be able to recover it. Your poems and grades will be lost.</p>
+              <a href="{{url_for('user.delete', poet_id=user_id)}}" class="btn btn-danger">Delete account</a>
+              <a href="{{url_for('main.index_poet')}}" class="btn btn-primary">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endblock %}

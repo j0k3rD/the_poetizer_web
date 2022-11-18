@@ -163,20 +163,3 @@ def add_mark(id):
     else:
         return redirect(url_for('main.login'))
 
-
-
-        #             response = requests.post(f'{current_app.config["API_URL"]}/marks', json=data, headers=headers)
-        #             print(response)
-        #             if response.ok:
-        #                 flash('Mark added successfully')
-        #                 return redirect(url_for('poem.view_user', id=id, jwt=jwt))
-        #             else:
-        #                 flash('Error adding mark')
-        #                 return redirect(url_for('poem.add_mark', id=id))
-        #         else:
-        #             return redirect(url_for('poem.add_mark', id=id))
-        #     else:
-        #         #Mostrar template
-        #         return render_template('view_add_mark.html', jwt=f.get_jwt())
-        # else:
-        #     return redirect(url_for('main.login'))

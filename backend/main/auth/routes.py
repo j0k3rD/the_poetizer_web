@@ -35,10 +35,13 @@ def login():
 def register():
     #Obtener user
     user = UserModel.from_json(request.get_json())
-    #Verificar si el mail ya existe en la db
-    exists = db.session.query(UserModel).filter(UserModel.email == user.email).scalar() is not None
-    if exists:
-        return 'Duplicated Mail!', 409
+    #Verificar si el mail y el nombre ya existen en la db
+    exists_email = db.session.query(UserModel).filter(UserModel.email == user.email).scalar() is not None
+    exists_username = db.session.query(UserModel).filter(UserModel.username == user.username).scalar() is not None
+    if exists_email:
+        return 'Email already exists', 400
+    elif exists_username:
+        return 'Username already exists', 400
     else:
         try:
             #Agregar user a DB

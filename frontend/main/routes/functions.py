@@ -82,6 +82,12 @@ def get_username(user_id):
     response = requests.get(api_url, headers=headers)
     user = json.loads(response.text)
     return user["name"] 
+
+#Borrar cuenta de usuario.
+def delete_user(id):
+    api_url = f'{current_app.config["API_URL"]}/user/{id}'
+    headers = get_headers(without_token=False)
+    return requests.delete(api_url, headers=headers)
     
 #--------------- User -----------------#
 
@@ -150,6 +156,19 @@ def login(email, password):
 
     # Generamos la respuesta, mandando endpoint, data diccionario, y el headers que es el formato como aplication json.
     return requests.post(api_url, json = data, headers = headers)
+
+
+#Compruebo si el usuario esta registrado.
+def register(name, email, password):
+    api_url = f'{current_app.config["API_URL"]}/auth/register'
+
+    # Envio de logueo.
+    data = {"name": name, "email": email, "password": password}
+    headers = get_headers(without_token = True)
+
+    # Generamos la respuesta, mandando endpoint, data diccionario, y el headers que es el formato como aplication json.
+    return requests.post(api_url, json = data, headers = headers)
+
 
 
 def get_json(resp):

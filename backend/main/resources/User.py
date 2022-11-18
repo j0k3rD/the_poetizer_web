@@ -30,7 +30,7 @@ class User(Resource):
 
     #Eliminar un Usuario
     @jwt_required()
-    @admin_required
+    # @admin_required
     def delete(self, id):
         user = db.session.query(UserModel).get_or_404(id)
         db.session.delete(user)
