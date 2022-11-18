@@ -13,33 +13,30 @@
                 {% endfor %}
         {% endwith %}
         <!-- ===================================================== -->
-        <!-- LOGIN -->
+        <!-- REGISTER -->
         <div>
-            <form method="POST" id="form1" action="{{url_for('main.login')}}">
+            <form method="POST" id="form_register" action="{{url_for('main.register')}}">
                 <div class="row">
                     <!-- Espacio en blanco -->
                     <div class="col-lg-2 col-md-1"></div>
                     <div class="col-lg-8 col-md-10 principal-container">
                         <div class="row">
-                            <!--POEM -->
-                            <div class="poem-title">
-                                <div class="form-group row">
-                                    <label class="text" for="">Enter EMAIL</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" class="form-control" id="email" placeholder="neruda123@gmail.com" name="email">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="text" for="">Enter PASSWORD</label>
-                                    <div class="col-sm-12">
-                                        <input type="password" class="form-control" id="password" placeholder="Password" name="password">
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn_sign_in" type="submit">SIGN IN</button>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-1"></div>
                 </div>
             </form>
         </div>

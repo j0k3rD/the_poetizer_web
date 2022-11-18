@@ -30,22 +30,22 @@ def login():
 
 
 ## ESTE METODO NO SE USA EN ESTE PROYECTO PERO LO DEJO COMENTADO PARA DESPUES :)
-# #Método de registro
-# @auth.route('/register', methods=['POST'])
-# def register():
-#     #Obtener user
-#     user = UserModel.from_json(request.get_json())
-#     #Verificar si el mail ya existe en la db
-#     exists = db.session.query(UserModel).filter(UserModel.email == user.email).scalar() is not None
-#     if exists:
-#         return 'Duplicated Mail!', 409
-#     else:
-#         try:
-#             #Agregar user a DB
-#             db.session.add(user)
-#             db.session.commit()
-#         except Exception as error:
-#             db.session.rollback()
-#             return str(error), 409
-#         return user.to_json() , 201
+#Método de registro
+@auth.route('/register', methods=['POST'])
+def register():
+    #Obtener user
+    user = UserModel.from_json(request.get_json())
+    #Verificar si el mail ya existe en la db
+    exists = db.session.query(UserModel).filter(UserModel.email == user.email).scalar() is not None
+    if exists:
+        return 'Duplicated Mail!', 409
+    else:
+        try:
+            #Agregar user a DB
+            db.session.add(user)
+            db.session.commit()
+        except Exception as error:
+            db.session.rollback()
+            return str(error), 409
+        return user.to_json() , 201
 

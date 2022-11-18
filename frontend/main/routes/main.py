@@ -59,6 +59,28 @@ def login():
         return render_template("view_login.html")
 
 
+#Registro de un nuevo usuario
+@main.route("/register", methods=["GET", "POST"])
+def register():
+    if(request.method == "POST"):
+        #Obtener datos del formulario - Esto lo traigo del HTML con los name de los inputs.
+        email = request.form.get("email")
+        password = request.form.get("password")
+        name = request.form.get("name")
+        lastname = request.form.get("lastname")
+        username = request.form.get("username")
+        if email != "" and password != "":
+            response = f.register(email, password)
+            if (response.ok):
+                flash("Registered user successfully!", "success")
+                return redirect(url_for("main.login"))
+            else:
+                flash("Error registering user!", "error")
+                return render_template("view_register.html", error="Error al registrar usuario")
+    else:
+        return render_template("view_register.html")
+
+
 #Se deslogea el usuario
 @main.route("/logout")
 def logout():
