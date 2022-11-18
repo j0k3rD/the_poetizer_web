@@ -6,7 +6,7 @@ from sqlalchemy import func
 from main.models import PoemModel
 from main.models import UserModel
 from main.models import MarkModel
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask_jwt_extended import jwt_required, get_jwt_identity, get_jwt
 from main.auth.decorators import admin_required
 #Importo la libreria para Email
 from flask_mail import Mail
@@ -33,14 +33,25 @@ class User(Resource):
     # @admin_required
     def delete(self, id):
         user = db.session.query(UserModel).get_or_404(id)
-        db.session.delete(user)
-        db.session.commit()
-        return '',204
+        #Verificar si se ha ingresado con token
+        current_user = get_jwt_identity()
+        #Asociar usuario a usuario
+        user.id = current_user
+        #Funcion para que solo el mismo usuario pueda borrarlo.
+        if user.id == current_user:
+            try:
+                db.session.delete(user)
+                db.session.commit()
+                return {"message": "User deleted successfully."}, 200
+            except:
+                return {"message": "Something went wrong."}, 500
+        else:
+            return 'You have no permission to delete this User. You have to be the same!', 403
 
 
     #Modificar un usuario
-    @jwt_required()
-    @admin_required
+    @jwt_required(optional=True)
+    # @admin_required
     def put(self, id):
         user = db.session.query(UserModel).get_or_404(id)
         data = request.get_json().items()

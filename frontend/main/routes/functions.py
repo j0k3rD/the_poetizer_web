@@ -89,6 +89,7 @@ def delete_user(id):
     headers = get_headers(without_token=False)
     return requests.delete(api_url, headers=headers)
     
+    
 #--------------- User -----------------#
 
 
