@@ -5,6 +5,16 @@
 {% endblock %}
 
 {% block content %}
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
         <!-- ===================================================== -->
         <!-- VIEW ALL POEM INFO -->
         <!-- POEM -->
@@ -44,7 +54,7 @@
                                 {% endfor %}
                                 </tbody>
                             </div>
-                            <form method="POST" id="form4" action='/poem/view_user/{{poem.id}}'>
+                            <form method="POST" id="form_commentary" action='/poem/view_user/{{poem.id}}'>
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">ADD COMMENT</label>
                                     <textarea name="commentary" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -70,6 +80,7 @@
                                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5">
                                         <label class="form-check-label" for="inlineRadio5">5</label>
                                     </div>
+
                                     <button class="btn btn-primary btn-primary-outline-success" type="submit">COMMENT</button>
                                 </div>
                             </form>
@@ -86,9 +97,18 @@
                                 <div class="centered">{{poem.mark_avg}}</div>
                             </div>
                         </div>
-                          <div class="btn-back">
-                              <a type="button" class="btn" href="{{url_for('main.index_poet')}}">Back Home</a>
-                          </div>
+                        <div class="container-buttons">
+                            {% if user_id == poem.user.id %}
+                            <div class="btn-delete">
+                                <form method="POST" id='form_delete' action="{{url_for('poem.view_user', id=poem.id)}}">
+                                    <input type="hidden" name="delete_method" id="delete_call" value="DELETE">
+                                    <button type="submit" class="btn" href="{{url_for('poem.delete_poem', id=poem.id)}}">Delete Poem</button>
+                                </form>
+                            </div>
+                            {% endif %}
+                            <div class="btn-back">
+                                <a type="button" class="btn" href="{{url_for('main.index_poet')}}">Back Home</a>
+                            </div>
                         </div>
                         <div class="add-com container justify-content-center">
                         </div>

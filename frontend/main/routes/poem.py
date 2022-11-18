@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, redirect, json, current_app, request
+from flask import Blueprint, render_template, url_for, redirect, json, current_app, request, flash
 import requests
 from . import functions as f
 from . import auth
@@ -12,12 +12,14 @@ poem = Blueprint('poem', __name__, url_prefix='/poem')
 def view_user(id):
     if request.cookies.get('access_token'):
         jwt = f.get_jwt()
+        #Verificar si es un str o un int, ya que si hacemos una validacion puede que nos de False.
+        user_id = int(f.get_id())
         poem = f.get_poem(id)
         poem = json.loads(poem.text)
         resp = f.get_marks_by_poem_id(id)
         marks = json.loads(resp.text)
         #Mostrar template
-        return render_template('view_poem_poet.html', jwt = jwt, poem = poem, marks = marks)
+        return render_template('view_poem_poet.html', jwt = jwt, poem = poem, marks = marks, user_id = user_id)
     else:
         poem = f.get_poem(id)
         poem = json.loads(poem.text)
@@ -86,7 +88,59 @@ def create():
         return redirect(url_for('main.login'))
 
 
-#Agregar un calificación a un poema
+#Borrar un poema
+@poem.route('/view_user/<int:id>', methods=['GET', 'POST', 'DELETE'])
+def delete_poem(id):
+    jwt = f.get_jwt()
+    if jwt:
+        if request.method == 'POST':
+            method = request.form['delete_method']
+            if method == 'DELETE':
+                response = f.delete_poem(id, jwt=jwt)
+                if response.ok:
+                    flash('Poem deleted successfully')
+                    return redirect(url_for('poem.my_poems'))
+                else:
+                    flash('Error deleting poem')
+                    return redirect(url_for('poem.my_poems'))    
+            else:
+                return redirect(url_for('poem.my_poems'))
+        else:
+            return redirect(url_for('poem.my_poems'))
+    else:
+        return redirect(url_for('main.login'))
+
+
+#Editar un poema
+@poem.route('/view_user/<int:id>', methods=['GET', 'POST'])
+def edit_poem(id):
+    jwt = f.get_jwt()
+    if jwt:
+        if request.method == 'POST':
+            title = request.form['title']
+            body = request.form['body']
+            print(title)
+            print(body)
+            data = {"title": title, "body": body}
+            headers = f.get_headers(without_token=False)
+            if title != "" and body != "":
+                response = requests.put(f'{current_app.config["API_URL"]}/poems/{id}', json=data, headers=headers)
+                print(response)
+                if response.ok:
+                    response = f.json_load(response)
+                    return redirect(url_for('poem.view_user', id=response["id"], jwt=jwt))
+                else:
+                    return redirect(url_for('poem.edit_poem'))
+            else:
+                return redirect(url_for('poem.edit_poem'))
+        else:
+            #Mostrar template
+            return render_template('view_edit_poem.html', jwt=f.get_jwt())
+    else:
+        return redirect(url_for('main.login'))
+
+
+# Agregar un calificación a un poema
 @poem.route('/view_user/<int:id>', methods=['GET', 'POST'])
 def add_mark(id):
     jwt = f.get_jwt()

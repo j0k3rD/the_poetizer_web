@@ -15,7 +15,6 @@ def index_poet(jwt = None):
         poem_list = poems["poems"]
         user = f.get_user(f.get_id())
         user = json.loads(user.text)
-        print(user)
         #Redireccionar a función de vista
         return render_template('poet_main_page.html', poems = poem_list, user = user, jwt = jwt)
     else:
@@ -25,8 +24,6 @@ def index_poet(jwt = None):
 @main.route('/')
 def index_user():
     response = f.get_poems()
-
-    print(response)
     poems = json.loads(response.text)
     list_poems = poems["poems"]
 

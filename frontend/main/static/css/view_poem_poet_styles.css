@@ -97,7 +97,7 @@ body.dark {
     justify-content: center;
     margin-top: 1em;
     background-color: rgb(134, 134, 134);
-    min-height:480px;
+    min-height:510px;
 }
 
 .poem-container {
@@ -169,7 +169,7 @@ body.dark {
 }
 
 .comment {
-    width: 280px;
+    width: 270px;
     height: 300px;
     border-radius: 10px;
 }
@@ -260,7 +260,33 @@ transform: translate(-50%, -50%);
     position: absolute;
 }
 
+.container-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-delete button{
+    margin-right: 1em;
+    box-shadow: 0 1px 1px #000000;
+    color: #000000;
+    background-color: #c64848;
+    border-color: #ffffff;
+    font-weight: bolder;
+    font-size: 13px;
+}
+
+.btn-edit a{
+    margin-right: 2em;
+    box-shadow: 0 1px 1px #000000;
+    color: #000000;
+    background-color: #c7d44eb6;
+    border-color: #ffffff;
+    font-weight: bolder;
+    font-size: 13px;
+}
+
 .btn-back a{
+    align-items: right;
     box-shadow: 0 1px 1px #000000;
     color: #000000;
     background-color: #78c4f7;

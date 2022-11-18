@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block menu %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static', filename='css/view_add_poem.css')}}">
+{% endblock %}
+
+{% block content_menu %}
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <!-- Agrego algunos estilos para que funcionen bien las imagenes con el darkmode -->
+    <style>
+        body.dark 
+        {
+            background-color: #292C35;
+        }
+    </style>
+    <!-- Agrego algunos estilos para que funcionen bien las imagenes con el darkmode -->
+{% endblock %}
+
+{% block content %}
+        <!-- ===================================================== -->
+        <!-- VIEW ALL POEM INFO -->
+        <!-- POEM -->
+        <div class="row">
+            <!-- Espacio en blanco -->
+            <div class="col-lg-2 col-md-1"></div>
+            <div class="col-lg-8 col-md-10 principal-container">
+                <div class="row">
+                    <!--POEM -->
+                    <form method="POST" id="edit_poem_form" action="{{url_for('poem.edit_poem', id=poem.id)}}">
+                        <div class="card">
+                            <div class="poem-title">
+                                <div class="poemtitle">
+                                    <input class="form-control" type="poemtitle" name="title" placeholder="POEM TITLE..">
+                                </div>
+                                <div class="poembody">
+                                    <textarea class="form-control" name="body" rows="3" placeholder="INSERT YOUR POEM HERE.."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="btn-post">
+                            <button class="btn btn-primary btn-primary-outline-success" type="submit">POST</button>
+                        </div>
+                        <div class="btn-back">
+                            <a type="button" class="btn btn-outline-secondary" href="{{url_for('main.index_poet')}}">Back Home</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-1"></div>
+        </div>
+{% endblock %}

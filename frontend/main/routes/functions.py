@@ -37,16 +37,19 @@ def get_poems(jwt = None, page = 1, perpage = 3):
 
 
 #Borrar un poema en especifico.
-def delete_poem(id):
+def delete_poem(id, jwt = None):
     api_url = f'{current_app.config["API_URL"]}/poem/{id}'
-    headers = get_headers()
+    if jwt:
+        headers = get_headers(jwt=jwt)
+    else:
+        headers = get_headers(without_token=True)
     return requests.delete(api_url, headers=headers)
 
 
-#Editar un poema en especifico.
-def edit_poem(id, title, content):
+# Editar un poema en especifico.
+def edit_poem(id, title, body):
     api_url = f'{current_app.config["API_URL"]}/poem/{id}'
-    data = {"title": title, "content": content}
+    data = {"title": title, "body": body}
     headers = get_headers()
     return requests.put(api_url, json = data, headers = headers)
 
@@ -99,6 +102,14 @@ def get_marks_by_poet_id(id):
     data = {"user_id": id}
     headers = get_headers()
     return requests.get(api_url, json = data, headers = headers)
+
+
+#Agregar una calificacion a un poema.
+def add_mark(user_id, poem_id, score, commentary):
+    api_url = f'{current_app.config["API_URL"]}/marks'
+    data = {"user_id": user_id, "poem_id": poem_id, "score": score, "commentary": commentary}
+    headers = get_headers(without_token=False)
+    return requests.post(api_url, json = data, headers = headers)
 #--------------- Calificaciones -----------------#
 
 
@@ -127,6 +138,7 @@ def get_jwt():
 #Obtener el id desde response.
 def get_id():
     return request.cookies.get("id")
+
 
 #Compruebo si el usuario esta logueado.
 def login(email, password):
