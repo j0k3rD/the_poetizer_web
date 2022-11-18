@@ -83,12 +83,21 @@ def get_username(user_id):
     user = json.loads(response.text)
     return user["name"] 
 
+
 #Borrar cuenta de usuario.
 def delete_user(id):
     api_url = f'{current_app.config["API_URL"]}/user/{id}'
     headers = get_headers(without_token=False)
     return requests.delete(api_url, headers=headers)
-    
+
+
+#Editar un usuario.
+def edit_user(id, name, email, password):
+    api_url = f'{current_app.config["API_URL"]}/user/{id}'
+    data = {"id":id, "name": name, "email": email, "passw": password}
+    headers = get_headers()
+    return requests.put(api_url, json = data, headers = headers)
+
     
 #--------------- User -----------------#
 

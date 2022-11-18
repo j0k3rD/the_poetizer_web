@@ -47,15 +47,19 @@ header {
     padding: 5px;
 }
 
-#btn-login button{
+#btn-login {
+    text-align: center;
+    margin-left: 1em;
+}
+
+#btn-register{
     color: #000000;
     background-color: #73c6b6;
     border-color: #ffffff;
     font-weight: bolder;
     font-size: 15px;
     padding: auto;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    margin-bottom: 1px;
 }
 
 .divide-line hr{
@@ -128,16 +132,6 @@ header {
     margin-bottom: 3px;
     font-size: 20px;
     font-weight: bold;
-}
-
-#btn-login a{
-    color: #000000;
-    background-color: #73c6b6;
-    border-color: #ffffff;
-    font-weight: bolder;
-    font-size: 15px;
-    padding: auto;
-    margin-bottom: 1px;
 }
 
 .checkbox {

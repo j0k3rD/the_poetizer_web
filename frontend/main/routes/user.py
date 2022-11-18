@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, json, request, redirect, url_for, flash
+from flask import Blueprint, render_template, json, request, redirect, url_for, flash, make_response, current_app
 from . import functions as f
 from . import auth
 
@@ -43,21 +43,29 @@ def delete_account(id):
             flash("Failed to delete account")
             return redirect(url_for('main.login'))
 
-
-
-@user.route('/edit_profile')
+#Editar cuenta de usuario
+@user.route('/edit_profile', methods=['GET', 'POST'])
 def edit_credentials():
     jwt = f.get_jwt()
     if jwt:
         if request.method == 'POST':
-            user = auth.load_user(jwt)
-            # Guardamos la información de usuario en una variable.
-            user_info = f.get_user_info(user["id"])
-            user_info = json.loads(user_info.text)
-            user_id = user_info["id"]
-            #Editar perfil
-            response = f.edit_user(user_id, request.form['name'], request.form['email'], request.form['password'])
-
-        return render_template('view_edit_profile.html', jwt = jwt, user_info = user_info)
+            name = request.form['name']
+            email = request.form['email']
+            password = request.form['password']
+            user_info = auth.load_user(jwt)
+            user_id = str(user_info["id"])
+            print(user_id)
+            if name != "" and email != "" and password != "":
+                response = f.edit_user(user_id, name, email, password)
+                if response.ok:
+                    flash("Account successfully edited")
+                    return make_response(redirect(url_for('user.details')))
+                else:
+                    flash("Failed to edit account")
+                    return redirect(url_for('user.details'))
+            else:
+                return redirect(url_for('user.details'))
+        else:
+            return render_template('view_edit_profile.html', jwt = jwt)
     else:
         return redirect(url_for('main.login'))

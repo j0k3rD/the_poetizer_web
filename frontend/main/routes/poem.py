@@ -124,8 +124,6 @@ def edit_poem(id):
         if request.method == 'POST':
             title = request.form['title']
             body = request.form['body']
-            print(title)
-            print(body)
             if title != "" and body != "":
                 response = f.edit_poem(id=id, title=title, body=body)
                 if response.ok:

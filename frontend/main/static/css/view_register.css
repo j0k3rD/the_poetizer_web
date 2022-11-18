@@ -24,62 +24,6 @@ header {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
-/* =====================MENU========================== */
-
-#menu li > a{
-    font-size: 18px;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-#menu form > button{
-    font-size: 18px;
-    font-weight: bold;
-}
-
-#phrase-txt p{
-    margin-top: 2em;
-    font-size: 150%;
-    font-weight: bold;
-    text-align: center;
-    /* background-color: aqua; */
-    color: white;
-    padding: 5px;
-}
-
-#btn-login button{
-    color: #000000;
-    background-color: #73c6b6;
-    border-color: #ffffff;
-    font-weight: bolder;
-    font-size: 15px;
-    padding: auto;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-.divide-line hr{
-    width: 30%;
-    border: 1px solid white;
-}
-
-#btn-visitor button{
-    color: #ffffff;
-    font-size: 15px;
-    padding: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-#tf-txt p{
-    margin-top: 2em;
-    font-size: 150%;
-    font-weight: bolder;
-    text-align: center;
-    color: white;
-    padding: 1px;
-}
-
 /* =====================HOME========================== */
 
 .home-header {
@@ -134,6 +78,7 @@ header {
     text-align: center;
     margin-left: 1em;
 }
+
 #btn-register{
     color: #000000;
     background-color: #73c6b6;
@@ -268,7 +213,6 @@ header {
     font-weight: bolder;
     font-size: 15px;
 }
-
 
 .container-alert {
     text-align: center;
