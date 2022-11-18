@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, redirect, json, current_app, request, flash
+from flask import Blueprint, render_template, url_for, redirect, json, current_app, request, flash, make_response
 import requests
 from . import functions as f
 from . import auth
@@ -112,7 +112,7 @@ def delete_poem(id):
 
 
 #Editar un poema
-@poem.route('/view_user/<int:id>', methods=['GET', 'POST'])
+@poem.route('/edit_poem/<int:id>', methods=['GET', 'POST'])
 def edit_poem(id):
     jwt = f.get_jwt()
     if jwt:
@@ -121,21 +121,22 @@ def edit_poem(id):
             body = request.form['body']
             print(title)
             print(body)
-            data = {"title": title, "body": body}
-            headers = f.get_headers(without_token=False)
             if title != "" and body != "":
-                response = requests.put(f'{current_app.config["API_URL"]}/poems/{id}', json=data, headers=headers)
-                print(response)
+                response = f.edit_poem(id=id, title=title, body=body)
                 if response.ok:
-                    response = f.json_load(response)
-                    return redirect(url_for('poem.view_user', id=response["id"], jwt=jwt))
+                    flash('Poem edited successfully')
+                    return make_response(redirect(url_for('poem.view_user', id=id)))
                 else:
-                    return redirect(url_for('poem.edit_poem'))
+                    flash('Error editing poem')
+                    poem = f.get_poem(id)
+                    poem = json.loads(poem.text)
+                    return render_template('view_edit_poem.html', jwt = jwt, poem = poem)
             else:
-                return redirect(url_for('poem.edit_poem'))
+                return redirect(url_for('poem.my_poems'))
         else:
-            #Mostrar template
-            return render_template('view_edit_poem.html', jwt=f.get_jwt())
+            poem = f.get_poem(id)
+            poem = f.json_load(poem)
+            return render_template('view_edit_poem.html', jwt = jwt, poem = poem)
     else:
         return redirect(url_for('main.login'))
 
@@ -156,8 +157,10 @@ def add_mark(id):
                 response = requests.post(f'{current_app.config["API_URL"]}/marks', json=data, headers=headers)
                 print(response)
                 if response.ok:
+                    flash('Mark added successfully')
                     return redirect(url_for('poem.view_user', id=id, jwt=jwt))
                 else:
+                    flash('Error adding mark')
                     return redirect(url_for('poem.add_mark', id=id))
             else:
                 return redirect(url_for('poem.add_mark', id=id))

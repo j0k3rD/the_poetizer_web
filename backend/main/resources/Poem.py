@@ -51,27 +51,27 @@ class Poem(Resource):
 
     # ##NO VA EL PUT DE POEMAS, pero lo dejo por las dudas mas adelante :) 
     # #Modificar un Poema
-    # @jwt_required()
-    # def put(self, id):
-    #     poem = db.session.query(PoemModel).get_or_404(id)
-    #     #Verificar si se ha ingresado con token
-    #     current_user = get_jwt_identity()
-    #     #Asociar poema a usuario
-    #     poem.poetId = current_user
+    @jwt_required()
+    def put(self, id):
+        poem = db.session.query(PoemModel).get_or_404(id)
+        #Verificar si se ha ingresado con token
+        current_user = get_jwt_identity()
+        #Asociar poema a usuario
+        poem.poetId = current_user
 
-    #     #Obtener claims de adentro del JWT
-    #     claims = get_jwt()
+        #Obtener claims de adentro del JWT
+        claims = get_jwt()
 
-    #     #Funcion para que solo el ADMIN o el DUEÑO DEL POEMA pueda modificar el mismo.
-    #     if claims['rol'] == "admin" or poem.user_id == current_user:
-    #         data = request.get_json().items()
-    #         for key, value in data:
-    #             setattr(poem,key,value)
-    #         db.session.add(poem)
-    #         db.session.commit()
-    #         return poem.to_json(), 201
-    #     else:
-    #         return 'You have no permission to modify this Poem. You have to be OWNER!', 403
+        #Funcion para que solo el ADMIN o el DUEÑO DEL POEMA pueda modificar el mismo.
+        if claims['rol'] == "admin" or poem.user_id == current_user:
+            data = request.get_json().items()
+            for key, value in data:
+                setattr(poem,key,value)
+            db.session.add(poem)
+            db.session.commit()
+            return poem.to_json(), 201
+        else:
+            return 'You have no permission to modify this Poem. You have to be OWNER!', 403
 
             
 #Recurso Poemas

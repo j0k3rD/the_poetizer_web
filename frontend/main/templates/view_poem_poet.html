@@ -39,7 +39,7 @@
                         <div class="vl"></div>
                     </div>
                     <!-- COMMENTS AND RATING -->
-                      <div class="col-md-6 second-container">
+                    <div class="col-md-6 second-container">
                         <div class="comment justify-content-center">
                             <div class="title">
                                 <h3>COMMENTS</h3>
@@ -80,7 +80,6 @@
                                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="5">
                                         <label class="form-check-label" for="inlineRadio5">5</label>
                                     </div>
-
                                     <button class="btn btn-primary btn-primary-outline-success" type="submit">COMMENT</button>
                                 </div>
                             </form>
@@ -105,14 +104,16 @@
                                     <button type="submit" class="btn" href="{{url_for('poem.delete_poem', id=poem.id)}}">Delete Poem</button>
                                 </form>
                             </div>
+                            <div class="btn-edit">
+                                <a class="btn" href="{{url_for('poem.edit_poem', id=poem.id)}}">Edit Poem</a>
+                            </div>
                             {% endif %}
                             <div class="btn-back">
                                 <a type="button" class="btn" href="{{url_for('main.index_poet')}}">Back Home</a>
                             </div>
                         </div>
-                        <div class="add-com container justify-content-center">
-                        </div>
-                      </div>
+                        <div class="add-com container justify-content-center"></div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-2 col-md-1"></div>
