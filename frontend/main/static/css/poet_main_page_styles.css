@@ -20,6 +20,26 @@ header {
 
 }
 
+.alert-error {
+    padding: 15px;
+    border-radius: 3px;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    background-color: rgb(255, 209, 209);
+    color: rgb(109, 0, 0);
+  }
+  
+  .alert-green {
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    background-color: #e5ffe7;
+    color: rgb(2, 91, 0);
+  }
+
 /* =====================MENU========================== */
 
 #menu li > a{
@@ -45,11 +65,12 @@ header {
 
 #welcome-txt p{
     margin-top: 1em;
-    font-size: 100%;
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
+    text-shadow: 2px 2px 4px #000000;
     /* background-color: aqua; */
-    color: white;
+    color: #73c6b6;
     padding: 5px;
 }
 
@@ -281,6 +302,7 @@ a.btn-new{
 /* =====================FOOTER========================== */
 
 .footer {
+    position: absolute;
     background-color: #1d3557;
     margin-top: 20px;
     text-align: center;

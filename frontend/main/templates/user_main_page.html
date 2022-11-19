@@ -18,13 +18,13 @@
     <style>
       body
       {
-        background-image: url("{{url_for('static', filename='img/arte3.jpg')}}");
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{{url_for('static', filename='img/arte3.jpg')}}");
         background-repeat: no-repeat;
         background-size: 100% 30%;
       }
       body.dark 
       {
-        background-image: url("{{url_for('static', filename='img/arte3.jpg')}}");
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{{url_for('static', filename='img/arte3.jpg')}}");
 	      background-color: #292C35;
 
       }

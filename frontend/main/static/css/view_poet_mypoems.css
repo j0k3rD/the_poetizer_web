@@ -22,6 +22,24 @@ header {
     color: white;
 }
 
+.alert-error {
+    padding: 15px;
+    border-radius: 3px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    background-color: rgb(255, 209, 209);
+    color: rgb(109, 0, 0);
+  }
+  
+  .alert-green {
+    padding: 15px;
+    border-radius: 3px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    background-color: #e5ffe7;
+    color: rgb(2, 91, 0);
+  }
+
 /* =====================MENU========================== */
 
 #menu li > a{
@@ -284,17 +302,13 @@ a.btn-new{
 .card .content .btn-container a:hover {
     background: #000000;
 }
-/* =====================PAGINATION========================== */
-
-.paginate{
-    margin-top: 3em;
-}
 
 /* =====================FOOTER========================== */
 
 .footer {
+    position: absolute;
     background-color: #1d3557;
-    margin-top: 20px;
+    margin-top: 120px;
     text-align: center;
     font-size: 15px;
 }

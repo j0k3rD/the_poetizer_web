@@ -54,12 +54,29 @@ class User(Resource):
     # @admin_required
     def put(self, id):
         user = db.session.query(UserModel).get_or_404(id)
-        data = request.get_json().items()
-        for key, value in data:
-            setattr(user,key,value)
-        db.session.add(user)
-        db.session.commit()
-        return user.to_json(), 201
+        #Verificar si se ha ingresado con token
+        current_identity = get_jwt_identity()
+        if current_identity:
+            #Asociar usuario a usuario
+            user.id = current_identity
+            #Funcion para que solo el mismo usuario pueda modificarlo.
+            if user.id == current_identity:
+                try:
+                    #Obtener datos del usuario
+                    user.name = request.json['name']
+                    user.email = request.json['email']
+                    user.password = request.json['passw']
+                    #Ya solo veridica si existen en la base de datos.
+                    #Guardar cambios en la db
+                    db.session.commit()
+                    return user.to_json_short_pAm(), 200
+                except:
+                    return {"message": "Something went wrong."}, 500
+            else:
+                return 'You have no permission to modify this User. You have to be the same!', 403
+        else:
+            return 'You have no permission to modify this User. You have to be the same!', 403
+
         
 
 #Recurso Usuarios
@@ -127,7 +144,6 @@ class Users(Resource):
     @jwt_required(optional=True)
     def post(self):
         user = UserModel.from_json(request.get_json())
-        # db.session.query(UserModel).get_or_404(user.user_id)
         
         #Consulta para verificar si ya existe un Usuario con ese Email
         exists_email = db.session.query(UserModel).filter(UserModel.email == user.email).scalar() is not None

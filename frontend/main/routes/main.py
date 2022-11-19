@@ -34,7 +34,7 @@ def index_user():
 ### Desafio, sacar el login de la URL
 @main.route("/login", methods=["GET", "POST"])
 def login():
-    if(request.method == "POST"):
+    if request.method == "POST":
         #Obtener datos del formulario - Esto lo traigo del HTML con los name de los inputs.
         email = request.form.get("email")
         password = request.form.get("password")
@@ -42,12 +42,12 @@ def login():
         if email != "" and password != "":
             response = f.login(email, password)
 
-            if (response.ok):
+            if response.ok:
                 #Obtener el token desde response.
                 response = json.loads(response.text)
                 token = response["access_token"]
                 user_id = str(response["id"])
-                flash(f"Bienvenido {email}!", "success")
+                flash(f"Welcome {email}!", "success")
                 resp = make_response(index_poet(jwt=token))
                 resp.set_cookie("access_token", token)
                 resp.set_cookie("id", user_id)
@@ -76,6 +76,9 @@ def register():
             else:
                 flash("Error registering user!", "error")
                 return render_template("view_register.html", error="Error al registrar usuario")
+        else:
+            flash("Error registering user!", "error")
+            return render_template("view_register.html", error="Error al registrar usuario")
     else:
         return render_template("view_register.html")
 

@@ -17,73 +17,28 @@ body.dark {
 }
 
 header {
-    height: 60vh;
+    height: 100vh;
     width: 100%;
     color: white;
 }
 
-/* =====================MENU========================== */
-
-#menu li > a{
-    font-size: 18px;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-#menu form > button{
-    font-size: 18px;
-    font-weight: bold;
-}
-
-#phrase-txt p{
-    margin-top: 2em;
-    font-size: 150%;
-    font-weight: bold;
-    text-align: center;
-    /* background-color: aqua; */
-    color: white;
-    padding: 5px;
-}
-
-#btn-login button{
-    color: #000000;
-    background-color: #73c6b6;
-    border-color: #ffffff;
-    font-weight: bolder;
-    font-size: 15px;
-    padding: auto;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-#welcome-txt p{
-    margin-top: 1em;
-    font-size: 100%;
-    font-weight: bold;
-    text-align: center;
-    /* background-color: aqua; */
-    color: white;
-    padding: 5px;
-}
-
-#btn-home button{
-    color: #000000;
-    background-color: #73c6b6;
-    border-color: #ffffff;
-    font-weight: bolder;
-    font-size: 15px;
-    padding: auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-#tf-txt p{
-    font-size: 150%;
-    font-weight: bolder;
-    text-align: center;
-    color: white;
-    padding: 1px;
-}
+.alert-error {
+    padding: 15px;
+    border-radius: 3px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    background-color: rgb(255, 209, 209);
+    color: rgb(109, 0, 0);
+  }
+  
+  .alert-green {
+    padding: 15px;
+    border-radius: 3px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    background-color: #e5ffe7;
+    color: rgb(2, 91, 0);
+  }
 
 .checkbox {
 	opacity: 0;
@@ -159,29 +114,9 @@ header {
     box-shadow: 0 1px 0 0 #f48fb1;
 }
 
-
 /* =====================FILTERS========================== */
 .poems-filter{
     margin-top: 2em;
-    margin-left: 16em;
-    object-position: left;
-    width: 10%;
-}
-
-/* =====================BTN ADD NEW POEM========================== */
-a.btn-new{
-    position: absolute;
-    margin-top: 1em;
-    margin-bottom: 1em;
-    margin-left: 55em;
-    padding: 2px 2px 2px 2px;
-    background-color: #a8dadc;
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    text-align: center;
-    border-color: #026e5e;
-    border-radius: 10px;
 }
 /* =====================POEMS CARDS========================== */
 *{
@@ -373,8 +308,9 @@ div[class^='col']
 /* =====================FOOTER========================== */
 
 .footer {
+    position: absolute;
     background-color: #1d3557;
-    margin-top: 20px;
+    margin-top: 11.5em;
     text-align: center;
     font-size: 15px;
 }

@@ -75,13 +75,7 @@ class User(db.Model):
         'email': str(self.email),
         }
         return user_json
-    # def to_json_short_marks(self):
-    #     user_json = {
-    #         'id': self.id,
-    #         'name': str(self.name),
-    #         'num_poems': len(self.poems),
-    #     }
-    #     return user_json #########
+
     
     def to_json_complete(self):
         user_json = {
@@ -92,7 +86,6 @@ class User(db.Model):
             'rol': str(self.rol),
             'marks': [mark.to_json() for mark in self.marks],
             'poems': [poem.to_json() for poem in self.poems]
-        
         }
         return user_json
 

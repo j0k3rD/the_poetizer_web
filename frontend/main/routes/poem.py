@@ -103,11 +103,14 @@ def create():
                 response = requests.post(f'{current_app.config["API_URL"]}/poems', json=data, headers=headers)
                 print(response)
                 if response.ok:
+                    flash('Poem added successfully', 'success')
                     response = f.json_load(response)
                     return redirect(url_for('poem.view_user', id=response["id"], jwt=jwt))
                 else:
+                    flash('Error adding poem', 'error')
                     return redirect(url_for('poem.create'))
             else:
+                flash('Error adding poem', 'error')
                 return redirect(url_for('poem.create'))
         else:
             #Mostrar template
@@ -127,10 +130,10 @@ def edit_poem(id):
             if title != "" and body != "":
                 response = f.edit_poem(id=id, title=title, body=body)
                 if response.ok:
-                    flash('Poem edited successfully')
+                    flash('Poem edited successfully', 'success')
                     return make_response(redirect(url_for('poem.view_user', id=id)))
                 else:
-                    flash('Error editing poem')
+                    flash('Error editing poem', 'danger')
                     poem = f.get_poem(id)
                     poem = json.loads(poem.text)
                     return render_template('view_edit_poem.html', jwt = jwt, poem = poem)

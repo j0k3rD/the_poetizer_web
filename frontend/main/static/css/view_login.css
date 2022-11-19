@@ -24,6 +24,27 @@ header {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
+.alert-error {
+    padding: 15px;
+    border-radius: 3px;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    background-color: rgb(255, 209, 209);
+    color: rgb(109, 0, 0);
+  }
+  
+  .alert-green {
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    background-color: #e5ffe7;
+    color: rgb(2, 91, 0);
+  }
+  
+
 /* =====================MENU========================== */
 
 #menu li > a{
