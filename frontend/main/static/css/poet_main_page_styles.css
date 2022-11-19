@@ -30,7 +30,7 @@ header {
     color: rgb(109, 0, 0);
   }
   
-  .alert-green {
+.alert-success {
     padding: 15px;
     border-radius: 5px;
     font-size: 16px;
@@ -38,7 +38,7 @@ header {
     margin-bottom: 15px;
     background-color: #e5ffe7;
     color: rgb(2, 91, 0);
-  }
+}
 
 /* =====================MENU========================== */
 
@@ -302,9 +302,11 @@ a.btn-new{
 /* =====================FOOTER========================== */
 
 .footer {
-    position: absolute;
+    position: relative;
+    margin-top: 2em;
+    bottom: 0;
+    width: 100%;
     background-color: #1d3557;
-    margin-top: 20px;
     text-align: center;
     font-size: 15px;
 }

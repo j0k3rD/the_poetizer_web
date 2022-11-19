@@ -5,16 +5,6 @@
 {% endblock %}
 
 {% block content_menu %}
-
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-success" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
-    {% endwith %}
     <!-- Agrego algunos estilos para que funcionen bien las imagenes con el darkmode -->
     <style>
         body.dark 
@@ -26,6 +16,8 @@
 {% endblock %}
 
 {% block content %}
+{{ super() }}
+
         <!-- ===================================================== -->
         <!-- VIEW ALL POEM INFO -->
         <!-- POEM -->

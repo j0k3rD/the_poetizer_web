@@ -28,10 +28,10 @@ def view_user(id):
                 if score != "" and commentary != "":
                     response = f.add_mark(user_id=user_id, poem_id=id, score=score, commentary=commentary)
                     if response.ok:
-                        flash('Mark added successfully')
+                        flash('Mark added successfully', 'success')
                         return make_response(redirect(url_for('poem.view_user', id=id)))
                     else:
-                        flash('Error adding mark')
+                        flash('Error adding mark', 'error')
                         return render_template('view_poem_user.html', poem = poem, marks = marks, jwt=f.get_jwt())
                 else:
                     return redirect(url_for('poem.my_poems'))
@@ -40,10 +40,10 @@ def view_user(id):
             if request.form['delete_method'] == 'DELETE':
                 response = f.delete_poem(id, jwt=jwt)
                 if response.ok:
-                    flash('Poem deleted successfully')
+                    flash('Poem deleted successfully', 'success')
                     return redirect(url_for('poem.my_poems'))
                 else:
-                    flash('Error deleting poem')
+                    flash('Error deleting poem', 'error')
                     return redirect(url_for('poem.my_poems'))  
 
         #Mostrar template
@@ -133,7 +133,7 @@ def edit_poem(id):
                     flash('Poem edited successfully', 'success')
                     return make_response(redirect(url_for('poem.view_user', id=id)))
                 else:
-                    flash('Error editing poem', 'danger')
+                    flash('Error editing poem', 'error')
                     poem = f.get_poem(id)
                     poem = json.loads(poem.text)
                     return render_template('view_edit_poem.html', jwt = jwt, poem = poem)

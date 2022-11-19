@@ -47,7 +47,6 @@ def login():
                 response = json.loads(response.text)
                 token = response["access_token"]
                 user_id = str(response["id"])
-                flash(f"Welcome {email}!", "success")
                 resp = make_response(index_poet(jwt=token))
                 resp.set_cookie("access_token", token)
                 resp.set_cookie("id", user_id)
@@ -86,7 +85,7 @@ def register():
 #Se deslogea el usuario
 @main.route("/logout")
 def logout():
-    flash("You have successfully logged out!", "info")
+    flash("You have successfully logged out!", "success")
     resp = make_response(redirect(url_for("main.login")))
     resp.delete_cookie("access_token")
     resp.delete_cookie("id")

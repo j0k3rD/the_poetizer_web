@@ -1,5 +1,6 @@
 from .. import login_manager
 import jwt
+from flask import current_app
 
 @login_manager.user_loader
 def load_user(token):

@@ -249,9 +249,11 @@ header {
 /* =====================FOOTER========================== */
 
 .footer {
-    position: absolute;
+    position: relative;
+    margin-top: 2em;
+    bottom: 0;
+    width: 100%;
     background-color: #1d3557;
-    margin-top: 11.5em;
     text-align: center;
     font-size: 15px;
 }

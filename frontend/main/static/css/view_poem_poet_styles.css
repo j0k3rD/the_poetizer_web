@@ -19,6 +19,7 @@ body.dark {
     padding: 15px;
     border-radius: 3px;
     font-size: 16px;
+    margin-top: 5px;
     margin-bottom: 15px;
     background-color: rgb(255, 209, 209);
     color: rgb(109, 0, 0);
@@ -26,8 +27,9 @@ body.dark {
   
   .alert-green {
     padding: 15px;
-    border-radius: 3px;
+    border-radius: 5px;
     font-size: 16px;
+    margin-top: 5px;
     margin-bottom: 15px;
     background-color: #e5ffe7;
     color: rgb(2, 91, 0);
@@ -322,8 +324,10 @@ transform: translate(-50%, -50%);
 /* =====================FOOTER========================== */
 
 .footer {
+    position: fixed;
+    bottom: 0;
     background-color: #1d3557;
-    margin-top: 7.3em;
+    margin-top: 11.5em;
     text-align: center;
     font-size: 15px;
 }

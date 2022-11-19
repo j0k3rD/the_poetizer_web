@@ -23,6 +23,7 @@ header {
     padding: 15px;
     border-radius: 3px;
     font-size: 16px;
+    margin-top: 5px;
     margin-bottom: 15px;
     background-color: rgb(255, 209, 209);
     color: rgb(109, 0, 0);
@@ -30,8 +31,9 @@ header {
   
   .alert-green {
     padding: 15px;
-    border-radius: 3px;
+    border-radius: 5px;
     font-size: 16px;
+    margin-top: 5px;
     margin-bottom: 15px;
     background-color: #e5ffe7;
     color: rgb(2, 91, 0);
@@ -200,7 +202,8 @@ textarea{
 /* =====================FOOTER========================== */
 
 .footer {
-    position: absolute;
+    position: fixed;
+    bottom: 0;
     background-color: #1d3557;
     margin-top: 50px;
     text-align: center;

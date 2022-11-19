@@ -37,10 +37,10 @@ def delete_account(id):
         #Borrar cuenta
         response = f.delete_user(id)
         if response.ok:
-            flash("Account successfully deleted")
+            flash("Account successfully deleted", "success")
             return redirect(url_for('main.login'))
         else:
-            flash("Failed to delete account")
+            flash("Failed to delete account", "error")
             return redirect(url_for('main.login'))
 
 #Editar cuenta de usuario
@@ -58,10 +58,10 @@ def edit_credentials():
             if name != "" and email != "" and password != "":
                 response = f.edit_user(user_id, name, email, password)
                 if response.ok:
-                    flash("Account successfully edited")
+                    flash("Account successfully edited", "success")
                     return make_response(redirect(url_for('user.details')))
                 else:
-                    flash("Failed to edit account")
+                    flash("Failed to edit account", "error")
                     return redirect(url_for('user.details'))
             else:
                 return redirect(url_for('user.details'))

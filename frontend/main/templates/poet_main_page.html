@@ -4,15 +4,6 @@
   <link rel="stylesheet" href="{{url_for('static', filename='css/poet_main_page_styles.css')}}">
   {% endblock %}
   {% block content_menu %}
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-          {% for message in messages %}
-              <div class="alert alert-success" role="alert">
-                  {{ message }}
-              </div>
-          {% endfor %}
-      {% endif %}
-    {% endwith %}
   <header>    
     <!-- Agrego algunos estilos para que funcionen bien las imagenes con el darkmode -->
     <style>
@@ -68,6 +59,8 @@
   {% endblock %}
   
     {% block content %}
+    {{ super() }}
+
     <!-- ===================================================== -->
     <!-- BUTTON ADD NEW POEM -->
     <div class="row section-1">
