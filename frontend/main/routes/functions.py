@@ -53,6 +53,11 @@ def edit_poem(id, title, body):
     headers = get_headers()
     return requests.put(api_url, json = data, headers = headers)
 
+
+# Obtener la pagina de los poemas.
+def get_poems_page():
+    return request.cookies.get("poems_page")
+
 #--------------- Poems -----------------#
 
 

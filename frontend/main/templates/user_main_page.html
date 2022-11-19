@@ -9,13 +9,13 @@
     <style>
       body
       {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{{url_for('static', filename='img/arte3.jpg')}}");
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{{url_for('static', filename='img/arte2.jpg')}}");
         background-repeat: no-repeat;
         background-size: 100% 30%;
       }
       body.dark 
       {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{{url_for('static', filename='img/arte3.jpg')}}");
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{{url_for('static', filename='img/arte2.jpg')}}");
 	      background-color: #292C35;
 
       }
@@ -103,7 +103,7 @@
     
     {% block content %}
     {{ super() }}
-
+  <form action="{{url_for('main.index_user')}}">
         <!-- ===================================================== -->
     <!-- POEMS CARDS -->
     <div>
@@ -166,5 +166,6 @@
           </ul>
           </nav>
       </div>
+  </form>
     <!-- ===================================================== -->
     {% endblock %}

@@ -6,7 +6,7 @@ from . import functions as f
 main = Blueprint('main', __name__, url_prefix='/')
 
 
-@main.route('/poet')
+@main.route('/poet', methods=['GET', 'POST'])
 def index_poet(jwt = None):
     jwt = f.get_jwt()
     if jwt: 
@@ -15,20 +15,51 @@ def index_poet(jwt = None):
         poem_list = poems["poems"]
         user = f.get_user(f.get_id())
         user = json.loads(user.text)
+
+        # Paginacion
+        try:
+            page = int(request.form['n_page'])
+        except:
+            page = request.form.get("n_page")
+            if (page == "< Atras"):
+                page = int(f.get_poems_page()) - 1
+            elif (page == "Siguiente >"):
+                page = int(f.get_poems_page()) + 1
+            else:
+                page = f.get_poems_page()
+                if (page == None):
+                    page = 1
+                else:
+                    page = int(page)
         #Redireccionar a función de vista
-        return render_template('poet_main_page.html', poems = poem_list, user = user, jwt = jwt)
+        return render_template('poet_main_page.html', poems = poem_list, user = user, jwt = jwt, page = int(page))
     else:
         return render_template("view_login.html")
 
 
-@main.route('/')
+@main.route('/', methods=['GET', 'POST'])
 def index_user():
     response = f.get_poems()
     poems = json.loads(response.text)
     list_poems = poems["poems"]
+    # Paginacion
+    try:
+        page = int(request.form.get("_page"))
+    except:
+        page = request.form.get("_page")
+        if (page == "< Atras"):
+            page = int(f.get_poems_page()) - 1
+        elif (page == "Siguiente >"):
+            page = int(f.get_poems_page()) + 1
+        else:
+            page = f.get_poems_page()
+            if (page == None):
+                page = 1
+            else:
+                page = int(page)
 
     #Redireccionar a función de vista
-    return render_template('user_main_page.html', poems=list_poems)
+    return render_template('user_main_page.html', poems=list_poems, page=int(page))
 
 
 ### Desafio, sacar el login de la URL
