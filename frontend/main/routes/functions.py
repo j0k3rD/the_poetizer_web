@@ -1,5 +1,6 @@
 from flask import request, current_app
 import requests, json
+from . import auth
 
 #--------------- Poems -----------------#
 
@@ -153,7 +154,13 @@ def get_headers(without_token = False, jwt = None):
 
 #Obtener el token desde response.
 def get_jwt():
-    return request.cookies.get("access_token")
+    token = request.cookies.get("access_token")
+    print(token)
+    expired = auth.check_jwt_expiration(token)
+    if expired:
+        return None
+    else:
+        return token
 
 
 #Obtener el id desde response.

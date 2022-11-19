@@ -10,15 +10,9 @@ main = Blueprint('main', __name__, url_prefix='/')
 def index_poet(jwt = None):
     jwt = f.get_jwt()
     if jwt: 
-        resp = f.get_poems(jwt=jwt)
-        poems = f.get_json(resp)
-        poem_list = poems["poems"]
-        user = f.get_user(f.get_id())
-        user = json.loads(user.text)
-
         # Paginacion
         try:
-            page = int(request.form['n_page'])
+            page = int(request.form.get('n_page'))
         except:
             page = request.form.get("n_page")
             if (page == "< Atras"):
@@ -31,22 +25,29 @@ def index_poet(jwt = None):
                     page = 1
                 else:
                     page = int(page)
+
+        resp = f.get_poems(jwt=jwt, page=page)
+        poems = f.get_json(resp)
+        poem_list = poems["poems"]
+        user = f.get_user(f.get_id())
+        user = json.loads(user.text)
+
         #Redireccionar a función de vista
-        return render_template('poet_main_page.html', poems = poem_list, user = user, jwt = jwt, page = int(page))
+        response = make_response(render_template('poet_main_page.html', jwt=jwt, poems = poem_list, user = user, page = int(page)))
+        response.set_cookie("poems_page", str(page))
+        return response
     else:
+        print("No hay jwt")
         return render_template("view_login.html")
 
 
 @main.route('/', methods=['GET', 'POST'])
 def index_user():
-    response = f.get_poems()
-    poems = json.loads(response.text)
-    list_poems = poems["poems"]
     # Paginacion
     try:
-        page = int(request.form.get("_page"))
+        page = int(request.form.get('n_page'))
     except:
-        page = request.form.get("_page")
+        page = request.form.get("n_page")
         if (page == "< Atras"):
             page = int(f.get_poems_page()) - 1
         elif (page == "Siguiente >"):
@@ -58,11 +59,15 @@ def index_user():
             else:
                 page = int(page)
 
+    response = f.get_poems(page=page)
+    poems = f.get_json(response)
+    list_poems = poems["poems"]
     #Redireccionar a función de vista
-    return render_template('user_main_page.html', poems=list_poems, page=int(page))
+    response = make_response(render_template('user_main_page.html', poems = list_poems, page = int(page)))
+    response.set_cookie("poems_page", str(page))
+    return response
 
 
-### Desafio, sacar el login de la URL
 @main.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -78,7 +83,7 @@ def login():
                 response = json.loads(response.text)
                 token = response["access_token"]
                 user_id = str(response["id"])
-                resp = make_response(index_poet(jwt=token))
+                resp = make_response(redirect(url_for('main.index_poet')))
                 resp.set_cookie("access_token", token)
                 resp.set_cookie("id", user_id)
                 return resp

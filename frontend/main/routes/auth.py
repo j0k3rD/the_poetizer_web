@@ -19,3 +19,19 @@ def load_user(token):
         print('Invalid Token')
     except jwt.exceptions.DecodeError:
         print('Decode Error')
+
+
+def check_jwt_expiration(token):
+    try:
+        header_data = jwt.get_unverified_header(token)
+        key = current_app.config['SECRET_KEY']
+        jwt.decode(token, key, algorithms=[header_data['alg']])
+        return False
+    # Token Expired
+    except jwt.ExpiredSignatureError:
+        return True
+    # Token Invalido    
+    except jwt.InvalidTokenError:
+        return True
+    except jwt.DecodeError:
+        return True

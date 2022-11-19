@@ -60,7 +60,7 @@
   
     {% block content %}
     {{ super() }}
-  <form action="{{url_for('main.index_poet')}}">
+  <form method="POST" action="{{url_for('main.index_poet')}}">
     <!-- ===================================================== -->
     <!-- BUTTON ADD NEW POEM -->
     <div class="row section-1">

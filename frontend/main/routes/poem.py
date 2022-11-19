@@ -47,7 +47,10 @@ def view_user(id):
                     return redirect(url_for('poem.my_poems'))  
 
         #Mostrar template
-        return render_template('view_poem_poet.html', jwt = jwt, poem = poem, marks = marks, user_id = user_id)
+        response = render_template('view_poem_poet.html', jwt = jwt, poem = poem, marks = marks, user_id = user_id)
+        response.set_cookie("poems_page", 1)
+        return response
+
     else:
         poem = f.get_poem(id)
         poem = json.loads(poem.text)
@@ -66,7 +69,9 @@ def my_poems():
         resp = f.get_poems_by_id(user["id"])
         poems = json.loads(resp.text)
         poemsList = poems["poems"]
-        return render_template('view_poet_mypoems.html', jwt=jwt, poems = poemsList)
+        response = render_template('view_poet_mypoems.html', jwt=jwt, poems = poemsList)
+        response.set_cookie("poems_page", 1)
+        return response
     else:
         return redirect(url_for('main.login'))
 
