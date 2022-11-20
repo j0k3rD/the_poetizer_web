@@ -35,18 +35,21 @@ Teniendo en cuenta los siguientes topicos:
 
 ## 3- BASE DE DATOS (BACKEND)
   - Decidimos usar una base de datos SQL por su facil uso que le podemos dar con Python, ademas de que solo vamos a almacenar datos en formato plano (nada de contenido digital).
-  En este punto toco crear las relaciones entre los diferentes modelos.
+  Lo que hicimos fue crear las relaciones entre las tablas.
   ![image](https://user-images.githubusercontent.com/83615514/202870493-00450846-eac0-42c4-bdab-8206a895e501.png)
   ![image](https://user-images.githubusercontent.com/83615514/202870539-61b5a612-0c68-4bb9-9c98-f67401c752cb.png)
 
 
+## 4- FILTRADO Y PAGINACION (BACKEND)
+  -  Creamos los filtros en las consultas donde corresponde y aplicamos paginacion para luego poder mostrar los recursos como el usuario quiera de forma ordenada.
+  ![image](https://user-images.githubusercontent.com/83615514/202876183-4485a70d-29e5-41c4-9192-cd1ed70624aa.png)
+  ![image](https://user-images.githubusercontent.com/83615514/202876186-5939b5e6-5c20-4dc8-910b-50db38d4ab6a.png)
 
-
-## 4- PAGINACION (BACKEND)
-
-
-## 5
-  - Auth JWT
+## 5- AUTENTICACION JWT
+  - Implementamos los métodos de autenticación (Register y Login), protegimos las rutas de acuerdo a los requisitos, modificamos la implementación dependiendo del rol donde sea necesario.
+ ![image](https://user-images.githubusercontent.com/83615514/202876276-ba7d8860-7056-4c51-b2cb-5df17e9f60a1.png)
+ ![image](https://user-images.githubusercontent.com/83615514/202876281-40c9a6fc-4d9e-4774-8a60-ecc3ff5476ee.png)
+ ![image](https://user-images.githubusercontent.com/83615514/202876301-e24c1ae1-6047-4767-8cd4-c5899b17b1e6.png)
  
-## 6
+## 6- 
   - Email Sending
