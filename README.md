@@ -67,5 +67,9 @@ Teniendo en cuenta los siguientes topicos:
 - Procedemos a volcar nuestras maquetas a codigo, realizando nuestros primero HTML TEMPLATES y codeando algunos estilos adicionales en CSS. Ya que hicimos uso de Bootstrap para la creacion de las mismas, teniendo como ejemplo guia de codigo algunas navbars, tablas, formularios, etc, que aparecian en su pagina web.
 ![image](https://user-images.githubusercontent.com/83615514/202876729-614c7209-c3fe-4379-bad4-5c6d33e04180.png)
 
+## 9- ENRUTAMIENTO SERVIDOR FLASK
+- Con la ayuda de librerias como redirect, render_templates, url_for, etc, que son propias de Flask, comenzamos con el enrutamiento de nuestra pagina. Pudiendo realizar los primeros desplazamientos entre los diferentes templates con los botones que habiamos creado en los mismos.
+![image](https://user-images.githubusercontent.com/83615514/202876927-3dea38f6-9ad4-454e-909e-3283cd35fcec.png)
+![image](https://user-images.githubusercontent.com/83615514/202876941-2bdd39cf-00ed-43e9-a971-8a1cf1dfa5f6.png)
 
 
