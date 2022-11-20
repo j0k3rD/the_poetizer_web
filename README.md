@@ -63,5 +63,9 @@ Teniendo en cuenta los siguientes topicos:
   - Creamos modelos para tener una mejor idea de como queriamos que se viera nuestra pagina web, lo que nos ayudara a luego poder pasar todas las ideas e implementaciones a codigo. Puedes ver mis bocetos en la pagina de Figma.com (https://www.figma.com/file/Qf4m2hZcihMOkdT7JoC43m/THE-POETIZER-(maquetacion)?node-id=105%3A225&t=8GLDC4MptIcYlWyU-1)
   ![image](https://user-images.githubusercontent.com/83615514/202876568-feb1095f-b3f1-4d25-9761-d110b5f18e4a.png)
 
-## 8-
+## 8- VISTAS BOOTSTRAP
+- Procedemos a volcar nuestras maquetas a codigo, realizando nuestros primero HTML TEMPLATES y codeando algunos estilos adicionales en CSS. Ya que hicimos uso de Bootstrap para la creacion de las mismas, teniendo como ejemplo guia de codigo algunas navbars, tablas, formularios, etc, que aparecian en su pagina web.
+![image](https://user-images.githubusercontent.com/83615514/202876729-614c7209-c3fe-4379-bad4-5c6d33e04180.png)
+
+
 
