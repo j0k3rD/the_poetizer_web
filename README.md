@@ -89,6 +89,17 @@ En este proyecto nos enfocaremos en crear una página web para Poetas.
 
 
 ### Algunos Requerimientos usados:
-- INSOMNIA = Insomnia es un cliente REST multiplataforma.
-- FLASK = 
+Que programas se usa:
+-    Backend
+  - Flask: es un microframework escrito en Python que permite crear aplicaciones web rápidamente y con un mínimo número de líneas de código.
+  - MySQLAlchemy: Manejo de base de datos mediante ORM.
+  - Werkzeug: Encriptado de la contraseña. Backend.
+  - Flask-JWT-Extended: Manejo de JSON Web Token
 
+<br>
+
+-    Frontend
+  - Jinja2: Motor de plantilla web, para el lenguaje de programación Python.
+  - Insomnia: Nos permite crear variables para poder utilizarlas en diferentes consultas
+  - PyJWT: Manejo de JSON Web Token.
+  - Requests: requests es una librería Python que facilita enormemente el trabajo con peticiones HTTP.
