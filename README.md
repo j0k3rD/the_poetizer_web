@@ -22,8 +22,6 @@ En este proyecto nos enfocaremos en crear una página web para Poetas.
 </p>
 
 
-Teniendo en cuenta los siguientes topicos: 
-
 -----------------------------------------------------------------------------------------------------------------------------------------
 
   ##
