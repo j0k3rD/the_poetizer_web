@@ -92,6 +92,9 @@ En este proyecto nos enfocaremos en crear una página web para Poetas.
 Que programas se usa:
 -    Backend
   - Flask: es un microframework escrito en Python que permite crear aplicaciones web rápidamente y con un mínimo número de líneas de código.
+  - Un ORM es un modelo de programación que permite mapear las estructuras de una base de datos relacional (SQL Server, Oracle, MySQL, etc.), en adelante RDBMS (Relational Database Management System), sobre una estructura lógica de entidades con el objeto de simplificar y acelerar el desarrollo de nuestras aplicaciones.
+  - JWT = es un estandar que esta dentro de los RFC. Basicamente es un mecanismo de proteccion, el cual garantiza que la comunicacion entre el frontend y el backend va a ser segura y no se revelará la información dentro de esa comunicación. Codificados en objetos de tipo JSON.
+  - Token JWT = Es una cadena de texto que esta codificada en Base64, la cual tiene 3 partes, la cabecera (donde se indica el algoritmo y el tipo de token), el payload (datos de usuario y privilegios) y el cuerpo del mensaje que es la firma (nos permite verificar si el token es válido). Tienen un ciclo de vida.
   - MySQLAlchemy: Manejo de base de datos mediante ORM.
   - Werkzeug: Encriptado de la contraseña. Backend.
   - Flask-JWT-Extended: Manejo de JSON Web Token
