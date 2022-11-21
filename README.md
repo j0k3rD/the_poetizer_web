@@ -89,6 +89,6 @@ En este proyecto nos enfocaremos en crear una página web para Poetas.
 
 
 ### Bibliografia
-INSOMNIA = Insomnia es un cliente REST multiplataforma.
-FLASK = 
+- INSOMNIA = Insomnia es un cliente REST multiplataforma.
+- FLASK = 
 
