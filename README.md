@@ -77,5 +77,20 @@ Teniendo en cuenta los siguientes topicos:
 ![image](https://user-images.githubusercontent.com/83615514/202876927-3dea38f6-9ad4-454e-909e-3283cd35fcec.png)
 ![image](https://user-images.githubusercontent.com/83615514/202876941-2bdd39cf-00ed-43e9-a971-8a1cf1dfa5f6.png)
 
-INSOMNIA = Insomnia es un cliente REST multiplataforma
+## 10- JINJA2
+- Jinja2 es un motor de renderizado de Flask el cual lo implementamos para no tener tanto código repetido en nuestros templates. Lo que hicimos fue crear un 'base.html' el cual, como su nombre lo indica, tiene todas las partes que se repetirian en todos los templates como navbars, menus, footer, etc. Nos ayuda a poder integrar todo esto en los demas templates sin tener que repetir esto en cada uno de ellos.
+ ![image](https://user-images.githubusercontent.com/83615514/202944417-68bd5a12-c357-479e-badd-ff2e08959f18.png)
+ ![image](https://user-images.githubusercontent.com/83615514/202944529-ce8e91cc-1102-4649-95b6-cf3e1907437d.png)
+ ![image](https://user-images.githubusercontent.com/83615514/202944559-4f154603-652e-4a5e-8f47-dae8efbaa518.png)
+ ![image](https://user-images.githubusercontent.com/83615514/202944985-fd36d243-51d4-415b-8405-7b823d47324c.png)
+
+## 11- REQUESTS Y PROTECCION DE LAS VISTAS
+- Por último lo que hicimos fue terminar de enlazar nuestro servidor Backend con el servidor Frontend a través de Requests a la base de datos. Lo que hacemos es tomar todas las peticiones que realiza el usuario a traves de la página, enviarlas a al Backend en forma de consulta y este a su vez, tambien devolver una respuesta con consultas. Y por supuesto, protegimos todas las vistas para que los usuarios que no estuvieran logueados no puedan acceder a rutas en donde sea necesario el token.
+  ![image](https://user-images.githubusercontent.com/83615514/202945178-ac37836b-29ef-4224-9975-8a7326b7b261.png)
+  ![image](https://user-images.githubusercontent.com/83615514/202945343-826d1014-4f2c-4355-bded-b060aa04a210.png) 
+
+
+### Bibliografia
+INSOMNIA = Insomnia es un cliente REST multiplataforma.
+FLASK = 
 
