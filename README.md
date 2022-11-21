@@ -14,7 +14,12 @@ Prof. Andrea Navarro - @AndreaNavarroMoreno -- Prof. Matias Navarro
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 En este proyecto nos enfocaremos en crear una página web para Poetas.
-![image](https://user-images.githubusercontent.com/83615514/202870082-ea85217d-b284-44bf-bd9d-d816289599d8.png)
+
+<br>
+
+<p align='center'>
+ <img src='https://user-images.githubusercontent.com/83615514/202943480-72f8dadd-8d37-468e-a9bf-16638dbb4410.png'>
+</p>
 
 
 Teniendo en cuenta los siguientes topicos: 
