@@ -88,7 +88,7 @@ En este proyecto nos enfocaremos en crear una página web para Poetas.
   ![image](https://user-images.githubusercontent.com/83615514/202945343-826d1014-4f2c-4355-bded-b060aa04a210.png) 
 
 
-### Bibliografia
+### Algunos Requerimientos usados:
 - INSOMNIA = Insomnia es un cliente REST multiplataforma.
 - FLASK = 
 
