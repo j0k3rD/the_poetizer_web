@@ -40,7 +40,7 @@ En este proyecto nos enfocaremos en crear una página web para Poetas.
   - Decidimos usar una base de datos SQL por su facil uso que le podemos dar con Python, ademas de que solo vamos a almacenar datos en formato plano (nada de contenido digital).
   Lo que hicimos fue crear las relaciones entre las tablas.
   ![image](https://user-images.githubusercontent.com/83615514/202870493-00450846-eac0-42c4-bdab-8206a895e501.png)
-  ![image](https://user-images.githubusercontent.com/83615514/202870539-61b5a612-0c68-4bb9-9c98-f67401c752cb.png)
+  ![image](https://user-images.githubusercontent.com/83615514/203188950-df0c74b2-4fe3-4063-aad3-a937fb3c41b8.png)
 
 
 ## 4- FILTRADO Y PAGINACION (BACKEND)
