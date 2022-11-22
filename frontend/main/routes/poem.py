@@ -48,8 +48,8 @@ def view_user(id):
                     return redirect(url_for('poem.my_poems'))  
 
         #Mostrar template
-        response = render_template('view_poem_poet.html', jwt = jwt, poem = poem, marks = marks, user_id = user_id)
-        response.set_cookie("poems_page", 1)
+        response = make_response(render_template('view_poem_poet.html', jwt = jwt, poem = poem, marks = marks, user_id = user_id, page=f.get_poems_page()))
+        response.set_cookie("poems_page", str(1))
         return response
 
     else:
@@ -58,8 +58,9 @@ def view_user(id):
         mark = f.get_marks_by_poem_id(id)
         marks = json.loads(mark.text)
         #Mostrar template
-        return render_template('view_poem_user.html', poem = poem, marks = marks, jwt=None)
-
+        response = make_response(render_template('view_poem_user.html', poem = poem, marks = marks, jwt=None, page=f.get_poems_page()))
+        response.set_cookie("poems_page", str(1))
+        return response
 
 #Ver mi lista de poemas
 @poem.route('/my_poems')
@@ -67,11 +68,11 @@ def my_poems():
     jwt = f.get_jwt()
     if jwt:
         user = auth.load_user(jwt)
-        resp = f.get_poems_by_id(user["id"])
+        resp = f.get_poems_by_id(user["id"], perpage=10)
         poems = json.loads(resp.text)
         poemsList = poems["poems"]
-        response = render_template('view_poet_mypoems.html', jwt=jwt, poems = poemsList)
-        response.set_cookie("poems_page", 1)
+        response = make_response(render_template('view_poet_mypoems.html', jwt=jwt, poems = poemsList, page=f.get_poems_page()))
+        response.set_cookie("poems_page", str(1))
         return response
     else:
         return redirect(url_for('main.login'))
@@ -86,7 +87,9 @@ def my_ratings():
         user_id = str(user["id"])
         resp = f.get_marks_by_poet_id(user_id)
         marks = json.loads(resp.text)
-        return render_template('view_poet_myratings.html', jwt=jwt, marks = marks)
+        response = make_response(render_template('view_poet_myratings.html', jwt=jwt, marks = marks, page=f.get_poems_page()))
+        response.set_cookie("poems_page", str(1))
+        return response
     else:
         return redirect(url_for('main.login'))
 
@@ -152,3 +155,5 @@ def edit_poem(id):
             return render_template('view_edit_poem.html', jwt = jwt, poem = poem)
     else:
         return redirect(url_for('main.login'))
+
+##

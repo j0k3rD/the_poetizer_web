@@ -171,11 +171,8 @@ body.dark {
 }
 
 .card .poem-text p{
-    float: right;
-    display: flex;
-    align-items: center;
     word-break:break-all;
-    margin: 1em 1em;
+    margin: 1em 2em;
     color: rgba(0, 0, 0, 0.6);
     font-size: 15px;
     text-align: left;

@@ -39,7 +39,7 @@ def index_poet(jwt = None):
         user = f.get_user(f.get_id())
         user = json.loads(user.text)
 
-        #Redireccionar a función de vista
+        #Redireccionar a función de vista   
         response = make_response(render_template('poet_main_page.html', jwt=jwt, poems = poem_list, user = user, page = int(page)))
         # Seteo la cookie de la pagina.
         response.set_cookie("poems_page", str(page))

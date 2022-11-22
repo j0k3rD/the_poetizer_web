@@ -19,6 +19,7 @@ def details():
     else:
         return redirect(url_for('main.login'))
 
+
 #Borrar cuenta de usuario
 @user.route('/delete')
 def delete():
