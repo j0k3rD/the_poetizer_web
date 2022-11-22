@@ -92,6 +92,7 @@ En este proyecto nos enfocaremos en crear una página web para Poetas.
 ### Algunos Requerimientos usados:
 Que programas se usa:
 -    Backend
+  - cURL es un proyecto de software consistente en una biblioteca y un intérprete de comandos orientado a la transferencia de archivos
   - Flask: es un microframework escrito en Python que permite crear aplicaciones web rápidamente y con un mínimo número de líneas de código.
   - Un ORM es un modelo de programación que permite mapear las estructuras de una base de datos relacional (SQL Server, Oracle, MySQL, etc.), en adelante RDBMS (Relational Database Management System), sobre una estructura lógica de entidades con el objeto de simplificar y acelerar el desarrollo de nuestras aplicaciones.
   - JWT = es un estandar que esta dentro de los RFC. Basicamente es un mecanismo de proteccion, el cual garantiza que la comunicacion entre el frontend y el backend va a ser segura y no se revelará la información dentro de esa comunicación. Codificados en objetos de tipo JSON.
