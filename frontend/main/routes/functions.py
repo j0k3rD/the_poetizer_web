@@ -2,6 +2,12 @@ from flask import request, current_app
 import requests, json
 from . import auth
 
+'''
+    Utilizado para realizar las peticiones a la api.
+    - Manejo de los Headers
+    - Manejo del JWT
+'''
+
 #--------------- Poems -----------------#
 
 #Obtengo los poemas del poeta ayudandome del id del mismo.
@@ -104,7 +110,6 @@ def edit_user(id, name, email, password):
     headers = get_headers()
     return requests.put(api_url, json = data, headers = headers)
 
-    
 #--------------- User -----------------#
 
 
@@ -132,6 +137,7 @@ def add_mark(user_id, poem_id, score, commentary):
     data = {"user_id": user_id, "poem_id": poem_id, "score": score, "commentary": commentary}
     headers = get_headers(without_token=False)
     return requests.post(api_url, json = data, headers = headers)
+
 #--------------- Calificaciones -----------------#
 
 

@@ -1,3 +1,4 @@
+#Son todas la librerias necesarias para que nuestro proyecto funcione
 Flask==2.1.1
 python-dotenv
 flask-restful

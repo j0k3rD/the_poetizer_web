@@ -25,6 +25,7 @@ def view_user(id):
                 score = request.form['inlineRadioOptions']
                 commentary = request.form['commentary']
                 user_id = f.get_id()
+
                 if score != "" and commentary != "":
                     response = f.add_mark(user_id=user_id, poem_id=id, score=score, commentary=commentary)
                     if response.ok:
@@ -104,6 +105,7 @@ def create():
             print(id)
             data = {"user_id": id, "title": title, "body": body}
             headers = f.get_headers(without_token=False)
+            
             if title != "" and body != "":
                 response = requests.post(f'{current_app.config["API_URL"]}/poems', json=data, headers=headers)
                 print(response)

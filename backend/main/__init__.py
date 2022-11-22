@@ -19,12 +19,14 @@ jwt = JWTManager()
 #Inicializo Email
 mailsender = Mail()
 
+
 def create_app():
-    #inicializar Flask
+    #Inicializar Flask
     app= Flask(__name__)
-    #Cargar variables de entorno
+    #Cargar variables de entorno .env
     load_dotenv()
 
+    #DB
     #Si no existe el archivo de base de datos crearlo (solo valido si se utiliza SQLite)
     if not os.path.exists(os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME')):
         os.mknod(os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME'))
@@ -36,6 +38,7 @@ def create_app():
 
     #URL de configuracion de base de datos
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////'+os.getenv('DATABASE_PATH')+os.getenv('DATABASE_NAME')
+    #Inicia la base de datos
     db.init_app(app)
 
     #Importar diccionario de Recursos
@@ -48,15 +51,16 @@ def create_app():
     api.add_resource(resource.MarksResource, '/marks')
     api.add_resource(resource.MarkResource, '/mark/<id>')
 
-    #Cargar clave secreta
+    #Cargar clave secreta de JWT
     app.config['JWT_SECRET_KEY'] = os.getenv('JWT_SECRET_KEY')
-    #Cargar tiempo de expiracion de los tokens
+    #Cargar tiempo de expiracion de los tokens JWT
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = int(os.getenv('JWT_ACCESS_TOKEN_EXPIRES'))
+    #Iniciar JWT
     jwt.init_app(app)
 
     #Me traigo las rutas
     from main.auth import routes
-    #Importar blueprint
+    #Importar blueprint del logueo y registro del usuario.
     app.register_blueprint(routes.auth)
     
     #Configuración de email
@@ -70,9 +74,7 @@ def create_app():
     #Inicializar en app
     mailsender.init_app(app)
 
-
     #Aqui se inicializaran el resto de los m
-    #retornar aplicaciion inicializada
+    #Retornar aplicaciion inicializada
     api.init_app(app)
     return app
-

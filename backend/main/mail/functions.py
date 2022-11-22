@@ -8,7 +8,7 @@ from smtplib import SMTPException
 #Creo la funcion para Envio del email
 def sendMail(to, subject, template, **kwargs):
     #Configuracion del email
-    msg = Message( subject, sender=current_app.config['FLASKY_MAIL_SENDER'], recipients=to)
+    msg = Message(subject, sender=current_app.config['FLASKY_MAIL_SENDER'], recipients=to)
     try:
         #Creación del cuerpo del mensaje
         msg.body = render_template(template + '.txt', **kwargs)

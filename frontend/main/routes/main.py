@@ -6,6 +6,12 @@ from . import functions as f
 main = Blueprint('main', __name__, url_prefix='/')
 
 
+'''
+    Este archivo contiene las rutas del frontend.
+    - Los metodos DELETE y PUT funcionan solamente en HTML5. Solo funciona en HTTP utilizado en RESTful.
+'''
+
+#Ruta principal de los Poetas
 @main.route('/poet', methods=['GET', 'POST'])
 def index_poet(jwt = None):
     jwt = f.get_jwt()
@@ -25,22 +31,25 @@ def index_poet(jwt = None):
                     page = 1
                 else:
                     page = int(page)
-
+        # Obtengo los poemas de la pagina.
         resp = f.get_poems(jwt=jwt, page=page)
         poems = f.get_json(resp)
         poem_list = poems["poems"]
+        # Obtenigo el usuario.
         user = f.get_user(f.get_id())
         user = json.loads(user.text)
 
         #Redireccionar a función de vista
         response = make_response(render_template('poet_main_page.html', jwt=jwt, poems = poem_list, user = user, page = int(page)))
+        # Seteo la cookie de la pagina.
         response.set_cookie("poems_page", str(page))
         return response
     else:
-        print("No hay jwt")
+        #Si no esta logueado, redireccionar a la pagina de login.
         return render_template("view_login.html")
 
 
+#Ruta Principal de los Usuarios
 @main.route('/', methods=['GET', 'POST'])
 def index_user():
     # Paginacion
@@ -68,6 +77,7 @@ def index_user():
     return response
 
 
+#Ruta del Login
 @main.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -84,6 +94,7 @@ def login():
                 token = response["access_token"]
                 user_id = str(response["id"])
                 resp = make_response(redirect(url_for('main.index_poet')))
+                # Seteo la cookie del token y el id del usuario.
                 resp.set_cookie("access_token", token)
                 resp.set_cookie("id", user_id)
                 return resp
@@ -94,6 +105,7 @@ def login():
         return render_template("view_login.html")
 
 
+#Ruta del Registro
 #Registro de un nuevo usuario
 @main.route("/register", methods=["GET", "POST"])
 def register():
@@ -103,6 +115,7 @@ def register():
         email = request.form.get("email")
         password = request.form.get("password")
         rol = 'poeta'
+
         if username != "" and email != "" and password != "":
             response = f.register(username, email, password, rol)
             if response.ok:
@@ -118,12 +131,13 @@ def register():
         return render_template("view_register.html")
 
 
+#Ruta del Logout
 #Se deslogea el usuario
 @main.route("/logout")
 def logout():
     flash("You have successfully logged out!", "success")
     resp = make_response(redirect(url_for("main.login")))
+    # Elimino las cookies del token y el id del usuario.
     resp.delete_cookie("access_token")
     resp.delete_cookie("id")
     return resp
-

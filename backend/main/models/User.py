@@ -13,8 +13,11 @@ class User(db.Model):
     #Rol (En el caso de que existan diferentes tipos de usuarios con diferentes permisos)
     rol = db.Column(db.String(50), nullable=False)
 
-    #Relacion Base
+    #Relacion Poema
+    # Delete-Orphan -- Cuando eliminamos un Usuario se eliminan tambien todos sus poemas.
     poems = db.relationship("Poem", back_populates="user", cascade="all, delete-orphan")
+    #Relacion Calificacion
+    # Delete-Orphan -- Cuando eliminamos un Usuario se eliminan tambien todas sus calificaciones.
     marks = db.relationship("Mark", back_populates="user", cascade="all, delete-orphan")
     
     #Funciona como una funcion get, la que se llama para obtener un valor del atributo.
@@ -75,7 +78,6 @@ class User(db.Model):
         'email': str(self.email),
         }
         return user_json
-
     
     def to_json_complete(self):
         user_json = {

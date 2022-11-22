@@ -9,8 +9,9 @@ class Poem(db.Model):
     body = db.Column(db.String(500), nullable=False)
     created_at = db.Column(db.DateTime(), default=datetime.now(), nullable=False)
 
-    #Relacion Usuario
+    #Clave Foranea Usuario
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    #Relacion Usuario
     user = db.relationship("User", back_populates="poems", uselist=False, single_parent=True)
     
     #Relacion Calificacion
@@ -31,6 +32,8 @@ class Poem(db.Model):
     #         count = len(score_list)
     #     return count
 
+    """No es un valor guardado en la base de datos sino que lo hace en el momento que se necesita
+        y se envia en el JSON"""
     def avg_score(self):
         score_list = []
         if len(self.marks) == 0:

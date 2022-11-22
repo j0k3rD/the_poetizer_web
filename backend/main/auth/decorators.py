@@ -1,10 +1,11 @@
 from .. import jwt
 from flask import jsonify
 from flask_jwt_extended import verify_jwt_in_request, get_jwt
+#Sirve para llamar a otras funciones
 from functools import wraps
 
 
-#Decorador para restringir el acceso a usuarios ADMIN
+#Decorador para restringir el acceso a Usuarios y ADMIN
 def admin_required(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):

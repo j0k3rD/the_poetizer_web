@@ -6,7 +6,7 @@ from flask_login import LoginManager
 login_manager = LoginManager()
 
 def create_app():
-    #inicializar Flask
+    #Inicializar Flask, static_url_path es la ruta donde se encuentran los archivos estaticos.
     app=Flask(__name__, static_url_path='/static')
     
     #Cargar variables de entorno
@@ -17,12 +17,14 @@ def create_app():
     #Secret Key
     app.secret_key = os.getenv('SECRET_KEY')
 
-    #Importar Blueprints
+    #Inicializar Login Manager
+    # login_manager.init_app(app)
+
+    #Importar Blueprints, siendo las rutas del HTML.
     from main.routes import main, poem, user
     app.register_blueprint(routes.main.main)
     app.register_blueprint(routes.user.user)
     app.register_blueprint(routes.poem.poem)
-    
     
     #retornar aplicaciion inicializada
     return app
