@@ -105,4 +105,5 @@ Que programas se usa:
   - Jinja2: Motor de plantilla web, para el lenguaje de programación Python.
   - Insomnia: Nos permite crear variables para poder utilizarlas en diferentes consultas
   - PyJWT: Manejo de JSON Web Token.
-  - Requests: requests es una librería Python que facilita enormemente el trabajo con peticiones HTTP.
+  - Requests: requests es una librería Python que facilita enormemente el trabajo con peticiones HTTP. 
+  - HTTP Request: La petición o HTTP request es el mensaje que se envía desde el cliente al servidor para solicitar un resource.
